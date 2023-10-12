@@ -19,11 +19,17 @@ public final class employeeEntity
         // Increase id to create new unique ID
         int empID = empCount;
         empCount++;
+        boolean success = false; 
         
-        String myQuery = "INSERT INTO EMPLOYEE (EMP_ID, EMP_NAME, EMP_SALARY, EMP_DATEJOINED, EMP_ROLEID, EMP_USERNAME, EMP_PASSWORD) VALUES(" 
-                            + String.valueOf(empID) + ", \"" + empName + "\", " + String.valueOf(salary) + ", \"" +
-                            dateJoined + "\", " + String.valueOf(roleID) + ", \"" + username +
-                            "\", \"" + password + "\")";
+        String myQuery = "INSERT INTO EMPLOYEE (EMP_ID, EMP_NAME, EMP_SALARY, EMP_DATEJOINED, "
+                            + "EMP_ROLEID, EMP_USERNAME, EMP_PASSWORD) VALUES(" 
+                            + String.valueOf(empID) 
+                            + ", \"" + empName + "\", " 
+                            + String.valueOf(salary) 
+                            + ", \"" + dateJoined + "\", " 
+                            + String.valueOf(roleID) 
+                            + ", \"" + username + "\"" 
+                            + ", \"" + password + "\")";
 
         Connection connection = null;
         try {
@@ -38,6 +44,7 @@ public final class employeeEntity
             int i = statement.executeUpdate(myQuery);
             if (i > 0) {
                 System.out.println("EMPLOYEE RECORD INSERTED");
+                success = true;
             } else {
                 System.out.println("EMPLOYEE RECORD NOT INSERTED");
             }
@@ -48,9 +55,10 @@ public final class employeeEntity
             System.out.println(exception);
         }
 
-        return true;
+        return success;
     }
 
+    // Method to display employee record => To be discarded upon test finish
     public static void displayEmpRecord()
     {
         String myQuery = "SELECT * FROM EMPLOYEE";
@@ -68,6 +76,7 @@ public final class employeeEntity
             ResultSet resultSet;
             resultSet = statement.executeQuery(myQuery);
 
+            // Declare values for output
             int empID, roleID;
             String empName, dateJoined, username, password; 
             double salary; 
@@ -81,6 +90,7 @@ public final class employeeEntity
                 username = resultSet.getString("EMP_USERNAME").trim();
                 password = resultSet.getString("EMP_PASSWORD").trim();
         
+                // Output records
                 System.out.println("\nEMP_ID : " + empID
                                    + "\nEMP_NAME : " + empName
                                    + "\nEMP_SALARY : " + salary
@@ -90,7 +100,7 @@ public final class employeeEntity
                                    + "\nEMP_PASSWORD : " + password
                                    + "\n==============================");
             }
-            
+
             resultSet.close();
             statement.close();
             connection.close();
