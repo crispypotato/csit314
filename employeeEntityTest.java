@@ -3,10 +3,12 @@ public class employeeEntityTest {
     public static void main(String arg[])
     {
         boolean myBool;
-        myBool = employeeEntity.createEmpRecord("myEmp", 10000, "12/10/2023", 0, "testUsername", "testPassword");
-        myBool = employeeEntity.createEmpRecord("myEmp2", 20000, "13/10/2023", 0, "testUsername2", "testPassword2");
+        Employee myEmp1 = new Employee("myEmp", 10000, "12/10/2023", 0, "testUsername", "testPassword");
+        Employee myEmp2 = new Employee("myEmp2", 20000, "13/10/2023", 0, "testUsername2", "testPassword2");
+        myBool = employeeEntity.createEmpRecord(myEmp1);
+        myBool = employeeEntity.createEmpRecord(myEmp2);
         System.out.println(myBool);
 
-        employeeEntity.displayEmpRecord();
+        Employee.displayEmpRecord();
     }
 }

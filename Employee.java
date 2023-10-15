@@ -1,35 +1,49 @@
 import java.sql.*;
 
-/* Entity Utility Class to access employee database
+/* Employee Entity Class
 
-    Information in User database:
-    ID, Name, Salary, DateJoined, RoleID, Username, Password
+    Information in Employee database:
+    empID, Name, Salary, DateJoined, RoleID, Username, Password
 */
 
-public final class employeeEntity 
+public class Employee
 {
+    // To count number of employees in system
     private static int empCount = 0;
-    // Private Constructor to prevent userEntity from being instantiated
-    private employeeEntity() {}
+
+    private int empID, roleID;
+    private String name, username, password, dateJoined;
+    private double salary;
+
+    // Constructor for Employee Class
+    public Employee (String name, double salary, String dateJoined, 
+                        int roleID, String username, String password)
+    {
+        this.empID = empCount;
+        this.name = name;
+        this.salary = salary;
+        this.dateJoined = dateJoined;
+        this.roleID = roleID;
+        this.username = username;
+        this.password = password;
+
+        empCount ++;
+    }
 
     // Method to create new user record in database
-    public static boolean createEmpRecord(String empName, double salary, String dateJoined, 
-                                            int roleID, String username, String password)
+    public static boolean createEmpRecord(Employee myEmp)
     {
-        // Increase id to create new unique ID
-        int empID = empCount;
-        empCount++;
         boolean success = false; 
         
         String myQuery = "INSERT INTO EMPLOYEE (EMP_ID, EMP_NAME, EMP_SALARY, EMP_DATEJOINED, "
                             + "EMP_ROLEID, EMP_USERNAME, EMP_PASSWORD) VALUES(" 
-                            + String.valueOf(empID) 
-                            + ", \"" + empName + "\", " 
-                            + String.valueOf(salary) 
-                            + ", \"" + dateJoined + "\", " 
-                            + String.valueOf(roleID) 
-                            + ", \"" + username + "\"" 
-                            + ", \"" + password + "\")";
+                            + String.valueOf(myEmp.empID) 
+                            + ", \"" + myEmp.name + "\", " 
+                            + String.valueOf(myEmp.salary) 
+                            + ", \"" + myEmp.dateJoined + "\", " 
+                            + String.valueOf(myEmp.roleID) 
+                            + ", \"" + myEmp.username + "\"" 
+                            + ", \"" + myEmp.password + "\")";
 
         Connection connection = null;
         try {
