@@ -2,12 +2,12 @@ public class employeeEntityTest {
     // Main Method for testing purposes
     public static void main(String arg[])
     {
-        boolean myBool;
-        Employee myEmp1 = new Employee("myEmp", 10000, "12/10/2023", 0, "testUsername", "testPassword");
-        Employee myEmp2 = new Employee("myEmp2", 20000, "13/10/2023", 0, "testUsername2", "testPassword2");
-        myBool = Employee.createEmpRecord(myEmp1);
-        myBool = Employee.createEmpRecord(myEmp2);
-        System.out.println(myBool);
+        boolean accountCreated = false;
+ 
+        accountCreated = createAccountController.createEmpRecord("myEmp", 10000, "12/10/2023", 0, "testUsername", "testPassword");
+        System.out.println(accountCreated);
+        accountCreated = createAccountController.createEmpRecord("myEmp2", 20000, "13/10/2023", 0, "testUsername2", "testPassword2");
+        System.out.println(accountCreated);
 
         Employee.displayEmpRecord();
     }

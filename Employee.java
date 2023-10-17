@@ -6,39 +6,36 @@ import java.sql.*;
     empID, Name, Salary, DateJoined, RoleID, Username, Password
 */
 
-public class Employee
+class Employee
 {
-    // To count number of employees in system
-    private static int empCount = 0;
-
+    // Declaration of variables in Employee
     private int empID, roleID;
     private String name, username, password, dateJoined;
     private double salary;
 
     // Constructor for Employee Class
-    public Employee (String name, double salary, String dateJoined, 
+    public Employee (int empID, String name, double salary, String dateJoined, 
                         int roleID, String username, String password)
     {
-        this.empID = empCount;
+        this.empID = empID;
         this.name = name;
         this.salary = salary;
         this.dateJoined = dateJoined;
         this.roleID = roleID;
         this.username = username;
         this.password = password;
-
-        empCount ++;
     }
 
-    // Method to create new user record in database
+    /* Method to create new user record in database
+     * EmpID is automatically set by database
+     */
     public static boolean createEmpRecord(Employee myEmp)
     {
         boolean success = false; 
         
-        String myQuery = "INSERT INTO EMPLOYEE (EMP_ID, EMP_NAME, EMP_SALARY, EMP_DATEJOINED, "
-                            + "EMP_ROLEID, EMP_USERNAME, EMP_PASSWORD) VALUES(" 
-                            + String.valueOf(myEmp.empID) 
-                            + ", \"" + myEmp.name + "\", " 
+        String myQuery = "INSERT INTO EMPLOYEE (EMP_NAME, EMP_SALARY, EMP_DATEJOINED, "
+                            + "EMP_ROLEID, EMP_USERNAME, EMP_PASSWORD) VALUES (" 
+                            + "\"" + myEmp.name + "\", " 
                             + String.valueOf(myEmp.salary) 
                             + ", \"" + myEmp.dateJoined + "\", " 
                             + String.valueOf(myEmp.roleID) 
