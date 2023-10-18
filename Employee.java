@@ -33,14 +33,55 @@ class Employee
     {
         boolean success = false; 
         
+        // Prepare query
         String myQuery = "INSERT INTO EMPLOYEE (EMP_NAME, EMP_SALARY, EMP_DATEJOINED, "
-                            + "EMP_ROLEID, EMP_USERNAME, EMP_PASSWORD) VALUES (" 
-                            + "\"" + myEmp.name + "\", " 
-                            + String.valueOf(myEmp.salary) 
-                            + ", \"" + myEmp.dateJoined + "\", " 
-                            + String.valueOf(myEmp.roleID) 
-                            + ", \"" + myEmp.username + "\"" 
-                            + ", \"" + myEmp.password + "\")";
+                            + "EMP_ROLEID, EMP_USERNAME, EMP_PASSWORD) VALUES (?, ?, ?, ?, ?, ?)";
+
+        Connection connection = null;
+        try 
+        {
+            // below two lines are used for connectivity.
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/cafems",
+                "root", "Just@GroupProj3ctPW");
+ 
+            // Prepare statement
+            PreparedStatement myStatement = connection.prepareStatement(myQuery);
+
+            // Set parameters for statement
+            myStatement.setString(1, myEmp.name);
+            myStatement.setDouble(2, myEmp.salary);
+            myStatement.setString(3, myEmp.dateJoined); // Possible swap to SQL Date?
+            myStatement.setInt(4, myEmp.roleID);
+            myStatement.setString(5, myEmp.username);
+            myStatement.setString(6, myEmp.password);
+
+            int i = myStatement.executeUpdate();
+            if (i > 0) {
+                System.out.println("EMPLOYEE RECORD INSERTED");
+                success = true;
+            } else {
+                System.out.println("EMPLOYEE RECORD NOT INSERTED");
+            }
+            myStatement.close();
+            connection.close();
+        }
+        catch (Exception exception) 
+        {
+            System.out.println(exception);
+        }
+
+        return success;
+    }
+
+    // Check against database if username is unique
+    public static boolean isUniqueUsername(String username)
+    {
+        boolean uniqueUsername = false;
+
+        // Prepare query
+        String myQuery = "SELECT * FROM EMPLOYEE WHERE EMP_USERNAME = (?)";
 
         Connection connection = null;
         try {
@@ -50,23 +91,32 @@ class Employee
                 "jdbc:mysql://localhost:3306/cafems",
                 "root", "Just@GroupProj3ctPW");
  
-            Statement statement;
-            statement = connection.createStatement();
-            int i = statement.executeUpdate(myQuery);
-            if (i > 0) {
-                System.out.println("EMPLOYEE RECORD INSERTED");
-                success = true;
+            // Prepare statement
+            PreparedStatement myStatement = connection.prepareStatement(myQuery);
+
+            // Set parameters for statement
+            myStatement.setString(1, username);
+
+            ResultSet resultSet;
+            resultSet = myStatement.executeQuery();
+
+            // if resultSet gets a record, username is not unique
+            if (resultSet.next()) {
+                uniqueUsername = false;
             } else {
-                System.out.println("EMPLOYEE RECORD NOT INSERTED");
+                uniqueUsername = true;
             }
-            statement.close();
+
+            myStatement.close();
             connection.close();
         }
-        catch (Exception exception) {
+        catch (Exception exception) 
+        {
             System.out.println(exception);
         }
 
-        return success;
+        return uniqueUsername;
+
     }
 
     // Method to display employee record => To be discarded upon test finish

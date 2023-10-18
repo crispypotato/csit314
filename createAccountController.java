@@ -28,11 +28,20 @@ final class createAccountController {
         if (roleID < 0 || roleID > 100)
         {return validAccount;}
 
-        // Check if username and password is alphanumeric
-        if (!(isAlphaNumeric(username)) || !(isAlphaNumeric(password)))
+        // Check if username is alphanumeric AND unique
+        if (!(isAlphaNumeric(username)))
+        {return validAccount;}
+
+        // Prevent injections by ensuring username is alphanumeric FIRST
+        if (!(Employee.isUniqueUsername(username)))
+        {return validAccount;}
+
+        // Check if password is alphanumeric
+        if (!(isAlphaNumeric(password)))
         {return validAccount;}
         
         // Pass all checks - create account
+        System.out.println("Should not reach here!");
         validAccount = true;
         Employee newEmployee = new Employee(0, name, salary, dateJoined, roleID, username, password);
         createAccount = Employee.createEmpRecord(newEmployee);

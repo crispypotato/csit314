@@ -6,7 +6,7 @@ public class employeeEntityTest {
  
         accountCreated = createAccountController.createEmpRecord("myEmp", 10000, "12/10/2023", 0, "testUsername", "testPassword");
         System.out.println(accountCreated);
-        accountCreated = createAccountController.createEmpRecord("myEmp2", 20000, "13/10/2023", 0, "testUsername2", "testPassword2");
+        accountCreated = createAccountController.createEmpRecord("myEmp3", 20000, "13/10/2023", 0, "testUsername3", "testPassword3");
         System.out.println(accountCreated);
 
         Employee.displayEmpRecord();
