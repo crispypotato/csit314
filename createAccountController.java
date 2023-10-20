@@ -11,7 +11,7 @@ final class createAccountController {
      * True = Account created || False = Account not created
     */
     public static boolean createEmpRecord(String name, double salary, String dateJoined, 
-                                   int roleID, String username, String password)
+                                   int roleID, String position, String username, String password)
     {
         boolean validAccount = false;
         boolean createAccount = false;
@@ -28,6 +28,9 @@ final class createAccountController {
         if (roleID < 0 || roleID > 100)
         {return validAccount;}
 
+        if (!(isAlphaNumeric(position)))
+        {return validAccount;}
+
         // Check if username is alphanumeric AND unique
         if (!(isAlphaNumeric(username)))
         {return validAccount;}
@@ -41,9 +44,8 @@ final class createAccountController {
         {return validAccount;}
         
         // Pass all checks - create account
-        System.out.println("Should not reach here!");
         validAccount = true;
-        Employee newEmployee = new Employee(0, name, salary, dateJoined, roleID, username, password);
+        Employee newEmployee = new Employee(0, name, salary, dateJoined, roleID, position, username, password);
         createAccount = Employee.createEmpRecord(newEmployee);
 
         return createAccount;

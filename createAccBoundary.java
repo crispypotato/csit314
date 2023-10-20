@@ -8,7 +8,7 @@ public class createAccBoundary extends JFrame implements ActionListener {
 
     private JTextField nameField, salaryField, dateJoinedField, usernameField;
     private JPasswordField passwordField;
-    private JButton submitButton;
+    private JButton submitButton, clearButton;
     private JComboBox<String> roleField, positionField;
 
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
@@ -22,6 +22,8 @@ public class createAccBoundary extends JFrame implements ActionListener {
         panel.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createTitledBorder("Create New Account"),
             BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        
+        JPanel buttonPanel = new JPanel(new FlowLayout());
         
         GridBagConstraints c;
         
@@ -61,7 +63,7 @@ public class createAccBoundary extends JFrame implements ActionListener {
         panel.add(roleLabel, c);
 
         // Set Role
-        String[] roleChoices = {" ", "Cafe Owner","Cafe Manager", "Cafe Staff"};
+        String[] roleChoices = {" ", "System Admin", "Cafe Owner","Cafe Manager", "Cafe Staff"};
         roleField = new JComboBox<String>(roleChoices);
         roleField.setVisible(true);
         roleField.setSelectedIndex(0);
@@ -77,7 +79,7 @@ public class createAccBoundary extends JFrame implements ActionListener {
         // Set Position if Role = Cafe Staff
         String[] positionChoices = {" ", "Cashier","Chef", "Waiter"};
         positionField = new JComboBox<String>(positionChoices);
-        positionField.setVisible(true);
+        positionField.setVisible(false);
         positionField.setSelectedIndex(0);
         c = createGbc(1,5);
         panel.add(positionField, c);
@@ -104,40 +106,76 @@ public class createAccBoundary extends JFrame implements ActionListener {
 
         submitButton = new JButton("Submit");
         submitButton.addActionListener(this);
-        c = createGbc(1,8);
-        panel.add(submitButton, c);
+        buttonPanel.add(submitButton);
+
+        clearButton = new JButton("Clear");
+        clearButton.addActionListener(this);
+        buttonPanel.add(clearButton);
 
         final JFrame frame = new JFrame("Create New Account");
+        frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(panel);
+        frame.add(panel, BorderLayout.CENTER);
+        frame.add(buttonPanel, BorderLayout.SOUTH);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
+        // Submit details to create employee record
         if (e.getSource() == submitButton) {
+            // Retrieve details from form
             String name = nameField.getText();
-            String salary = salaryField.getText();
+            double salary = Double.parseDouble(salaryField.getText());
             String dateJoined = dateJoinedField.getText();
-            String role = roleField.getSelectedItem().toString();
+            int role = roleField.getSelectedIndex();
             String position = positionField.getSelectedItem().toString();
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
 
-            System.out.println("Name: "+ name);
-            System.out.println("Salary: " + salary);
-            System.out.println("Date Joined: " + dateJoined);
-            System.out.println("Role: " + role);
-            System.out.println("Position: " + position);
-            System.out.println("Username: " + username);
-            System.out.println("Password: " + password);
+            // set null field if applicable
+            if (position == " ")
+            {
+                position = "NULL";
+            }
 
-            // You can perform any additional operations with the values here
+            // Create employee
+            boolean createEmployee = createAccountController.createEmpRecord(name, salary, dateJoined, role, position, username, password);
+            if (createEmployee)
+            {
+                System.out.println("Success");
+            }
+            else
+            {
+                System.out.println("Failure");
+            }
+        }
 
+        // Clear fields
+        if (e.getSource() == clearButton)
+        {
             nameField.setText("");
+            salaryField.setText("");
+            dateJoinedField.setText("");
+            roleField.setSelectedIndex(0);
+            positionField.setSelectedIndex(0);
             usernameField.setText("");
             passwordField.setText("");
+        }
+
+        if (e.getSource() == roleField)
+        {
+            if (roleField.getSelectedItem().toString() == "Cafe Staff")
+            {
+                positionField.setVisible(true);
+                positionField.setSelectedIndex(0);
+            }
+            else
+            {
+                positionField.setVisible(false);
+                positionField.setSelectedIndex(0);
+            }
         }
     }
 

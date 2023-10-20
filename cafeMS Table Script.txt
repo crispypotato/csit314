@@ -12,8 +12,8 @@ EMP_ID 		int NOT NULL AUTO_INCREMENT,
 EMP_NAME	varchar(25) NOT NULL,
 EMP_SALARY 	double NOT NULL,
 EMP_DATEJOINED	varchar(25) NOT NULL,
-EMP_ROLEID 	int,
-EMP_USERNAME	varchar(25),
+EMP_ROLEID 	int NOT NULL,
+EMP_USERNAME	varchar(25) UNIQUE,
 EMP_PASSWORD 	varchar(255) NOT NULL,
 EMP_POSITION	varchar(25),
 
@@ -33,3 +33,7 @@ ALTER TABLE EMPLOYEE AUTO_INCREMENT=10001;
 COMMIT;
 
 insert into role values(0, "default");
+insert into role values(1, "System Admin");
+insert into role values(2, "Cafe Owner");
+insert into role values(3, "Cafe Manager");
+insert into role values(4, "Cafe Staff");
