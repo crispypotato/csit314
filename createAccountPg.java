@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class createAccBoundary extends JFrame implements ActionListener {
+public class createAccountPg extends JFrame implements ActionListener {
 
     private JTextField nameField, salaryField, dateJoinedField, usernameField;
     private JPasswordField passwordField;
@@ -14,7 +14,7 @@ public class createAccBoundary extends JFrame implements ActionListener {
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
     private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
 
-    public createAccBoundary() {
+    public createAccountPg() {
 
         FlatDarkLaf.setup();
 
@@ -197,7 +197,7 @@ public class createAccBoundary extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {        
-        new createAccBoundary();
+        new createAccountPg();
     }
 }
 
