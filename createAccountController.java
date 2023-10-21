@@ -10,16 +10,26 @@ final class createAccountController {
     /* Method to check variables to create Employee account
      * True = Account created || False = Account not created
     */
-    public static boolean createEmpRecord(String name, double salary, String dateJoined, 
+    public static boolean createEmpRecord(String name, String salaryStr, String dateJoined, 
                                    int roleID, String position, String username, String password)
     {
         boolean validAccount = false;
         boolean createAccount = false;
+        double salary;
 
         // Check if name is alpha-numeric
-        if (!(isAlphaNumeric(name)))
+        if (!(isAlphaNumeric(name)) || name == "")
         {return validAccount;}
 
+        // Check if salary is numeric
+        if (isNumeric(salaryStr))
+        {
+            salary = Double.parseDouble(salaryStr);
+        }
+        else{
+            return validAccount;
+        }
+        
         // Check if salary is within 0 to 100000
         if (salary < 0 || salary > 100000)
         {return validAccount;}
@@ -31,7 +41,7 @@ final class createAccountController {
         if (!(isAlphaNumeric(position)))
         {return validAccount;}
 
-        // Check if username is alphanumeric AND unique
+        // Check if username is alphanumeric
         if (!(isAlphaNumeric(username)))
         {return validAccount;}
 
@@ -55,6 +65,15 @@ final class createAccountController {
     private static boolean isAlphaNumeric(String s){
         String pattern= "^[a-zA-Z0-9]*$";
         return s.matches(pattern);
+    }
+
+    private static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
     }
 }
 

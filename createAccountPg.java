@@ -127,7 +127,7 @@ public class createAccountPg extends JFrame implements ActionListener {
         if (e.getSource() == submitButton) {
             // Retrieve details from form
             String name = nameField.getText();
-            double salary = Double.parseDouble(salaryField.getText());
+            String salary = salaryField.getText();
             String dateJoined = dateJoinedField.getText();
             int role = roleField.getSelectedIndex();
             String position = positionField.getSelectedItem().toString();
@@ -141,18 +141,21 @@ public class createAccountPg extends JFrame implements ActionListener {
             }
 
             // Create employee
+            String statusText;
             boolean createEmployee = createAccountController.createEmpRecord(name, salary, dateJoined, role, position, username, password);
             if (createEmployee)
             {
-                System.out.println("Success");
-            }
+               statusText = "Account created successfully!";
+			}
             else
             {
-                System.out.println("Failure");
+                statusText = "Account creation failed. Please check your fields.";
             }
+            String titleText = "Account Creation Status";
+            JOptionPane.showMessageDialog(null, statusText, titleText, JOptionPane.PLAIN_MESSAGE);
         }
 
-        // Clear fields
+        // Clear fields if clear button is used
         if (e.getSource() == clearButton)
         {
             nameField.setText("");
@@ -164,6 +167,8 @@ public class createAccountPg extends JFrame implements ActionListener {
             passwordField.setText("");
         }
 
+        /* Only show position field if Cafe Staff is selected
+           If other roles selected, position is automatically set to null */
         if (e.getSource() == roleField)
         {
             if (roleField.getSelectedItem().toString() == "Cafe Staff")
