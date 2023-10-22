@@ -6,7 +6,7 @@ import java.sql.*;
     empID, Name, Salary, DateJoined, RoleID, PositionID, Username, Password
 */
 
-class Employee
+class User
 {
     // Declaration of variables in Employee
     private int empID, roleID;
@@ -14,7 +14,7 @@ class Employee
     private double salary;
 
     // Constructor for Employee Class
-    public Employee (int empID, String name, double salary, String dateJoined, 
+    public User (int empID, String name, double salary, String dateJoined, 
                         int roleID, String position, String username, String password)
     {
         this.empID = empID;
@@ -30,7 +30,7 @@ class Employee
     /* Method to create new user record in database
      * EmpID is automatically set by database
      */
-    public static boolean createEmpRecord(Employee myEmp)
+    public static boolean createEmpRecord(User myEmp)
     {
         boolean success = false; 
         
@@ -125,7 +125,6 @@ class Employee
         }
 
         return uniqueUsername;
-
     }
 
     // Method to display employee record => To be discarded upon test finish
@@ -181,4 +180,51 @@ class Employee
             System.out.println(exception);
         }
     }
+
+    // Maybe set a method that allows for connection to prevent code reiteration
+
+    // Method that authenticates username and password and logs in the user
+    public static boolean authenAccount(String username, String password)
+    {
+        boolean authenUser = false;
+
+        // Prepare query
+        String myQuery = "SELECT * FROM EMPLOYEE WHERE EMP_USERNAME = (?) AND EMP_PASSWORD = (?)";
+
+        Connection connection = null;
+        try {
+            // below two lines are used for connectivity.
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/cafems",
+                "root", "Just@GroupProj3ctPW");
+ 
+            // Prepare statement
+            PreparedStatement myStatement = connection.prepareStatement(myQuery);
+
+            // Set parameters for statement
+            myStatement.setString(1, username);
+            myStatement.setString(2, password);
+
+            ResultSet resultSet;
+            resultSet = myStatement.executeQuery();
+
+            // if resultSet gets a record, username and password matches
+            if (resultSet.next()) {
+                authenUser = true;
+            } else {
+                authenUser = false;
+            }
+
+            myStatement.close();
+            connection.close();
+        }
+        catch (Exception exception) 
+        {
+            System.out.println(exception);
+        }
+
+        return authenUser;
+    }
+
 }
