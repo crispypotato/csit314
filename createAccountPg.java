@@ -142,8 +142,8 @@ public class createAccountPg extends JFrame implements ActionListener {
 
             // Create employee
             String statusText;
-            boolean createEmployee = createAccountController.createEmpRecord(name, salary, dateJoined, role, position, username, password);
-            if (createEmployee)
+            boolean createUser = createAccountController.createUserRecord(name, salary, dateJoined, role, position, username, password);
+            if (createUser)
             {
                statusText = "Account created successfully!";
 			}

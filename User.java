@@ -30,7 +30,7 @@ class User
     /* Method to create new user record in database
      * EmpID is automatically set by database
      */
-    public static boolean createEmpRecord(User myEmp)
+    public static boolean createUserRecord(User myUser)
     {
         boolean success = false; 
         
@@ -51,20 +51,20 @@ class User
             PreparedStatement myStatement = connection.prepareStatement(myQuery);
 
             // Set parameters for statement
-            myStatement.setString(1, myEmp.name);
-            myStatement.setDouble(2, myEmp.salary);
-            myStatement.setString(3, myEmp.dateJoined); // Possible swap to SQL Date?
-            myStatement.setInt(4, myEmp.roleID);
-            if (myEmp.position == "NULL")
+            myStatement.setString(1, myUser.name);
+            myStatement.setDouble(2, myUser.salary);
+            myStatement.setString(3, myUser.dateJoined); // Possible swap to SQL Date?
+            myStatement.setInt(4, myUser.roleID);
+            if (myUser.position == "NULL")
             {
                 myStatement.setNull(5, Types.VARCHAR);
             }
             else
             {
-                myStatement.setString(5, myEmp.position);
+                myStatement.setString(5, myUser.position);
             }
-            myStatement.setString(6, myEmp.username);
-            myStatement.setString(7, myEmp.password);
+            myStatement.setString(6, myUser.username);
+            myStatement.setString(7, myUser.password);
 
             int i = myStatement.executeUpdate();
             if (i > 0) {
@@ -181,9 +181,7 @@ class User
         }
     }
 
-    // Maybe set a method that allows for connection to prevent code reiteration
-
-    // Method that authenticates username and password and logs in the user
+    // Authenticates username and password 
     public static boolean authenAccount(String username, String password)
     {
         boolean authenUser = false;
@@ -227,4 +225,50 @@ class User
         return authenUser;
     }
 
+    // Login to user account
+    public User loginUser(String username, String password)
+    {
+        // Prepare query
+        String myQuery = "SELECT * FROM EMPLOYEE WHERE EMP_USERNAME = (?) AND EMP_PASSWORD = (?)";
+
+        Connection connection = null;
+        try {
+            // below two lines are used for connectivity.
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/cafems",
+                "root", "Just@GroupProj3ctPW");
+ 
+            // Prepare statement
+            PreparedStatement myStatement = connection.prepareStatement(myQuery);
+
+            // Set parameters for statement
+            myStatement.setString(1, username);
+            myStatement.setString(2, password);
+
+            ResultSet resultSet;
+            resultSet = myStatement.executeQuery();
+
+            // Set variables to current user
+            if (resultSet.next()) {
+                this.empID = resultSet.getInt("EMP_ID");
+                this.name = resultSet.getString("EMP_NAME").trim();
+                this.salary = resultSet.getDouble("EMP_SALARY");
+                this.dateJoined = resultSet.getString("EMP_DATEJOINED").trim();
+                this.roleID = resultSet.getInt("EMP_ROLEID");
+                this.position = resultSet.getString("EMP_POSITION");
+                this.username = resultSet.getString("EMP_USERNAME").trim();
+                this.password = resultSet.getString("EMP_PASSWORD").trim();
+            }
+
+            resultSet.close();
+            myStatement.close();
+            connection.close();
+        }
+        catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        return (this);
+    }
 }

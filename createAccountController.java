@@ -10,7 +10,7 @@ final class createAccountController {
     /* Method to check variables to create Employee account
      * True = Account created || False = Account not created
     */
-    public static boolean createEmpRecord(String name, String salaryStr, String dateJoined, 
+    public static boolean createUserRecord(String name, String salaryStr, String dateJoined, 
                                    int roleID, String position, String username, String password)
     {
         boolean validAccount = false;
@@ -46,7 +46,7 @@ final class createAccountController {
         {return validAccount;}
 
         // Prevent injections by ensuring username is alphanumeric FIRST
-        if (!(Employee.isUniqueUsername(username)))
+        if (!(User.isUniqueUsername(username)))
         {return validAccount;}
 
         // Check if password is alphanumeric
@@ -55,8 +55,8 @@ final class createAccountController {
         
         // Pass all checks - create account
         validAccount = true;
-        Employee newEmployee = new Employee(0, name, salary, dateJoined, roleID, position, username, password);
-        createAccount = Employee.createEmpRecord(newEmployee);
+        User newUser = new User(0, name, salary, dateJoined, roleID, position, username, password);
+        createAccount = User.createUserRecord(newUser);
 
         return createAccount;
     }
