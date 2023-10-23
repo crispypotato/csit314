@@ -13,7 +13,20 @@ class User
     private String name, username, password, dateJoined, position;
     private double salary;
 
-    // Constructor for Employee Class
+    // Default Constructor for User class - Should not be added to database at anytime!
+    public User()
+    {
+        this.empID = 0;
+        this.name = "Default";
+        this.salary = 0;
+        this.dateJoined = "00/00/0000";
+        this.roleID = 0;
+        this.position = "Default";
+        this.username = "Default";
+        this.password = "Default";
+    }
+
+    // Constructor for User Class
     public User (int empID, String name, double salary, String dateJoined, 
                         int roleID, String position, String username, String password)
     {
@@ -226,9 +239,10 @@ class User
     }
 
     // Login to user account
-    public User loginUser(String username, String password)
+    public static User loginUser(String username, String password)
     {
         // Prepare query
+        User currentUser = new User();
         String myQuery = "SELECT * FROM EMPLOYEE WHERE EMP_USERNAME = (?) AND EMP_PASSWORD = (?)";
 
         Connection connection = null;
@@ -251,14 +265,14 @@ class User
 
             // Set variables to current user
             if (resultSet.next()) {
-                this.empID = resultSet.getInt("EMP_ID");
-                this.name = resultSet.getString("EMP_NAME").trim();
-                this.salary = resultSet.getDouble("EMP_SALARY");
-                this.dateJoined = resultSet.getString("EMP_DATEJOINED").trim();
-                this.roleID = resultSet.getInt("EMP_ROLEID");
-                this.position = resultSet.getString("EMP_POSITION");
-                this.username = resultSet.getString("EMP_USERNAME").trim();
-                this.password = resultSet.getString("EMP_PASSWORD").trim();
+                currentUser.empID = resultSet.getInt("EMP_ID");
+                currentUser.name = resultSet.getString("EMP_NAME").trim();
+                currentUser.salary = resultSet.getDouble("EMP_SALARY");
+                currentUser.dateJoined = resultSet.getString("EMP_DATEJOINED").trim();
+                currentUser.roleID = resultSet.getInt("EMP_ROLEID");
+                currentUser.position = resultSet.getString("EMP_POSITION");
+                currentUser.username = resultSet.getString("EMP_USERNAME").trim();
+                currentUser.password = resultSet.getString("EMP_PASSWORD").trim();
             }
 
             resultSet.close();
@@ -269,6 +283,6 @@ class User
             System.out.println(exception);
         }
 
-        return (this);
+        return (currentUser);
     }
 }
