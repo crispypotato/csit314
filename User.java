@@ -40,6 +40,62 @@ class User
         this.password = password;
     }
 
+    /* ================================
+     *  Get Set Methods
+     * ================================ */
+
+    public int getEmpID()
+    { return this.empID; }
+
+    public int getRoleID()
+    { return this.roleID; }
+
+    public String getName()
+    { return this.name; }
+
+    public String getUsername()
+    { return this.username; }
+
+    public String getPassword() // is it a good idea to have this
+    { return this.password; }
+
+    public String getDateJoined()
+    { return this.dateJoined; }
+
+    public String getPosition()
+    { return this.position; }
+
+    public double getSalary()
+    { return this.salary; }
+
+    public void setEmpID(int empID)
+    { this.empID = empID; }
+
+    public void setRoleID(int roleID)
+    { this.roleID = roleID; }
+
+    public void setName(String name)
+    { this.name = name; }
+
+    public void setUsername(String username)
+    { this.username = username; }
+
+    public void setPassword(String password) // is it a good idea to have this
+    { this.password = password; }
+
+    public void setDateJoined(String dateJoined)
+    { this.dateJoined = dateJoined; }
+
+    public void setPosition(String position)
+    { this.position = position; }
+
+    public void getSalary(double salary)
+    { this.salary = salary; }
+
+    /* ================================
+     *  End Get Set Methods
+     * ================================ */
+
     /* Method to create new user record in database
      * EmpID is automatically set by database
      */
