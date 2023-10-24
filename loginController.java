@@ -1,9 +1,13 @@
-public class loginController {
+/* Controller class for login
+ * Method available for all users
+ */
+
+final class loginController {
 
     // Prevent instantiation of class object
     private loginController() {}
 
-    public boolean authenAccount(String username, String password)
+    public static boolean authenAccount(String username, String password)
     {
         // Ensure username and password is alphanumeric
         if (!(isAlphaNumeric(username)) || !(isAlphaNumeric(password)))
@@ -15,7 +19,7 @@ public class loginController {
         return authenAccount;
     }
 
-    public User loginUser(String username, String password)
+    public static User loginUser(String username, String password)
     {
         User currentUser = User.loginUser(username, password);
         return currentUser;

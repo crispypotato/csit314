@@ -285,4 +285,11 @@ class User
 
         return (currentUser);
     }
+
+    // Basic toString method to display unique userID
+    @Override
+    public String toString()
+    {
+        return (String.valueOf(this.empID));
+    }
 }

@@ -21,7 +21,7 @@ public class createAccountPg extends JFrame implements ActionListener {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createTitledBorder("Create New Account"),
-            BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
         
         JPanel buttonPanel = new JPanel(new FlowLayout());
         
@@ -192,8 +192,7 @@ public class createAccountPg extends JFrame implements ActionListener {
         gbc.gridheight = 1;
   
         gbc.anchor = (x == 0) ? GridBagConstraints.WEST : GridBagConstraints.EAST;
-        gbc.fill = (x == 0) ? GridBagConstraints.BOTH
-              : GridBagConstraints.HORIZONTAL;
+        gbc.fill = (x == 0) ? GridBagConstraints.BOTH : GridBagConstraints.HORIZONTAL;
   
         gbc.insets = (x == 0) ? WEST_INSETS : EAST_INSETS;
         gbc.weightx = (x == 0) ? 0.1 : 1.0;
