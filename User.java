@@ -58,6 +58,7 @@ class User
 
     public String getPassword() // is it a good idea to have this
     { return this.password; }
+    // need it for authenticating so maybe leave it in for now
 
     public String getDateJoined()
     { return this.dateJoined; }
@@ -251,9 +252,10 @@ class User
     }
 
     // Authenticates username and password 
-    public static boolean authenAccount(String username, String password)
+    public static User authenAccount(String username, String password)
     {
         boolean authenUser = false;
+        User user = null;
 
         // Prepare query
         String myQuery = "SELECT * FROM EMPLOYEE WHERE EMP_USERNAME = (?) AND EMP_PASSWORD = (?)";
@@ -282,7 +284,19 @@ class User
             } else {
                 authenUser = false;
             }
-
+            if (authenUser = true){
+                int tmp_id = resultSet.getInt(1);
+                String tmp_name = resultSet.getString(2);
+                double tmp_salary = resultSet.getDouble(3);
+                String tmp_dateJoined = resultSet.getString(4);
+                int tmp_roleID = resultSet.getInt(5);
+                String tmp_position = resultSet.getString(6);
+                String tmp_username = resultSet.getString(7);
+                String tmp_password = resultSet.getString(8);
+                user = new User(tmp_id,tmp_name,tmp_salary,tmp_dateJoined,tmp_roleID,tmp_position,tmp_username,tmp_password);
+            } else {
+                user = new User();
+            }
             myStatement.close();
             connection.close();
         }
@@ -290,8 +304,7 @@ class User
         {
             System.out.println(exception);
         }
-
-        return authenUser;
+        return user;
     }
 
     // Login to user account

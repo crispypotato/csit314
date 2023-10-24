@@ -100,6 +100,7 @@ public class loginPg extends JFrame implements ActionListener
             String password = new String(passwordField.getPassword());
 
             User currentUser = loginController.loginUser(username, password);
+            
             // if current user is null display login failed
             if (currentUser.getEmpID() == 0)
             {
