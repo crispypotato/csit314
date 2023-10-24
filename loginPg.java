@@ -86,7 +86,7 @@ public class loginPg extends JFrame implements ActionListener
         c.gridx = 1;
         c.gridy = 1;
         frame.add(loginPanel, c);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -101,7 +101,17 @@ public class loginPg extends JFrame implements ActionListener
 
             User currentUser = loginController.loginUser(username, password);
             // if current user is null display login failed
-            // else display page
+            if (currentUser.getEmpID() == 0)
+            {
+                String statusText = "Login Failed! Please try again.";
+                String titleText = "Invalid Login";
+                JOptionPane.showMessageDialog(null, statusText, titleText, JOptionPane.PLAIN_MESSAGE);
+            }
+            // else close current frame and display landing page
+            else
+            {
+                System.out.println("Success!");
+            }
         }
     }
 
