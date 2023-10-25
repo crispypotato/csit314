@@ -100,7 +100,7 @@ public class loginPg extends JFrame implements ActionListener
             String password = new String(passwordField.getPassword());
 
             User currentUser = loginController.loginUser(username, password);
-            
+
             // if current user is null display login failed
             if (currentUser.getEmpID() == 0)
             {
@@ -111,7 +111,13 @@ public class loginPg extends JFrame implements ActionListener
             // else close current frame and display landing page
             else
             {
-                System.out.println("Success!");
+                JOptionPane.showMessageDialog(null, "Success!", "Login success", JOptionPane.PLAIN_MESSAGE);
+                // placeholder empty screen
+                // need to figure out how to connect each page together somehow
+                JFrame f = new JFrame("Landing Page");
+                f.setSize(200,100);
+                f.setVisible(true);
+                f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             }
         }
     }
