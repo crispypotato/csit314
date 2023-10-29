@@ -118,7 +118,14 @@ public class loginPg extends JFrame implements ActionListener
                 frame.dispose();
                 // current placeholder landing page
                 // Can call another class created page through this - using createAccount as placeholder
-                new createAccountPg();
+                if (currentUser.getRoleID() == 1)
+                {
+                    new SystemAdminPg();
+                }
+                else
+                {
+                    new createAccountPg();
+                }
             }
         }
     }
