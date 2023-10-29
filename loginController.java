@@ -13,7 +13,7 @@ final class loginController {
 
         if ((isAlphaNumeric(username)) || (isAlphaNumeric(password)))
         {
-            currentUser = User.authenAccount(username, password);
+            currentUser = User.loginUser(username, password);
         }
         else
         {
