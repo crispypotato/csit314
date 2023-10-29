@@ -254,7 +254,6 @@ class User
     // Authenticates username and password 
     public static User authenAccount(String username, String password)
     {
-        boolean authenUser = false;
         User user = null;
 
         // Prepare query
@@ -280,11 +279,6 @@ class User
 
             // if resultSet gets a record, username and password matches
             if (resultSet.next()) {
-                authenUser = true;
-            } else {
-                authenUser = false;
-            }
-            if (authenUser = true){
                 int tmp_id = resultSet.getInt(1);
                 String tmp_name = resultSet.getString(2);
                 double tmp_salary = resultSet.getDouble(3);

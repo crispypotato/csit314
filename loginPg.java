@@ -1,7 +1,5 @@
 import com.formdev.flatlaf.FlatDarkLaf;
 
-import javafx.stage.WindowEvent;
-
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.swing.*;

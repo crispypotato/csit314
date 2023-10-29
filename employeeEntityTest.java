@@ -4,9 +4,10 @@ public class employeeEntityTest {
     {
         boolean accountCreated = false;
  
-        accountCreated = createAccountController.createUserRecord("myEmp", "10000", "12/10/2023", 4, "Cashier", "testUsername", "testPassword");
+        createAccountController createAC = new createAccountController();
+        accountCreated = createAC.createUserRecord("myEmp", "10000", "12/10/2023", 4, "Cashier", "testUsername", "testPassword");
         System.out.println(accountCreated);
-        accountCreated = createAccountController.createUserRecord("myEmp3", "20000", "13/10/2023", 4, "Chef", "testUsername3", "testPassword3");
+        accountCreated = createAC.createUserRecord("myEmp3", "20000", "13/10/2023", 4, "Chef", "testUsername3", "testPassword3");
         System.out.println(accountCreated);
 
         loginController loginController = new loginController();
