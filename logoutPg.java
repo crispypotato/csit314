@@ -1,3 +1,6 @@
+// idk if it's a bit of an overkill to create a whole class
+// for something equivalent to a warning dialog
+
 import com.formdev.flatlaf.FlatDarkLaf;
 
 import javax.swing.*;
@@ -5,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SystemAdminPg extends JFrame implements ActionListener
+public class logoutPg extends JFrame implements ActionListener
 {
     private JFrame frame;
     private JButton createAccButton, logoutButton;
@@ -13,59 +16,49 @@ public class SystemAdminPg extends JFrame implements ActionListener
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
     private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
 
-    public SystemAdminPg()
+    public logoutPg()
     {
         // Setup for UI LAF
         FlatDarkLaf.setup();
 
         // Create Panel
-        JPanel SAPanel = new JPanel(new GridBagLayout());
+        JPanel logoutPanel = new JPanel(new GridBagLayout());
 
         // Set System Admin Panel
-        SAPanel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createTitledBorder("System Admin | Home"),
+        logoutPanel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createTitledBorder(""),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         GridBagConstraints c;
 
         // Set title
-        JLabel headerLabel = new JLabel("What do you want to do today?");
-        headerLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        JLabel headerLabel = new JLabel("Are you sure you want to log out?");
         c = createGbc(0,0);
         c.gridwidth = 2;
-        SAPanel.add(headerLabel, c);
-
-        // Set createAccount
-        createAccButton = new JButton("Create an Account");
-        createAccButton.addActionListener(this);
-        c = createGbc(0,2);
-        SAPanel.add(createAccButton, c);
+        logoutPanel.add(headerLabel, c);
 
         // Set logout
         logoutButton = new JButton("Log out");
         logoutButton.addActionListener(this);
-        c = createGbc(5,0);
-        SAPanel.add(logoutButton, c);
+        c = createGbc(0,1);
+        logoutPanel.add(logoutButton, c);
 
-        frame = new JFrame("System Admin Homepage");
+        frame = new JFrame("Log out");
         frame.setLayout(new GridBagLayout());
 
-        frame.add(SAPanel, c);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(logoutPanel, c);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == createAccButton)
+        if(e.getSource() == logoutButton)
         {
-            new createAccountPg();
-        }
-        else if(e.getSource() == logoutButton){
-            // JOptionPane.showMessageDialog(null, "Logging out. You will now be redirected back to the login page.", "Logout success", JOptionPane.PLAIN_MESSAGE);
-            // new loginPg();
-            new logoutPg(); // landing page does not disappear after logging out
+            JOptionPane.showMessageDialog(null, "You will now be redirected back to the login page.", "Logout success", JOptionPane.PLAIN_MESSAGE);
+            frame.dispose();
+            new loginPg();
         }
     }
 
@@ -86,7 +79,6 @@ public class SystemAdminPg extends JFrame implements ActionListener
     }
 
     public static void main(String[] args) {
-        new SystemAdminPg();
+        new logoutPg();
     }
-
 }
