@@ -1,4 +1,7 @@
 import com.formdev.flatlaf.FlatDarkLaf;
+
+import javafx.stage.WindowEvent;
+
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -13,6 +16,7 @@ public class loginPg extends JFrame implements ActionListener
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton submitButton;
+    private JFrame frame;
     
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
     private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
@@ -76,7 +80,7 @@ public class loginPg extends JFrame implements ActionListener
         loginPanel.add(submitButton, c);
 
         // Create Base Frame
-        final JFrame frame = new JFrame("Cafe Management System Login Page");
+        frame = new JFrame("Cafe Management System Login Page");
         frame.setLayout(new GridBagLayout());
 
         // Add Panels to frame
@@ -99,6 +103,7 @@ public class loginPg extends JFrame implements ActionListener
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
 
+            loginController loginController = new loginController();
             User currentUser = loginController.loginUser(username, password);
 
             // if current user is null display login failed
@@ -112,12 +117,10 @@ public class loginPg extends JFrame implements ActionListener
             else
             {
                 JOptionPane.showMessageDialog(null, "Success!", "Login success", JOptionPane.PLAIN_MESSAGE);
-                // placeholder empty screen
-                // need to figure out how to connect each page together somehow
-                JFrame f = new JFrame("Landing Page");
-                f.setSize(200,100);
-                f.setVisible(true);
-                f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.dispose();
+                // current placeholder landing page
+                // Can call another class created page through this - using createAccount as placeholder
+                new createAccountPg();
             }
         }
     }

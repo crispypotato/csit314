@@ -9,6 +9,7 @@ public class employeeEntityTest {
         accountCreated = createAccountController.createUserRecord("myEmp3", "20000", "13/10/2023", 4, "Chef", "testUsername3", "testPassword3");
         System.out.println(accountCreated);
 
+        loginController loginController = new loginController();
         User currentUser = loginController.loginUser("testUsername", "testPassword");
         System.out.println("Current user: " + currentUser);
 

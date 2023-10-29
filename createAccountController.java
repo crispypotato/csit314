@@ -4,13 +4,13 @@
 
 final class createAccountController {
 
-    // Private constructor to prevent instatiation of controller
-    private createAccountController() {}
+    // Empty constructor - private constructor better?
+    public createAccountController() {}
 
     /* Method to check variables to create Employee account
      * True = Account created || False = Account not created
     */
-    public static boolean createUserRecord(String name, String salaryStr, String dateJoined, 
+    public boolean createUserRecord(String name, String salaryStr, String dateJoined, 
                                    int roleID, String position, String username, String password)
     {
         boolean validAccount = false;
@@ -62,12 +62,12 @@ final class createAccountController {
     }
 
     // Check if string is strictly alpha-numeric
-    private static boolean isAlphaNumeric(String s){
+    private boolean isAlphaNumeric(String s){
         String pattern= "^[a-zA-Z0-9]*$";
         return s.matches(pattern);
     }
 
-    private static boolean isNumeric(String str) {
+    private boolean isNumeric(String str) {
         try {
             Double.parseDouble(str);
             return true;

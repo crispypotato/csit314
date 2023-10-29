@@ -4,10 +4,10 @@
 
 final class loginController {
 
-    // Prevent instantiation of class object
-    private loginController() {}
+    // Empty constructor
+    public loginController() {}
 
-    public static User loginUser(String username, String password)
+    public User loginUser(String username, String password)
     {
         User currentUser;
 
