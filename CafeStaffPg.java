@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SystemAdminPg extends JFrame implements ActionListener
+public class CafeStaffPg extends JFrame implements ActionListener
 {
     private JFrame frame;
     private JButton createAccButton, logoutButton;
@@ -13,17 +13,17 @@ public class SystemAdminPg extends JFrame implements ActionListener
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
     private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
 
-    public SystemAdminPg()
+    public CafeStaffPg()
     {
         // Setup for UI LAF
         FlatDarkLaf.setup();
 
         // Create Panel
-        JPanel SAPanel = new JPanel(new GridBagLayout());
+        JPanel CSPanel = new JPanel(new GridBagLayout());
 
         // Set System Admin Panel
-        SAPanel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createTitledBorder("System Admin | Home"),
+        CSPanel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createTitledBorder("Cafe Staff | Home"),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         GridBagConstraints c;
@@ -33,24 +33,24 @@ public class SystemAdminPg extends JFrame implements ActionListener
         headerLabel.setFont(new Font("Serif", Font.BOLD, 20));
         c = createGbc(0,0);
         c.gridwidth = 2;
-        SAPanel.add(headerLabel, c);
+        CSPanel.add(headerLabel, c);
 
         // Set createAccount
-        createAccButton = new JButton("Create an Account");
+        createAccButton = new JButton("");
         createAccButton.addActionListener(this);
         c = createGbc(0,2);
-        SAPanel.add(createAccButton, c);
+        CSPanel.add(createAccButton, c);
 
         // Set logout
         logoutButton = new JButton("Log out");
         logoutButton.addActionListener(this);
         c = createGbc(5,0);
-        SAPanel.add(logoutButton, c);
+        CSPanel.add(logoutButton, c);
 
-        frame = new JFrame("System Admin Homepage");
+        frame = new JFrame("Cafe Staff Homepage");
         frame.setLayout(new GridBagLayout());
 
-        frame.add(SAPanel, c);
+        frame.add(CSPanel, c);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -58,11 +58,7 @@ public class SystemAdminPg extends JFrame implements ActionListener
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == createAccButton)
-        {
-            new createAccountPg();
-        }
-        else if(e.getSource() == logoutButton){
+        if(e.getSource() == logoutButton){
             JOptionPane.showMessageDialog(null, "Logging out. You will now be redirected back to the login page.", "Logout success", JOptionPane.PLAIN_MESSAGE);
             frame.dispose();
             new loginPg();
@@ -86,6 +82,6 @@ public class SystemAdminPg extends JFrame implements ActionListener
     }
 
     public static void main(String[] args) {
-        new SystemAdminPg();
+        new CafeStaffPg();
     }
 }
