@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class SystemAdminPg extends JFrame implements ActionListener
 {
     private JFrame frame;
-    private JButton createAccButton, logoutButton;
+    private JButton createAccButton, logoutButton, viewAccButton;
 
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
     private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
@@ -41,6 +41,12 @@ public class SystemAdminPg extends JFrame implements ActionListener
         c = createGbc(0,2);
         SAPanel.add(createAccButton, c);
 
+        // Set viewAccount
+        viewAccButton = new JButton("View Accounts");
+        viewAccButton.addActionListener(this);
+        c = createGbc(1,2);
+        SAPanel.add(viewAccButton, c);
+
         // Set logout
         logoutButton = new JButton("Log out");
         logoutButton.addActionListener(this);
@@ -66,6 +72,9 @@ public class SystemAdminPg extends JFrame implements ActionListener
             JOptionPane.showMessageDialog(null, "Logging out. You will now be redirected back to the login page.", "Logout success", JOptionPane.PLAIN_MESSAGE);
             frame.dispose();
             new loginPg();
+        }
+        else if(e.getSource() == viewAccButton){
+            new viewAccountsPg();
         }
     }
 

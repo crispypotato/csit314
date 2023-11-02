@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.ArrayList;
 
 /* Employee Entity Class
 
@@ -249,6 +250,54 @@ class User
         catch (Exception exception) {
             System.out.println(exception);
         }
+    }
+
+    // retrieve users' information from database and returns as array
+    public static ArrayList<User> empRecordArray()
+    {
+        ArrayList<User> arr = new ArrayList<User>();
+        String myQuery = "SELECT * FROM EMPLOYEE";
+
+        Connection connection = null;
+        try {
+            // below two lines are used for connectivity.
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/cafems",
+                    "root", "Just@GroupProj3ctPW");
+
+            Statement statement;
+            statement = connection.createStatement();
+            ResultSet resultSet;
+            resultSet = statement.executeQuery(myQuery);
+
+            // Declare values for output
+            int empID, roleID;
+            String empName, dateJoined, position, username, password;
+            double salary;
+
+            while (resultSet.next()) {
+                empID = resultSet.getInt("EMP_ID");
+                empName = resultSet.getString("EMP_NAME").trim();
+                salary = resultSet.getDouble("EMP_SALARY");
+                dateJoined = resultSet.getString("EMP_DATEJOINED").trim();
+                roleID = resultSet.getInt("EMP_ROLEID");
+                position = resultSet.getString("EMP_POSITION");
+                username = resultSet.getString("EMP_USERNAME").trim();
+                password = resultSet.getString("EMP_PASSWORD").trim();
+                User user = new User(empID, empName, salary, dateJoined, roleID, position, username, password);
+                arr.add(user);
+            }
+
+            resultSet.close();
+            statement.close();
+            connection.close();
+        }
+        catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        return arr;
     }
 
     // Authenticates username and password 
