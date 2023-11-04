@@ -20,20 +20,20 @@ EMP_POSITION	varchar(25),
 PRIMARY KEY (EMP_ID)
 ) ENGINE = INNODB;
 
-CREATE TABLE ROLE(
-ROLE_ID 	int NOT NULL,
-ROLE_NAME 	varchar(25) NOT NULL,
+CREATE TABLE PROFILE(
+PROFILE_ID 	int NOT NULL,
+PROFILE_NAME 	varchar(25) NOT NULL,
 
 PRIMARY KEY (ROLE_ID)
 ) ENGINE = INNODB;
 
-ALTER TABLE EMPLOYEE ADD FOREIGN KEY (EMP_ROLEID) REFERENCES ROLE(ROLE_ID);
+ALTER TABLE EMPLOYEE ADD FOREIGN KEY (EMP_ROLEID) REFERENCES PROFILE(PROFILE_ID);
 ALTER TABLE EMPLOYEE AUTO_INCREMENT=10001;
 
 COMMIT;
 
-insert into role values(0, "default");
-insert into role values(1, "System Admin");
-insert into role values(2, "Cafe Owner");
-insert into role values(3, "Cafe Manager");
-insert into role values(4, "Cafe Staff");
+insert into profile values(0, "default");
+insert into profile values(1, "System Admin");
+insert into profile values(2, "Cafe Owner");
+insert into profile values(3, "Cafe Manager");
+insert into profile values(4, "Cafe Staff");
