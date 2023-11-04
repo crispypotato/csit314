@@ -56,7 +56,7 @@ final class createAccountController {
         // Pass all checks - create account
         validAccount = true;
         User newUser = new User(0, name, salary, dateJoined, roleID, position, username, password);
-        createAccount = User.createUserRecord(newUser);
+        createAccount = newUser.createUserRecord(newUser);
 
         return createAccount;
     }

@@ -101,7 +101,7 @@ class User
     /* Method to create new user record in database
      * EmpID is automatically set by database
      */
-    public static boolean createUserRecord(User myUser)
+    public boolean createUserRecord(User myUser)
     {
         boolean success = false; 
         
@@ -298,56 +298,6 @@ class User
         }
 
         return arr;
-    }
-
-    // Authenticates username and password 
-    public static User authenAccount(String username, String password)
-    {
-        User user = null;
-
-        // Prepare query
-        String myQuery = "SELECT * FROM EMPLOYEE WHERE EMP_USERNAME = (?) AND EMP_PASSWORD = (?)";
-
-        Connection connection = null;
-        try {
-            // below two lines are used for connectivity.
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/cafems",
-                "root", "Just@GroupProj3ctPW");
- 
-            // Prepare statement
-            PreparedStatement myStatement = connection.prepareStatement(myQuery);
-
-            // Set parameters for statement
-            myStatement.setString(1, username);
-            myStatement.setString(2, password);
-
-            ResultSet resultSet;
-            resultSet = myStatement.executeQuery();
-
-            // if resultSet gets a record, username and password matches
-            if (resultSet.next()) {
-                int tmp_id = resultSet.getInt(1);
-                String tmp_name = resultSet.getString(2);
-                double tmp_salary = resultSet.getDouble(3);
-                String tmp_dateJoined = resultSet.getString(4);
-                int tmp_roleID = resultSet.getInt(5);
-                String tmp_position = resultSet.getString(6);
-                String tmp_username = resultSet.getString(7);
-                String tmp_password = resultSet.getString(8);
-                user = new User(tmp_id,tmp_name,tmp_salary,tmp_dateJoined,tmp_roleID,tmp_position,tmp_username,tmp_password);
-            } else {
-                user = new User();
-            }
-            myStatement.close();
-            connection.close();
-        }
-        catch (Exception exception) 
-        {
-            System.out.println(exception);
-        }
-        return user;
     }
 
     // Login to user account
