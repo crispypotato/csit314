@@ -127,7 +127,7 @@ public class createAccountPg extends JFrame implements ActionListener {
         if (e.getSource() == submitButton) {
             // Retrieve details from form
             String name = nameField.getText();
-            String salary = salaryField.getText();
+            String salaryStr = salaryField.getText();
             String dateJoined = dateJoinedField.getText();
             int role = roleField.getSelectedIndex();
             String position = positionField.getSelectedItem().toString();
@@ -140,17 +140,25 @@ public class createAccountPg extends JFrame implements ActionListener {
                 position = "NULL";
             }
 
+            boolean validAccount = checkFields(name, salaryStr, dateJoined, role, position, username, password);
+
             // Create employee
             String statusText;
-            createAccountController createAC = new createAccountController();
-            boolean createUser = createAC.createUserRecord(name, salary, dateJoined, role, position, username, password);
-            if (createUser)
-            {
-               statusText = "Account created successfully!";
-			}
-            else
-            {
-                statusText = "Account creation failed. Please check your fields.";
+            if (validAccount) {
+                double salary = Double.parseDouble(salaryStr);
+                createAccountController createAC = new createAccountController();
+                User newUser = new User(0, name, salary, dateJoined, role, position, username, password);
+                boolean createUser = createAC.createUserRecord(newUser);
+
+                if (createUser) {
+                    statusText = "Account created successfully!";
+                }
+                else {
+                    statusText = "Account creation failed. Account interfers with business rules.";
+                }
+            }
+            else {
+                statusText = "Account creation failed. Please check the fields for invalid input.";
             }
             String titleText = "Account Creation Status";
             JOptionPane.showMessageDialog(null, statusText, titleText, JOptionPane.PLAIN_MESSAGE);
@@ -201,7 +209,68 @@ public class createAccountPg extends JFrame implements ActionListener {
         return gbc;
     }
 
-    public static void main(String[] args) {        
+    // Check if string is strictly alpha-numeric
+    private boolean isAlphaNumeric(String s){
+        String pattern= "^[a-zA-Z0-9]*$";
+        return s.matches(pattern);
+    }
+
+    private boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
+    }
+
+    private boolean checkFields(String name, String salaryStr, String dateJoined, 
+    int roleID, String position, String username, String password) {
+        boolean validAccount = false;
+        double salary;
+
+        // Check if name is alpha-numeric
+        if (!(isAlphaNumeric(name)) || name == "")
+        {return validAccount;}
+
+        // Check if salary is numeric
+        if (isNumeric(salaryStr))
+        {
+            salary = Double.parseDouble(salaryStr);
+        }
+        else {
+            return validAccount;
+        }
+        
+        // Check if salary is within 0 to 100000
+        if (salary < 0 || salary > 100000)
+        {return validAccount;}
+
+        // Check if roleID is within 0 to 100
+        if (roleID < 0 || roleID > 100)
+        {return validAccount;}
+
+        if (!(isAlphaNumeric(position)))
+        {return validAccount;}
+
+        // Check if username is alphanumeric
+        if (!(isAlphaNumeric(username)))
+        {return validAccount;}
+
+        // Prevent injections by ensuring username is alphanumeric FIRST
+        if (!(User.isUniqueUsername(username)))
+        {return validAccount;}
+
+        // Check if password is alphanumeric
+        if (!(isAlphaNumeric(password)))
+        {return validAccount;}
+
+        // If no issues
+        validAccount = true;
+        return validAccount;
+    }
+
+    public static void main(String[] args) {       
         new createAccountPg();
     }
 }
