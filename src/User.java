@@ -1,7 +1,7 @@
 import java.sql.*;
 import java.util.ArrayList;
 
-/* Employee Entity Class
+/* User Entity Class
 
     Information in Employee database:
     empID, Name, Salary, DateJoined, RoleID, PositionID, Username, Password
