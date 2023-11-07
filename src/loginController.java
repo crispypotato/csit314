@@ -9,11 +9,11 @@ final class loginController {
 
     public User loginUser(String username, String password)
     {
-        User currentUser;
+        User currentUser = new User();
 
         if ((isAlphaNumeric(username)) || (isAlphaNumeric(password)))
         {
-            currentUser = User.loginUser(username, password);
+            currentUser = currentUser.loginUser(username, password);
         }
         else
         {

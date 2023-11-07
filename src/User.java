@@ -301,7 +301,7 @@ class User
     }
 
     // Login to user account
-    public static User loginUser(String username, String password)
+    public User loginUser(String username, String password)
     {
         // Prepare query
         User currentUser = new User();
