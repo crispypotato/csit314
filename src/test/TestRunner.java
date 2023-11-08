@@ -5,9 +5,10 @@ import org.junit.runner.notification.Failure;
 public class TestRunner {
     public static void main(String[] args) {
         Result result = JUnitCore.runClasses(sprintUnitTest.class);
-        System.out.println("Is the test successful?: " + result.wasSuccessful());
+
         for (Failure failure : result.getFailures()) {
             System.out.println("Failure: " + failure.toString());
         }
+        System.out.println("Successful: " + result.wasSuccessful() + " ran " + result.getRunCount() + " tests");
     }
 }
