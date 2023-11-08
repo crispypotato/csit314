@@ -49,9 +49,9 @@ public class viewAccountsPg extends JFrame implements ActionListener
         c = createGbc(3,0);
         panel.add(headerDateJoinedLabel, c);
 
-        JLabel headerRoleIDLabel = new JLabel("Role ID");
+        JLabel headerRoleLabel = new JLabel("Role");
         c = createGbc(4,0);
-        panel.add(headerRoleIDLabel, c);
+        panel.add(headerRoleLabel, c);
 
         JLabel headerUsernameLabel = new JLabel("Username");
         c = createGbc(5,0);
@@ -83,9 +83,9 @@ public class viewAccountsPg extends JFrame implements ActionListener
             c = createGbc(3,i);
             panel.add(dateJoined, c);
 
-            JLabel roleID = new JLabel(String.valueOf(u.getRoleID()));
+            JLabel role = new JLabel(getRoleName(u.getRoleID()));
             c = createGbc(4,i);
-            panel.add(roleID, c);
+            panel.add(role, c);
 
             JLabel username = new JLabel(u.getUsername());
             c = createGbc(5,i);
@@ -130,6 +130,29 @@ public class viewAccountsPg extends JFrame implements ActionListener
         gbc.weightx = (x == 0) ? 0.1 : 1.0;
         gbc.weighty = 1.0;
         return gbc;
+    }
+
+    private String getRoleName(int id){
+        if (id == 1)
+        {
+            return "System Admin";
+        }
+        else if (id == 2)
+        {
+            return "Cafe Owner";
+        }
+        else if (id == 3)
+        {
+            return "Cafe Manager";
+        }
+        else if (id == 4)
+        {
+            return "Cafe Staff";
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public static void main(String[] args) {
