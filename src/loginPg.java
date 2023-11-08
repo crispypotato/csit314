@@ -101,8 +101,14 @@ public class loginPg extends JFrame implements ActionListener
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
 
-            loginController loginController = new loginController();
-            User currentUser = loginController.loginUser(username, password);
+            User currentUser = new User();
+
+            // Attempt login
+            if ((isAlphaNumeric(username)) || (isAlphaNumeric(password)))
+            {
+                loginController loginController = new loginController();
+                currentUser = loginController.loginUser(username, password);
+            }
 
             // if current user is null display login failed
             if (currentUser.getEmpID() == 0)
@@ -154,6 +160,12 @@ public class loginPg extends JFrame implements ActionListener
         return gbc;
     }
     
+    // Check if string is strictly alpha-numeric
+    private static boolean isAlphaNumeric(String s){
+        String pattern= "^[a-zA-Z0-9]*$";
+        return s.matches(pattern);
+    }
+
     public static void main(String[] args) {        
         new loginPg();
     }

@@ -7,24 +7,13 @@ final class loginController {
     // Empty constructor
     public loginController() {}
 
+    // Log in user by retrieving user details from database
     public User loginUser(String username, String password)
     {
         User currentUser = new User();
 
-        if ((isAlphaNumeric(username)) || (isAlphaNumeric(password)))
-        {
-            currentUser = currentUser.loginUser(username, password);
-        }
-        else
-        {
-            currentUser = new User();
-        }
-            return currentUser;
-    }
+        currentUser = currentUser.loginUser(username, password);
 
-    // Check if string is strictly alpha-numeric
-    private static boolean isAlphaNumeric(String s){
-        String pattern= "^[a-zA-Z0-9]*$";
-        return s.matches(pattern);
+        return currentUser;
     }
 }
