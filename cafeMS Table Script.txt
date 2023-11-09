@@ -23,7 +23,7 @@ PRIMARY KEY (EMP_ID)
 ) ENGINE = INNODB;
 
 CREATE TABLE PROFILE(
-PROFILE_ID 	int NOT NULL,
+PROFILE_ID 	int NOT NULL AUTO_INCREMENT,
 PROFILE_NAME 	varchar(25) NOT NULL,
 
 PRIMARY KEY (PROFILE_ID)
@@ -57,8 +57,8 @@ ALTER TABLE BIDS ADD FOREIGN KEY (EMP_ID) REFERENCES EMPLOYEE(EMP_ID);
 
 COMMIT;
 
-insert into profile values(0, "default");
-insert into profile values(1, "System Admin");
-insert into profile values(2, "Cafe Owner");
-insert into profile values(3, "Cafe Manager");
-insert into profile values(4, "Cafe Staff");
+insert into profile (profile_name) values("default");
+insert into profile (profile_name) values("System Admin");
+insert into profile (profile_name) values("Cafe Owner");
+insert into profile (profile_name) values("Cafe Manager");
+insert into profile (profile_name) values("Cafe Staff");

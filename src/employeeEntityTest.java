@@ -15,7 +15,5 @@ public class employeeEntityTest {
         loginController loginController = new loginController();
         User currentUser = loginController.loginUser("testUsername", "testPassword");
         System.out.println("Current user: " + currentUser);
-
-        User.displayEmpRecord();
     }
 }

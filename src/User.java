@@ -198,60 +198,6 @@ class User
         return uniqueUsername;
     }
 
-    // Method to display employee record => To be discarded upon test finish
-    public static void displayEmpRecord()
-    {
-        String myQuery = "SELECT * FROM EMPLOYEE";
-
-        Connection connection = null;
-        try {
-            // below two lines are used for connectivity.
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/cafems",
-                "root", "Just@GroupProj3ctPW");
- 
-            Statement statement;
-            statement = connection.createStatement();
-            ResultSet resultSet;
-            resultSet = statement.executeQuery(myQuery);
-
-            // Declare values for output
-            int empID, roleID;
-            String empName, dateJoined, position, username, password; 
-            double salary; 
-
-            while (resultSet.next()) {
-                empID = resultSet.getInt("EMP_ID");
-                empName = resultSet.getString("EMP_NAME").trim();
-                salary = resultSet.getDouble("EMP_SALARY");
-                dateJoined = resultSet.getString("EMP_DATEJOINED").trim();
-                roleID = resultSet.getInt("EMP_ROLEID");
-                position = resultSet.getString("EMP_POSITION");
-                username = resultSet.getString("EMP_USERNAME").trim();
-                password = resultSet.getString("EMP_PASSWORD").trim();
-        
-                // Output records
-                System.out.println("\nEMP_ID : " + empID
-                                   + "\nEMP_NAME : " + empName
-                                   + "\nEMP_SALARY : " + salary
-                                   + "\nEMP_DATEJOINED : " + dateJoined
-                                   + "\nEMP_ROLEID : " + roleID
-                                   + "\nEMP_POSITION : " + position 
-                                   + "\nEMP_USERNAME : " + username
-                                   + "\nEMP_PASSWORD : " + password
-                                   + "\n==============================");
-            }
-
-            resultSet.close();
-            statement.close();
-            connection.close();
-        }
-        catch (Exception exception) {
-            System.out.println(exception);
-        }
-    }
-
     // retrieve users' information from database and returns as array
     public static ArrayList<User> empRecordArray()
     {
