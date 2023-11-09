@@ -12,19 +12,26 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class sprintUnitTest {
-    private User testSubject;
+    private User testSubject, testSubject3, testSubject5;
     private loginController testSubject2;
+    private createAccountController testSubject4;
 
     @Before
     public void setUp() throws Exception {
         this.testSubject = new User();
         this.testSubject2 = new loginController();
+        this.testSubject3 = new User(0, "CafeStaff4", 10000, "12/12/2023", 4, "Cashier", "staff4", "staff4");
+        this.testSubject4 = new createAccountController();
+        this.testSubject5 = new User(0, "CafeStaff5", 11000, "11/12/2023", 4, "Cashier", "staff5", "staff5");
     }
 
     @After
         public void tearDown() throws Exception {
         testSubject = null;
         testSubject2 = null;
+        testSubject3 = null;
+        testSubject4 = null;
+        testSubject5 = null;
     }
     
     @Test
@@ -58,5 +65,20 @@ public class sprintUnitTest {
     @Test
     public void testEntityCreateUser() {
         // Test Create User - Expected Success
+        boolean outcome1 = testSubject3.createUserRecord(testSubject3);
+        assertEquals("createAccount CS E", true, outcome1);
+        // Test Create User - Expected Fail - same details found
+        boolean outcome2 = testSubject3.createUserRecord(testSubject3);
+        assertEquals("createAccount CS E", false, outcome2);
+    }
+
+    @Test
+    public void testControllerCreateUser() {
+        // Test Create User - Expected Success
+        boolean outcome1 = testSubject4.createUserRecord(testSubject5);
+        assertEquals("createAccount CS C", true, outcome1);
+        // Test Create User - Expected Fail - same details found
+        boolean outcome2 = testSubject4.createUserRecord(testSubject5);
+        assertEquals("createAccount CS C", false, outcome2);
     }
 }
