@@ -33,7 +33,7 @@ public class Profile {
     public ArrayList<String> profileRecordArray()
     {
         ArrayList<String> arr = new ArrayList<String>();
-        String myQuery = "SELECT PROFILE_NAME FROM PROFILE";
+        String myQuery = "SELECT PROFILE_NAME FROM PROFILE ORDER BY PROFILE_ID";
 
         Connection connection = null;
         try {

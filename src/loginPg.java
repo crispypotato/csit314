@@ -122,21 +122,20 @@ public class loginPg extends JFrame implements ActionListener
             {
                 JOptionPane.showMessageDialog(null, "Success!", "Login success", JOptionPane.PLAIN_MESSAGE);
                 frame.dispose();
-                // current placeholder landing page
-                // Can call another class created page through this - using createAccount as placeholder
-                if (currentUser.getRoleID() == 1)
+                // Call page based on profiles
+                if (currentUser.getRoleID() == 2)
                 {
-                    new SystemAdminPg();
-                }
-                else if(currentUser.getRoleID() == 2)
-                {
-                    new CafeOwnerPg();
+                    new SystemAdminPg(currentUser);
                 }
                 else if(currentUser.getRoleID() == 3)
                 {
-                    new CafeManagerPg();
+                    new CafeOwnerPg();
                 }
                 else if(currentUser.getRoleID() == 4)
+                {
+                    new CafeManagerPg();
+                }
+                else if(currentUser.getRoleID() == 5)
                 {
                     new CafeStaffPg();
                 }

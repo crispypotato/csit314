@@ -117,7 +117,7 @@ public class createProfilePg extends JFrame implements ActionListener {
         {
             return false;
         }
-        if (name.trim() == "")
+        if (name.trim().equals(""))
         {
             return false;
         }
