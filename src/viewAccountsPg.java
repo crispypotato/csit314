@@ -133,19 +133,19 @@ public class viewAccountsPg extends JFrame implements ActionListener
     }
 
     private String getRoleName(int id){
-        if (id == 1)
+        if (id == 2)
         {
             return "System Admin";
         }
-        else if (id == 2)
+        else if (id == 3)
         {
             return "Cafe Owner";
         }
-        else if (id == 3)
+        else if (id == 4)
         {
             return "Cafe Manager";
         }
-        else if (id == 4)
+        else if (id == 5)
         {
             return "Cafe Staff";
         }

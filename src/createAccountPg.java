@@ -181,7 +181,7 @@ public class createAccountPg extends JFrame implements ActionListener {
            If other roles selected, position is automatically set to null */
         if (e.getSource() == roleField)
         {
-            if (roleField.getSelectedItem().toString() == "Cafe Staff")
+            if ((roleField.getSelectedItem().toString().equals("Cafe Staff")))
             {
                 positionField.setVisible(true);
                 positionField.setSelectedIndex(0);
