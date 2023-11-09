@@ -9,8 +9,8 @@ public class createProfileController {
     public boolean createProfileRecord(String name)
     {
         Profile pf = new Profile();
-        boolean createAccount = pf.createProfileRecord(name);
+        boolean createProfile = pf.createProfileRecord(name);
 
-        return createAccount;
+        return createProfile;
     }
 }
