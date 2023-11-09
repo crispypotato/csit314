@@ -294,6 +294,54 @@ class User
         return (currentUser);
     }
 
+    // Search and return a User's information based on id
+    public User searchUserAccount(int id)
+    {
+        // Prepare query
+        User currentUser = new User();
+        String myQuery = "SELECT * FROM EMPLOYEE WHERE EMP_ID = (?)";
+
+        Connection connection = null;
+        try {
+            // below two lines are used for connectivity.
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/cafems",
+                "root", "Just@GroupProj3ctPW");
+ 
+            // Prepare statement
+            PreparedStatement myStatement = connection.prepareStatement(myQuery);
+
+            // Set parameters for statement
+            myStatement.setInt(1, id);
+
+            ResultSet resultSet;
+            resultSet = myStatement.executeQuery();
+
+            // Set variables to current user
+            if (resultSet.next()) {
+                currentUser.empID = resultSet.getInt("EMP_ID");
+                currentUser.name = resultSet.getString("EMP_NAME").trim();
+                currentUser.salary = resultSet.getDouble("EMP_SALARY");
+                currentUser.dateJoined = resultSet.getString("EMP_DATEJOINED").trim();
+                currentUser.roleID = resultSet.getInt("EMP_ROLEID");
+                currentUser.position = resultSet.getString("EMP_POSITION");
+                currentUser.username = resultSet.getString("EMP_USERNAME").trim();
+                currentUser.password = resultSet.getString("EMP_PASSWORD").trim();
+            }
+
+            resultSet.close();
+            myStatement.close();
+            connection.close();
+        }
+        catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        return (currentUser);
+    }
+
+
     // Basic toString method to display unique userID
     @Override
     public String toString()

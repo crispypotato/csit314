@@ -1,4 +1,4 @@
-/* Controller class for createEmpRecord
+/* Controller class for createUserRecord
  * Method only available for System Admin role
  * Used to check business rules for user database
  */
