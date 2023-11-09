@@ -17,8 +17,20 @@ public class Profile {
         this.name = name;
     }
 
+    public int getID()
+    { return (this.id); }
+
+    public String getName()
+    { return (this.name); }
+
+    public void setID(int id)
+    { this.id = id; }
+
+    public void setName(String name)
+    { this.name = name; }
+
     // retrieve profile from database and return as arraylist
-    public static ArrayList<String> profileRecordArray()
+    public ArrayList<String> profileRecordArray()
     {
         ArrayList<String> arr = new ArrayList<String>();
         String myQuery = "SELECT PROFILE_NAME FROM PROFILE";
@@ -54,13 +66,44 @@ public class Profile {
         return arr;
     }
 
-    public static void main(String[] args)
+    // add new profile into database
+    public boolean createProfileRecord(String name)
     {
-        ArrayList<String> myarr = new ArrayList<String>();
-        myarr = profileRecordArray();
-        for (String profile : myarr)
+        boolean success = false; 
+        
+        // Prepare query
+        String myQuery = "INSERT INTO PROFILE (PROFILE_NAME) VALUES (?)";
+
+        Connection connection = null;
+        try 
         {
-            System.out.println(profile);
+            // below two lines are used for connectivity.
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/cafems",
+                "root", "Just@GroupProj3ctPW");
+ 
+            // Prepare statement
+            PreparedStatement myStatement = connection.prepareStatement(myQuery);
+
+            // Set parameters for statement
+            myStatement.setString(1, name);
+
+            int i = myStatement.executeUpdate();
+            if (i > 0) {
+                System.out.println("PROFILE RECORD INSERTED");
+                success = true;
+            } else {
+                System.out.println("PROFILE RECORD NOT INSERTED");
+            }
+            myStatement.close();
+            connection.close();
         }
+        catch (Exception exception) 
+        {
+            System.out.println(exception);
+        }
+
+        return success;
     }
 }

@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class createAccountPg extends JFrame implements ActionListener {
 
@@ -63,7 +64,7 @@ public class createAccountPg extends JFrame implements ActionListener {
         panel.add(roleLabel, c);
 
         // Set Role
-        String[] roleChoices = {" ", "System Admin", "Cafe Owner","Cafe Manager", "Cafe Staff"};
+        String[] roleChoices = getProfileList();
         roleField = new JComboBox<String>(roleChoices);
         roleField.setVisible(true);
         roleField.setSelectedIndex(0);
@@ -129,7 +130,7 @@ public class createAccountPg extends JFrame implements ActionListener {
             String name = nameField.getText();
             String salaryStr = salaryField.getText();
             String dateJoined = dateJoinedField.getText();
-            int role = roleField.getSelectedIndex();
+            int role = roleField.getSelectedIndex() + 1; // id starts at 1
             String position = positionField.getSelectedItem().toString();
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
@@ -246,8 +247,8 @@ public class createAccountPg extends JFrame implements ActionListener {
         if (salary < 0 || salary > 100000)
         {return validAccount;}
 
-        // Check if roleID is within 0 to 100
-        if (roleID < 0 || roleID > 100)
+        // Check if roleID is within 2 to 100 - profile id starts from 2
+        if (roleID < 2 || roleID > 100)
         {return validAccount;}
 
         if (!(isAlphaNumeric(position)))
@@ -268,6 +269,18 @@ public class createAccountPg extends JFrame implements ActionListener {
         // If no issues
         validAccount = true;
         return validAccount;
+    }
+
+    // Retrieve list of profile in database
+    private String[] getProfileList()
+    {
+        Profile pf = new Profile();
+
+        ArrayList<String> profileArrayList = pf.profileRecordArray();
+        // Set the empty option for default
+        profileArrayList.set(0, " ");
+        String[] profileArray = profileArrayList.toArray(new String[profileArrayList.size()]);
+        return profileArray;
     }
 
     public static void main(String[] args) {       
