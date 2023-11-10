@@ -8,7 +8,8 @@ import java.awt.event.ActionListener;
 public class SystemAdminPg extends JFrame implements ActionListener
 {
     private JFrame frame;
-    private JButton createAccButton, createProfileButton, logoutButton, viewAccButton;
+    private JButton createAccButton, createProfileButton, logoutButton, viewAccButton, searchAccButton;
+    private JTextField searchField;
 
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
     private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
@@ -24,7 +25,6 @@ public class SystemAdminPg extends JFrame implements ActionListener
         frame = new JFrame("System Admin Homepage");
         frame.setLayout(new BorderLayout(5, 5));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(500, 300);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
@@ -38,13 +38,23 @@ public class SystemAdminPg extends JFrame implements ActionListener
                 BorderFactory.createTitledBorder("System Admin | Home"),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-
         // Set title
         JLabel headerLabel = new JLabel("What do you want to do today?");
         headerLabel.setFont(new Font("Serif", Font.BOLD, 15));
         c = createGbc(0,0);
         c.gridwidth = 2;
         HomePanel.add(headerLabel, c);
+
+        // Set search User Account
+        JLabel searchLabel = new JLabel("Search Account: ");
+        c = createGbc(0,1);
+        HomePanel.add(searchLabel, c);
+        searchField = new JTextField();
+        c = createGbc(1,1);
+        HomePanel.add(searchField, c);
+        searchAccButton = new JButton("Search");
+        c = createGbc(2,1);
+        HomePanel.add(searchAccButton, c);
 
         // ================ Set Button Panel ======================
         // Set createAccount
@@ -91,12 +101,14 @@ public class SystemAdminPg extends JFrame implements ActionListener
 
         // Set Dimensions
         InfoPanel.setPreferredSize(new Dimension(500, 50));
-        ButtonPanel.setPreferredSize(new Dimension(150, 300));
+        ButtonPanel.setPreferredSize(new Dimension(150, 250));
+        HomePanel.setPreferredSize(new Dimension(350, 250));
         
         // Set locations
         frame.add(InfoPanel, BorderLayout.NORTH);
         frame.add(HomePanel, BorderLayout.CENTER);
         frame.add(ButtonPanel, BorderLayout.EAST);
+        frame.pack();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -104,16 +116,34 @@ public class SystemAdminPg extends JFrame implements ActionListener
         {
             new createAccountPg();
         }
-        else if(e.getSource() == logoutButton){
+
+        if(e.getSource() == logoutButton){
             JOptionPane.showMessageDialog(null, "Logging out. You will now be redirected back to the login page.", "Logout success", JOptionPane.PLAIN_MESSAGE);
             frame.dispose();
             new loginPg();
         }
-        else if(e.getSource() == viewAccButton){
+
+        if(e.getSource() == viewAccButton){
             new viewAccountsPg();
         }
-        else if(e.getSource() == createProfileButton){
+
+        if(e.getSource() == createProfileButton){
             new createProfilePg();
+        }
+
+        if (e.getSource() == searchAccButton){
+            String userInput = searchField.getSelectedText();
+            if (InputCheck.isNumeric(userInput))
+            {
+                int userID = Integer.parseInt(userInput);
+                new searchAccountPg(userID);
+            }
+            else
+            {
+                String statusText = "Invalid ID entered.";
+                String titleText = "Error";
+                JOptionPane.showMessageDialog(null, statusText, titleText, JOptionPane.PLAIN_MESSAGE);
+            }
         }
     }
 
