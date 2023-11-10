@@ -210,32 +210,17 @@ public class createAccountPg extends JFrame implements ActionListener {
         return gbc;
     }
 
-    // Check if string is strictly alpha-numeric
-    private boolean isAlphaNumeric(String s){
-        String pattern= "^[a-zA-Z0-9]*$";
-        return s.matches(pattern);
-    }
-
-    private boolean isNumeric(String str) {
-        try {
-            Double.parseDouble(str);
-            return true;
-        } catch(NumberFormatException e){
-            return false;
-        }
-    }
-
     private boolean checkFields(String name, String salaryStr, String dateJoined, 
     int roleID, String position, String username, String password) {
         boolean validAccount = false;
         double salary;
 
         // Check if name is alpha-numeric
-        if (!(isAlphaNumeric(name)) || name == "")
+        if (!(InputCheck.isAlphaNumeric(name)) || name == "")
         {return validAccount;}
 
         // Check if salary is numeric
-        if (isNumeric(salaryStr))
+        if (InputCheck.isNumeric(salaryStr))
         {
             salary = Double.parseDouble(salaryStr);
         }
@@ -251,11 +236,11 @@ public class createAccountPg extends JFrame implements ActionListener {
         if (roleID < 2 || roleID > 100)
         {return validAccount;}
 
-        if (!(isAlphaNumeric(position)))
+        if (!(InputCheck.isAlphaNumeric(position)))
         {return validAccount;}
 
         // Check if username is alphanumeric
-        if (!(isAlphaNumeric(username)))
+        if (!(InputCheck.isAlphaNumeric(username)))
         {return validAccount;}
 
         // Prevent injections by ensuring username is alphanumeric FIRST
@@ -263,7 +248,7 @@ public class createAccountPg extends JFrame implements ActionListener {
         {return validAccount;}
 
         // Check if password is alphanumeric
-        if (!(isAlphaNumeric(password)))
+        if (!(InputCheck.isAlphaNumeric(password)))
         {return validAccount;}
 
         // If no issues

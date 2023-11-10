@@ -105,15 +105,9 @@ public class createProfilePg extends JFrame implements ActionListener {
         return gbc;
     }
 
-    // Check if string is strictly alpha-numeric
-    private boolean isAlphaNumeric(String s){
-        String pattern= "^[a-zA-Z0-9]*$";
-        return s.matches(pattern);
-    }
-
     private boolean checkName(String name)
     {
-        if (!isAlphaNumeric(name))
+        if (!InputCheck.isAlphaNumeric(name))
         {
             return false;
         }
