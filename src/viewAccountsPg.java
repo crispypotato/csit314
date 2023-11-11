@@ -135,7 +135,7 @@ public class viewAccountsPg extends JFrame implements ActionListener
     private String getRoleName(int id){ //susceptible to change, edit to role arraylist
         Profile p = new Profile();
         ArrayList<String> roleArr = p.profileRecordArray();
-        return roleArr.get(id);
+        return roleArr.get(id-1);
     }
 
     public static void main(String[] args) {
