@@ -14,7 +14,11 @@ public final class InputCheck {
 
     public static boolean isNumeric(String str) {
         try {
-            Integer.parseInt(str);
+            if(str.contains(".")) {
+                Double.parseDouble(str);
+            }else{
+                Integer.parseInt(str);
+            }
             return true;
         } catch(NumberFormatException e){
             return false;

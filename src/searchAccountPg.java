@@ -13,11 +13,13 @@ public class searchAccountPg extends JFrame implements ActionListener {
     private JTextField nameField, salaryField, dateJoinedField, usernameField, passwordField;
     private JButton updateButton, deleteButton;
     private JComboBox<String> profileField, positionField;
+    private int empID = 0;
 
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
     private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
 
     public searchAccountPg(int id) {
+        empID = id;
 
         GridBagConstraints c;
 
@@ -195,7 +197,7 @@ public class searchAccountPg extends JFrame implements ActionListener {
                 String statusText;
                 if (validAccount) {
                     double salary = Double.parseDouble(salaryStr);
-                    User newUser = new User(0, name, salary, dateJoined, profileID, position, username, password);
+                    User newUser = new User(empID, name, salary, dateJoined, profileID, position, username, password);
                     boolean updateUser = uac.updateUserRecord(newUser);
 
                     if (updateUser) {

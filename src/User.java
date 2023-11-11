@@ -346,9 +346,9 @@ class User
         boolean success = false; 
         
         // Prepare query
-        String myQuery = "UPDATE EMPLOYEE SET EMP_NAME = (?), EMP_SALARY = (?), EMP_DATEJOINED = (?)"
+        String myQuery = "UPDATE EMPLOYEE SET EMP_NAME = (?), EMP_SALARY = (?), EMP_DATEJOINED = (?),"
                             + "EMP_ROLEID = (?), EMP_POSITION = (?), EMP_USERNAME = (?), EMP_PASSWORD = (?)"
-                            + "WHERE EMP_ID = (?)";
+                            + " WHERE EMP_ID = (?)";
 
         Connection connection = null;
         try 
@@ -380,7 +380,7 @@ class User
             myStatement.setInt(8, myUser.empID);
 
             int i = myStatement.executeUpdate();
-            if (i > 0) {
+            if (i >= 0) { // as no rows are added/deleted, i = 0
                 System.out.println("EMPLOYEE RECORD UPDATED");
                 success = true;
             } else {
