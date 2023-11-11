@@ -116,13 +116,13 @@ public class searchAccountPg extends JFrame implements ActionListener {
         MainPanel.add(passwordField, c);
 
         // Set all elements to uneditable
-        nameField.setEnabled(false);
-        salaryField.setEnabled(false);
-        dateJoinedField.setEnabled(false);
+        nameField.setEditable(false);
+        salaryField.setEditable(false);
+        dateJoinedField.setEditable(false);
         profileField.setEnabled(false);
         positionField.setEnabled(false);
-        usernameField.setEnabled(false);
-        passwordField.setEnabled(false);
+        usernameField.setEditable(false);
+        passwordField.setEditable(false);
         
 
         // ================ Set Button Panel ======================
@@ -144,27 +144,72 @@ public class searchAccountPg extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // Allow user to update details
         if (e.getSource() == updateButton) {
-            if (!nameField.isEnabled())
+            if (!nameField.isEditable())
             {
                 // Set all elements to editable
-                nameField.setEnabled(true);
-                salaryField.setEnabled(true);
-                dateJoinedField.setEnabled(true);
+                nameField.setEditable(true);
+                salaryField.setEditable(true);
+                dateJoinedField.setEditable(true);
                 profileField.setEnabled(true);
                 positionField.setEnabled(true);
-                usernameField.setEnabled(true);
-                passwordField.setEnabled(true);
+                usernameField.setEditable(true);
+                passwordField.setEditable(true);
+
+                updateButton.setText("Confirm");
             }
             else
             {
                 // Set all elements to uneditable
-                nameField.setEnabled(false);
-                salaryField.setEnabled(false);
-                dateJoinedField.setEnabled(false);
+                nameField.setEditable(false);
+                salaryField.setEditable(false);
+                dateJoinedField.setEditable(false);
                 profileField.setEnabled(false);
                 positionField.setEnabled(false);
-                usernameField.setEnabled(false);
-                passwordField.setEnabled(false);
+                usernameField.setEditable(false);
+                passwordField.setEditable(false);
+
+                updateButton.setText("Update Account");
+
+                // Save the data into database
+                updateAccountController uac = new updateAccountController();
+
+                // Retrieve data
+                String name = nameField.getText();
+                String salaryStr = salaryField.getText();
+                String dateJoined = dateJoinedField.getText();
+                int profileID = profileField.getSelectedIndex() + 1;
+                String position = positionField.getSelectedItem().toString();
+                String username = usernameField.getText();
+                String password = passwordField.getText();
+
+                // set null field if applicable
+                if (position == " ")
+                {
+                    position = "NULL";
+                }
+
+                // Check fields
+                boolean validAccount = checkFields(name, salaryStr, dateJoined, profileID, position, username, password);
+
+                // Create employee object
+                String statusText;
+                if (validAccount) {
+                    double salary = Double.parseDouble(salaryStr);
+                    User newUser = new User(0, name, salary, dateJoined, profileID, position, username, password);
+                    boolean updateUser = uac.updateUserRecord(newUser);
+
+                    if (updateUser) {
+                        statusText = "Account updated successfully!";
+                    }
+                    else {
+                        statusText = "Account update failed.";
+                    }
+                }
+                else {
+                    statusText = "Account update failed. Please check the fields for invalid input.";
+                }
+                String titleText = "Account Update Status";
+                JOptionPane.showMessageDialog(null, statusText, titleText, JOptionPane.PLAIN_MESSAGE);
             }
         }
 
@@ -272,7 +317,7 @@ public class searchAccountPg extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {       
-        new searchAccountPg(10002);
+        new searchAccountPg(10003);
     }
 }
 

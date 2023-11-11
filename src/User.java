@@ -341,6 +341,62 @@ class User
         return (currentUser);
     }
 
+    public boolean updateUserRecord(User myUser)
+    {
+        boolean success = false; 
+        
+        // Prepare query
+        String myQuery = "UPDATE EMPLOYEE SET EMP_NAME = (?), EMP_SALARY = (?), EMP_DATEJOINED = (?)"
+                            + "EMP_ROLEID = (?), EMP_POSITION = (?), EMP_USERNAME = (?), EMP_PASSWORD = (?)"
+                            + "WHERE EMP_ID = (?)";
+
+        Connection connection = null;
+        try 
+        {
+            // below two lines are used for connectivity.
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/cafems",
+                "root", "Just@GroupProj3ctPW");
+ 
+            // Prepare statement
+            PreparedStatement myStatement = connection.prepareStatement(myQuery);
+
+            // Set parameters for statement
+            myStatement.setString(1, myUser.name);
+            myStatement.setDouble(2, myUser.salary);
+            myStatement.setString(3, myUser.dateJoined); // Possible swap to SQL Date?
+            myStatement.setInt(4, myUser.roleID);
+            if (myUser.position == "NULL")
+            {
+                myStatement.setNull(5, Types.VARCHAR);
+            }
+            else
+            {
+                myStatement.setString(5, myUser.position);
+            }
+            myStatement.setString(6, myUser.username);
+            myStatement.setString(7, myUser.password);
+            myStatement.setInt(8, myUser.empID);
+
+            int i = myStatement.executeUpdate();
+            if (i > 0) {
+                System.out.println("EMPLOYEE RECORD UPDATED");
+                success = true;
+            } else {
+                System.out.println("EMPLOYEE RECORD NOT UPDATED");
+            }
+            myStatement.close();
+            connection.close();
+        }
+        catch (Exception exception) 
+        {
+            System.out.println(exception);
+        }
+
+        return success;
+    }
+
 
     // Basic toString method to display unique userID
     @Override
