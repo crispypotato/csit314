@@ -53,6 +53,7 @@ public class SystemAdminPg extends JFrame implements ActionListener
         c = createGbc(1,1);
         HomePanel.add(searchField, c);
         searchAccButton = new JButton("Search");
+        searchAccButton.addActionListener(this);
         c = createGbc(2,1);
         HomePanel.add(searchAccButton, c);
 
@@ -132,7 +133,7 @@ public class SystemAdminPg extends JFrame implements ActionListener
         }
 
         if (e.getSource() == searchAccButton){
-            String userInput = searchField.getSelectedText();
+            String userInput = searchField.getText();
             if (InputCheck.isNumeric(userInput))
             {
                 int userID = Integer.parseInt(userInput);

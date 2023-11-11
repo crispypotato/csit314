@@ -14,7 +14,7 @@ public final class InputCheck {
 
     public static boolean isNumeric(String str) {
         try {
-            Double.parseDouble(str);
+            Integer.parseInt(str);
             return true;
         } catch(NumberFormatException e){
             return false;
