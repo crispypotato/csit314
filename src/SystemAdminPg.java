@@ -132,9 +132,9 @@ public class SystemAdminPg extends JFrame implements ActionListener
             new createProfilePg();
         }
 
-        if(e.getSource() == searchAccButton){
+
+        if (e.getSource() == searchAccButton){
             String userInput = searchField.getText();
-            System.out.println("Here.");
             if (InputCheck.isNumeric(userInput))
             {
                 int userID = Integer.parseInt(userInput);

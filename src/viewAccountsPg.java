@@ -132,27 +132,10 @@ public class viewAccountsPg extends JFrame implements ActionListener
         return gbc;
     }
 
-    private String getRoleName(int id){
-        if (id == 2)
-        {
-            return "System Admin";
-        }
-        else if (id == 3)
-        {
-            return "Cafe Owner";
-        }
-        else if (id == 4)
-        {
-            return "Cafe Manager";
-        }
-        else if (id == 5)
-        {
-            return "Cafe Staff";
-        }
-        else
-        {
-            return null;
-        }
+    private String getRoleName(int id){ //susceptible to change, edit to role arraylist
+        Profile p = new Profile();
+        ArrayList<String> roleArr = p.profileRecordArray();
+        return roleArr.get(id);
     }
 
     public static void main(String[] args) {
