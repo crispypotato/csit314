@@ -225,6 +225,20 @@ public class searchAccountPg extends JFrame implements ActionListener {
             positionField.setSelectedIndex(0);
             usernameField.setText("");
             passwordField.setText("");
+
+            String statusText;
+            deleteAccountController dac = new deleteAccountController();
+
+            boolean deleted = dac.deleteUserRecord(empID);
+            if (deleted) {
+                statusText = "Account deleted successfully!";
+            }
+            else {
+                statusText = "Invalid ID, please try again.";
+            }
+
+            String titleText = "Account Deletion Status";
+            JOptionPane.showMessageDialog(null, statusText, titleText, JOptionPane.PLAIN_MESSAGE);
         }
 
         /* Only show position field if Cafe Staff is selected
