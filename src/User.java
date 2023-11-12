@@ -199,7 +199,7 @@ class User
     }
 
     // retrieve users' information from database and returns as array
-    public static ArrayList<User> empRecordArray()
+    public ArrayList<User> empRecordArray()
     {
         ArrayList<User> arr = new ArrayList<User>();
         String myQuery = "SELECT * FROM EMPLOYEE";

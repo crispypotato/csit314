@@ -4,6 +4,7 @@ final class viewAccountsController {
     public viewAccountsController(){}
 
     public ArrayList<User> displayAll(){
-        return User.empRecordArray();
+        User aUser = new User();
+        return aUser.empRecordArray();
     }
 }
