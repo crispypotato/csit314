@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class searchResultPg extends JFrame implements ActionListener {
 
+    private JFrame frame;
     private JTextField nameField, salaryField, dateJoinedField, usernameField, passwordField;
     private JButton updateButton, deleteButton;
     private JComboBox<String> profileField, positionField;
@@ -39,7 +40,7 @@ public class searchResultPg extends JFrame implements ActionListener {
         }
 
         // Create Main Frame
-        final JFrame frame = new JFrame("Search Account");
+        frame = new JFrame("Search Account");
         frame.setLayout(new BorderLayout(5, 5));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -234,30 +235,28 @@ public class searchResultPg extends JFrame implements ActionListener {
             }
         }
 
-        // Clear fields if clear button is used
+        // Delete current account
         if (e.getSource() == deleteButton)
         {
-            nameField.setText("");
-            salaryField.setText("");
-            dateJoinedField.setText("");
-            profileField.setSelectedIndex(0);
-            positionField.setSelectedIndex(0);
-            usernameField.setText("");
-            passwordField.setText("");
+            int reply = JOptionPane.showConfirmDialog(null, "Are you sure you wish to delete this account?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                String statusText;
+                deleteAccountController dac = new deleteAccountController();
 
-            String statusText;
-            deleteAccountController dac = new deleteAccountController();
+                boolean deleted = dac.deleteUserRecord(empID);
+                if (deleted) {
+                    statusText = "Account deleted successfully!";
+                    frame.dispose();
+                }
+                else {
+                    statusText = "Invalid ID, please try again.";
+                }
 
-            boolean deleted = dac.deleteUserRecord(empID);
-            if (deleted) {
-                statusText = "Account deleted successfully!";
-            }
-            else {
-                statusText = "Invalid ID, please try again.";
-            }
+                String titleText = "Account Deletion Status";
+                JOptionPane.showMessageDialog(null, statusText, titleText, JOptionPane.PLAIN_MESSAGE);
 
-            String titleText = "Account Deletion Status";
-            JOptionPane.showMessageDialog(null, statusText, titleText, JOptionPane.PLAIN_MESSAGE);
+            } 
+            // Do nothing if no is selected
         }
 
         /* Only show position field if Cafe Staff is selected

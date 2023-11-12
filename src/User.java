@@ -419,10 +419,10 @@ class User
 
             int i = myStatement.executeUpdate();
             if (i > 0) {
-                System.out.println("EMPLOYEE RECORD UPDATED");
+                System.out.println("EMPLOYEE RECORD DELETED");
                 success = true;
             } else {
-                System.out.println("EMPLOYEE RECORD NOT UPDATED");
+                System.out.println("EMPLOYEE RECORD NOT DELETED");
             }
             myStatement.close();
             connection.close();
