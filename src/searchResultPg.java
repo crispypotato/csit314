@@ -32,12 +32,6 @@ public class searchResultPg extends JFrame implements ActionListener {
         searchAccountController sac = new searchAccountController();
         searchUser = new User();
         searchUser = sac.searchUserAccount(id);
-        
-        // If no user is found
-        if (searchUser.getEmpID() == 0)
-        {
-            JOptionPane.showMessageDialog(null, "No user record was found!", "Search Result", JOptionPane.PLAIN_MESSAGE);
-        }
 
         // Create Main Frame
         frame = new JFrame("Search Account");
@@ -151,6 +145,13 @@ public class searchResultPg extends JFrame implements ActionListener {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
+        // If no user is found
+        if (searchUser.getEmpID() == 0)
+        {
+            JOptionPane.showMessageDialog(null, "No user record was found!", "Search Result", JOptionPane.PLAIN_MESSAGE);
+            frame.dispose();
+        }
     }
 
     public void actionPerformed(ActionEvent e) {
