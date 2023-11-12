@@ -8,17 +8,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class searchAccountPg extends JFrame implements ActionListener {
+public class searchResultPg extends JFrame implements ActionListener {
 
     private JTextField nameField, salaryField, dateJoinedField, usernameField, passwordField;
     private JButton updateButton, deleteButton;
     private JComboBox<String> profileField, positionField;
+    private User searchUser;
     private int empID = 0;
 
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
     private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
 
-    public searchAccountPg(int id) {
+    public searchResultPg(int id) {
         empID = id;
 
         GridBagConstraints c;
@@ -28,15 +29,19 @@ public class searchAccountPg extends JFrame implements ActionListener {
 
         // Retrieve User based on id
         searchAccountController sac = new searchAccountController();
-        User searchUser = new User();
+        searchUser = new User();
         searchUser = sac.searchUserAccount(id);
+        
+        // If no user is found
+        if (searchUser.getEmpID() == 0)
+        {
+            JOptionPane.showMessageDialog(null, "No user record was found!", "Search Result", JOptionPane.PLAIN_MESSAGE);
+        }
 
         // Create Main Frame
         final JFrame frame = new JFrame("Search Account");
         frame.setLayout(new BorderLayout(5, 5));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
 
         // Set up Panels
         JPanel MainPanel = new JPanel(new GridBagLayout());
@@ -140,7 +145,11 @@ public class searchAccountPg extends JFrame implements ActionListener {
         // Add elements to frame and pack
         frame.add(MainPanel, BorderLayout.CENTER);
         frame.add(ButtonPanel, BorderLayout.SOUTH);
+
+        // Set frame output
         frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -161,17 +170,6 @@ public class searchAccountPg extends JFrame implements ActionListener {
             }
             else
             {
-                // Set all elements to uneditable
-                nameField.setEditable(false);
-                salaryField.setEditable(false);
-                dateJoinedField.setEditable(false);
-                profileField.setEnabled(false);
-                positionField.setEnabled(false);
-                usernameField.setEditable(false);
-                passwordField.setEditable(false);
-
-                updateButton.setText("Update Account");
-
                 // Save the data into database
                 updateAccountController uac = new updateAccountController();
 
@@ -209,9 +207,30 @@ public class searchAccountPg extends JFrame implements ActionListener {
                 }
                 else {
                     statusText = "Account update failed. Please check the fields for invalid input.";
+
+                    // Reset values if invalid input
+                    // Set all elements to editable
+                    nameField.setEditable(true);
+                    salaryField.setEditable(true);
+                    dateJoinedField.setEditable(true);
+                    profileField.setEnabled(true);
+                    positionField.setEnabled(true);
+                    usernameField.setEditable(true);
+                    passwordField.setEditable(true);
                 }
                 String titleText = "Account Update Status";
                 JOptionPane.showMessageDialog(null, statusText, titleText, JOptionPane.PLAIN_MESSAGE);
+
+                // Set all elements to uneditable
+                nameField.setText(searchUser.getName());
+                salaryField.setText(Double.toString(searchUser.getSalary()));
+                dateJoinedField.setText(searchUser.getDateJoined());
+                profileField.setSelectedIndex(searchUser.getRoleID()-1);
+                positionField.setSelectedItem(searchUser.getPosition());
+                usernameField.setText(searchUser.getUsername());
+                passwordField.setText(searchUser.getPassword());
+
+                updateButton.setText("Update Account");
             }
         }
 
@@ -293,10 +312,6 @@ public class searchAccountPg extends JFrame implements ActionListener {
         if (!(InputCheck.isAlphaNumeric(username)))
         {return validAccount;}
 
-        // Prevent injections by ensuring username is alphanumeric FIRST
-        if (!(User.isUniqueUsername(username)))
-        {return validAccount;}
-
         // Check if password is alphanumeric
         if (!(InputCheck.isAlphaNumeric(password)))
         {return validAccount;}
@@ -319,7 +334,7 @@ public class searchAccountPg extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {       
-        new searchAccountPg(10003);
+        new searchResultPg(10003);
     }
 }
 

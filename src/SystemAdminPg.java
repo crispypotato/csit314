@@ -25,7 +25,6 @@ public class SystemAdminPg extends JFrame implements ActionListener
         frame = new JFrame("System Admin Homepage");
         frame.setLayout(new BorderLayout(5, 5));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setVisible(true);
 
         // Create Panels
         JPanel InfoPanel = new JPanel(new GridBagLayout());
@@ -108,8 +107,11 @@ public class SystemAdminPg extends JFrame implements ActionListener
         frame.add(InfoPanel, BorderLayout.NORTH);
         frame.add(HomePanel, BorderLayout.CENTER);
         frame.add(ButtonPanel, BorderLayout.EAST);
-        frame.setLocationRelativeTo(null);
+
+        // Set frame output
         frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -138,7 +140,7 @@ public class SystemAdminPg extends JFrame implements ActionListener
             if (InputCheck.isNumeric(userInput))
             {
                 int userID = Integer.parseInt(userInput);
-                new searchAccountPg(userID);
+                new searchResultPg(userID);
             }
             else
             {
