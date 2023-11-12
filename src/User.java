@@ -397,6 +397,43 @@ class User
         return success;
     }
 
+    public boolean deleteUserRecord(int id) {
+        boolean success = false;
+
+        // Prepare query
+        String myQuery = "DELETE FROM EMPLOYEE WHERE EMP_ID = (?)";
+
+        Connection connection = null;
+        try {
+            // below two lines are used for connectivity.
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/cafems",
+                    "root", "Just@GroupProj3ctPW");
+
+            // Prepare statement
+            PreparedStatement myStatement = connection.prepareStatement(myQuery);
+
+            // Set parameters for statement
+            myStatement.setInt(1, id);
+
+            int i = myStatement.executeUpdate();
+            if (i > 0) {
+                System.out.println("EMPLOYEE RECORD UPDATED");
+                success = true;
+            } else {
+                System.out.println("EMPLOYEE RECORD NOT UPDATED");
+            }
+            myStatement.close();
+            connection.close();
+        }
+        catch (Exception exception)
+        {
+            System.out.println(exception);
+        }
+
+        return success;
+    }
 
     // Basic toString method to display unique userID
     @Override
