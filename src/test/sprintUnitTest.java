@@ -39,6 +39,10 @@ public class sprintUnitTest {
         // Test Login - Expected Success
         testSubject = testSubject.loginUser("sysadmin1", "sysadmin1");
         assertEquals("Login SA E", 10001, testSubject.getEmpID());
+        testSubject = testSubject.loginUser("owner1", "owner1");
+        assertEquals("Login CO E", 10002, testSubject.getEmpID());
+        testSubject = testSubject.loginUser("manager1", "manager1");
+        assertEquals("Login CM E", 10003, testSubject.getEmpID());
         testSubject = testSubject.loginUser("staff1", "staff1");
         assertEquals("Login CS E", 10004, testSubject.getEmpID());
         // Test Login - Expected Failure
@@ -53,6 +57,10 @@ public class sprintUnitTest {
         // Test Login - Expected Success
         testSubject = testSubject2.loginUser("sysadmin1","sysadmin1");
         assertEquals("Login SA C", 10001, testSubject.getEmpID());
+        testSubject = testSubject.loginUser("owner1", "owner1");
+        assertEquals("Login CO C", 10002, testSubject.getEmpID());
+        testSubject = testSubject.loginUser("manager1", "manager1");
+        assertEquals("Login CM C", 10003, testSubject.getEmpID());
         testSubject = testSubject2.loginUser("staff1", "staff1");
         assertEquals("Login CS C", 10004, testSubject.getEmpID());
         // Test Login - Expected Failure
