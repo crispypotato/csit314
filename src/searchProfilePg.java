@@ -14,12 +14,12 @@ public class searchProfilePg extends JFrame implements ActionListener {
     private JButton updateButton, deleteButton;
 
     private Profile searchProfile;
+    private int profileID;
 
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
     private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
 
     public searchProfilePg(String name) {
-
         GridBagConstraints c;
 
         // UI Setup
@@ -29,6 +29,7 @@ public class searchProfilePg extends JFrame implements ActionListener {
         searchProfileController spc = new searchProfileController();
         searchProfile = new Profile();
         searchProfile = spc.searchProfile(name);
+        profileID = searchProfile.getID();
 
         // Create Main Frame
         frame = new JFrame("Search Profile");
@@ -93,6 +94,70 @@ public class searchProfilePg extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+        // Allow user to update details
+        if (e.getSource() == updateButton) {
+            if (!nameField.isEditable())
+            {
+                // Set all elements to editable
+                nameField.setEditable(true);
+
+                updateButton.setText("Confirm");
+            }
+            else
+            {
+                // Save the data into database
+                updateProfileController upc = new updateProfileController();
+
+                // Retrieve data
+                String name = nameField.getText();
+
+                // Create profile object
+                Profile newProfile = new Profile(profileID, name);
+                boolean updateProfile = upc.updateProfileRecord(newProfile);
+                String statusText;
+
+                if (updateProfile) {
+                    statusText = "Profile updated successfully!";
+                }
+                else {
+                    statusText = "Profile update failed.";
+                    // Reset values if invalid input
+                    // Set all elements to editable
+                    nameField.setEditable(true);
+                }
+                String titleText = "Profile Update Status";
+                JOptionPane.showMessageDialog(null, statusText, titleText, JOptionPane.PLAIN_MESSAGE);
+
+                // Set all elements to uneditable
+                nameField.setText(searchProfile.getName());
+
+                updateButton.setText("Update Profile");
+            }
+        }
+
+        // Delete current account
+        if (e.getSource() == deleteButton)
+        {
+            int reply = JOptionPane.showConfirmDialog(null, "Are you sure you wish to delete this account?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                String statusText;
+                deleteProfileController dpc = new deleteProfileController();
+
+                boolean deleted = dpc.deleteProfileRecord(profileID);
+                if (deleted) {
+                    statusText = "Account deleted successfully!";
+                    frame.dispose();
+                }
+                else {
+                    statusText = "Invalid ID, please try again.";
+                }
+
+                String titleText = "Account Deletion Status";
+                JOptionPane.showMessageDialog(null, statusText, titleText, JOptionPane.PLAIN_MESSAGE);
+
+            }
+            // Do nothing if no is selected
+        }
     }
 
     private GridBagConstraints createGbc(int x, int y) {

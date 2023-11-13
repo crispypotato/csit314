@@ -187,4 +187,83 @@ public class Profile {
 
         return (currentProfile);
     }
+
+    public boolean updateProfileRecord(Profile myProfile)
+    {
+        boolean success = false;
+
+        // Prepare query
+        String myQuery = "UPDATE PROFILE SET PROFILE_NAME = (?) WHERE PROFILE_ID = (?)";
+
+        Connection connection = null;
+        try
+        {
+            // below two lines are used for connectivity.
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/cafems",
+                    "root", "Just@GroupProj3ctPW");
+
+            // Prepare statement
+            PreparedStatement myStatement = connection.prepareStatement(myQuery);
+
+            // Set parameters for statement
+            myStatement.setString(1, myProfile.name);
+            myStatement.setInt(2,myProfile.id);
+
+            int i = myStatement.executeUpdate();
+            if (i >= 0) { // as no rows are added/deleted, i = 0
+                System.out.println("PROFILE RECORD UPDATED");
+                success = true;
+            } else {
+                System.out.println("PROFILE RECORD NOT UPDATED");
+            }
+            myStatement.close();
+            connection.close();
+        }
+        catch (Exception exception)
+        {
+            System.out.println(exception);
+        }
+
+        return success;
+    }
+
+    public boolean deleteProfileRecord(int id) {
+        boolean success = false;
+
+        // Prepare query
+        String myQuery = "DELETE FROM PROFILE WHERE PROFILE_ID = (?)";
+
+        Connection connection = null;
+        try {
+            // below two lines are used for connectivity.
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/cafems",
+                    "root", "Just@GroupProj3ctPW");
+
+            // Prepare statement
+            PreparedStatement myStatement = connection.prepareStatement(myQuery);
+
+            // Set parameters for statement
+            myStatement.setInt(1, id);
+
+            int i = myStatement.executeUpdate();
+            if (i > 0) {
+                System.out.println("PROFILE RECORD DELETED");
+                success = true;
+            } else {
+                System.out.println("PROFILE RECORD NOT DELETED");
+            }
+            myStatement.close();
+            connection.close();
+        }
+        catch (Exception exception)
+        {
+            System.out.println(exception);
+        }
+
+        return success;
+    }
 }
