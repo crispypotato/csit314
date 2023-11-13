@@ -85,7 +85,7 @@ public class searchProfilePg extends JFrame implements ActionListener {
         frame.setVisible(true);
 
         // If no user is found
-        if (searchProfile.getID() == 0)
+        if (searchProfile.getID() == 1)
         {
             JOptionPane.showMessageDialog(null, "No profile was found!", "Search Result", JOptionPane.PLAIN_MESSAGE);
             frame.dispose();

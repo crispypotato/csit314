@@ -44,11 +44,15 @@ public class createProfilePg extends JFrame implements ActionListener {
         clearButton.addActionListener(this);
         buttonPanel.add(clearButton);
 
+        // Create JFrame
         final JFrame frame = new JFrame("Create New Profile");
         frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(panel, BorderLayout.CENTER);
         frame.add(buttonPanel, BorderLayout.SOUTH);
+        frame.setPreferredSize(new Dimension(200, 150));
+
+        // Set frame to be visisble
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

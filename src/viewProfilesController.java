@@ -1,4 +1,11 @@
 // Controller class to view list of profiles
-public class viewProfilesController {
-    
+import java.util.ArrayList;
+
+final class viewProfilesController {
+    public viewProfilesController(){}
+
+    public ArrayList<Profile> getProfileArrayList(){
+        Profile myProfile = new Profile();
+        return myProfile.getProfileArrayList();
+    }
 }

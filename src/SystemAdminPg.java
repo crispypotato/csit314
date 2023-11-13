@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class SystemAdminPg extends JFrame implements ActionListener
 {
     private JFrame frame;
-    private JButton createAccButton, createProfileButton, logoutButton, viewAccButton, searchAccButton, searchProfileButton;
+    private JButton createAccButton, createProfileButton, logoutButton, viewAccButton, viewProfileButton, searchAccButton, searchProfileButton;
     private JTextField searchAccField, searchProfileField;
 
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
@@ -86,10 +86,16 @@ public class SystemAdminPg extends JFrame implements ActionListener
         c = createGbc(0,2);
         ButtonPanel.add(viewAccButton, c);
 
+        // Set viewPProfile
+        viewProfileButton = new JButton("View Profiles");
+        viewProfileButton.addActionListener(this);
+        c = createGbc(0,3);
+        ButtonPanel.add(viewProfileButton, c);
+
         // Set logout
         logoutButton = new JButton("Log out");
         logoutButton.addActionListener(this);
-        c = createGbc(0,3);
+        c = createGbc(0,4);
         ButtonPanel.add(logoutButton, c);
 
         // ================ Set Info Panel ======================
@@ -142,10 +148,13 @@ public class SystemAdminPg extends JFrame implements ActionListener
             new viewAccountsPg();
         }
 
+        if(e.getSource() == viewProfileButton){
+            new viewProfilesPg();
+        }
+
         if(e.getSource() == createProfileButton){
             new createProfilePg();
         }
-
 
         if (e.getSource() == searchAccButton){
             String userInput = searchAccField.getText();
@@ -164,16 +173,7 @@ public class SystemAdminPg extends JFrame implements ActionListener
 
         if (e.getSource() == searchProfileButton){
             String userInput = searchProfileField.getText();
-            if (InputCheck.isAlphaNumeric(userInput))
-            {
-                new searchProfilePg(userInput);
-            }
-            else
-            {
-                String statusText = "Invalid profile name entered.";
-                String titleText = "Error";
-                JOptionPane.showMessageDialog(null, statusText, titleText, JOptionPane.PLAIN_MESSAGE);
-            }
+            new searchProfilePg(userInput);
         }
     }
 

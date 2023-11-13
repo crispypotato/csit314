@@ -107,6 +107,46 @@ public class Profile {
         return success;
     }
 
+    // Get array list of profile from database and return as arraylist
+    public ArrayList<Profile> getProfileArrayList()
+    {
+        ArrayList<Profile> profileArrayList = new ArrayList<Profile>();
+        String myQuery = "SELECT * FROM PROFILE ORDER BY PROFILE_ID";
+
+        Connection connection = null;
+        try {
+            // below two lines are used for connectivity.
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/cafems",
+                    "root", "Just@GroupProj3ctPW");
+
+            Statement statement;
+            statement = connection.createStatement();
+            ResultSet resultSet;
+            resultSet = statement.executeQuery(myQuery);
+
+            int id;
+            String name;
+
+            while (resultSet.next()) {
+                id = resultSet.getInt("PROFILE_ID");
+                name = resultSet.getString("PROFILE_NAME");
+                Profile myProfile = new Profile(id, name);
+                profileArrayList.add(myProfile);
+            }
+
+            resultSet.close();
+            statement.close();
+            connection.close();
+        }
+        catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        return profileArrayList;
+    }
+
     // Search and return a User's information based on id
     public Profile searchProfile(String name)
     {
