@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
 public class SystemAdminPg extends JFrame implements ActionListener
 {
     private JFrame frame;
-    private JButton createAccButton, createProfileButton, logoutButton, viewAccButton, searchAccButton;
-    private JTextField searchField;
+    private JButton createAccButton, createProfileButton, logoutButton, viewAccButton, searchAccButton, searchProfileButton;
+    private JTextField searchAccField, searchProfileField;
 
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
     private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
@@ -44,16 +44,28 @@ public class SystemAdminPg extends JFrame implements ActionListener
         HomePanel.add(headerLabel, c);
 
         // Set search User Account
-        JLabel searchLabel = new JLabel("Search Account: ");
+        JLabel searchAccLabel = new JLabel("Search Account (UID): ");
         c = createGbc(0,1);
-        HomePanel.add(searchLabel, c);
-        searchField = new JTextField();
+        HomePanel.add(searchAccLabel, c);
+        searchAccField = new JTextField();
         c = createGbc(1,1);
-        HomePanel.add(searchField, c);
+        HomePanel.add(searchAccField, c);
         searchAccButton = new JButton("Search");
         searchAccButton.addActionListener(this);
         c = createGbc(2,1);
         HomePanel.add(searchAccButton, c);
+
+        // Set search Profile
+        JLabel searchProfileLabel = new JLabel("Search Profile (NAME): ");
+        c = createGbc(0,2);
+        HomePanel.add(searchProfileLabel, c);
+        searchProfileField = new JTextField();
+        c = createGbc(1,2);
+        HomePanel.add(searchProfileField, c);
+        searchProfileButton = new JButton("Search");
+        searchProfileButton.addActionListener(this);
+        c = createGbc(2,2);
+        HomePanel.add(searchProfileButton, c);
 
         // ================ Set Button Panel ======================
         // Set createAccount
@@ -136,7 +148,7 @@ public class SystemAdminPg extends JFrame implements ActionListener
 
 
         if (e.getSource() == searchAccButton){
-            String userInput = searchField.getText();
+            String userInput = searchAccField.getText();
             if (InputCheck.isNumeric(userInput))
             {
                 int userID = Integer.parseInt(userInput);
@@ -145,6 +157,20 @@ public class SystemAdminPg extends JFrame implements ActionListener
             else
             {
                 String statusText = "Invalid ID entered.";
+                String titleText = "Error";
+                JOptionPane.showMessageDialog(null, statusText, titleText, JOptionPane.PLAIN_MESSAGE);
+            }
+        }
+
+        if (e.getSource() == searchProfileButton){
+            String userInput = searchProfileField.getText();
+            if (InputCheck.isAlphaNumeric(userInput))
+            {
+                new searchProfilePg(userInput);
+            }
+            else
+            {
+                String statusText = "Invalid profile name entered.";
                 String titleText = "Error";
                 JOptionPane.showMessageDialog(null, statusText, titleText, JOptionPane.PLAIN_MESSAGE);
             }

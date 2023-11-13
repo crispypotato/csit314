@@ -7,7 +7,7 @@ public class Profile {
 
     public Profile()
     {
-        this.id = 0;
+        this.id = 1;
         this.name = "default";
     }
 
@@ -105,5 +105,46 @@ public class Profile {
         }
 
         return success;
+    }
+
+    // Search and return a User's information based on id
+    public Profile searchProfile(String name)
+    {
+        // Prepare query
+        Profile currentProfile = new Profile();
+        String myQuery = "SELECT * FROM PROFILE WHERE PROFILE_NAME = (?)";
+
+        Connection connection = null;
+        try {
+            // below two lines are used for connectivity.
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/cafems",
+                "root", "Just@GroupProj3ctPW");
+ 
+            // Prepare statement
+            PreparedStatement myStatement = connection.prepareStatement(myQuery);
+
+            // Set parameters for statement
+            myStatement.setString(1, name);
+
+            ResultSet resultSet;
+            resultSet = myStatement.executeQuery();
+
+            // Set variables to current profile
+            if (resultSet.next()) {
+                currentProfile.id = resultSet.getInt("PROFILE_ID");
+                currentProfile.name = resultSet.getString("PROFILE_NAME").trim();
+            }
+
+            resultSet.close();
+            myStatement.close();
+            connection.close();
+        }
+        catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        return (currentProfile);
     }
 }
