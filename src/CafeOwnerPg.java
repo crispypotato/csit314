@@ -147,8 +147,7 @@ public class CafeOwnerPg extends JFrame implements ActionListener
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
 
-        gbc.anchor = (x == 0) ? GridBagConstraints.WEST : GridBagConstraints.EAST;
-        gbc.fill = (x == 0) ? GridBagConstraints.BOTH : GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
         gbc.insets = (x == 0) ? WEST_INSETS : EAST_INSETS;
         gbc.weightx = (x == 0) ? 0.1 : 1.0;
