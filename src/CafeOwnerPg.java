@@ -139,7 +139,7 @@ public class CafeOwnerPg extends JFrame implements ActionListener
             CafeOwnerSearchWorkSlotController c = new CafeOwnerSearchWorkSlotController();
             ArrayList <WorkSlot> results = c.searchWorkSlot(userInput);
 
-            new ViewWorkSlotsPg(searchResults);
+            new ViewWorkSlotsPg(results);
         }
     }
 
