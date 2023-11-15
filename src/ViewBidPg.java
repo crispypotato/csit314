@@ -109,7 +109,7 @@ public class ViewBidPg extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         User myUser = new User();
-        myUser.loginUser("staff1", "staff1");
+        myUser = myUser.loginUser("staff1", "staff1");
         new ViewBidPg(myUser);
     }
 }

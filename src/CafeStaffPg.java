@@ -23,6 +23,8 @@ public class CafeStaffPg extends JFrame implements ActionListener {
         FlatDarkLaf.setup();
 
         this.employeeId = myUser.getEmpID();
+        this.myUser = myUser;
+
         // Create Panel
         JPanel CSPanel = new JPanel(new GridBagLayout());
 
