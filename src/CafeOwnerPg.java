@@ -125,8 +125,10 @@ public class CafeOwnerPg extends JFrame implements ActionListener
         if (e.getSource() == viewWorkSlotsButton) {
             // Implement view work slots functionality included edit and delete
             // Fetch all work slots
-            ArrayList<WorkSlot> workSlots = WorkSlot.getAllWorkSlots();
-            new ViewWorkSlotsPg(workSlots);
+            //ArrayList<WorkSlot> workSlots = WorkSlot.getAllWorkSlots();
+            CafeOwnerViewWorkSlotController c = new CafeOwnerViewWorkSlotController();
+            ArrayList <WorkSlot> ws = c.getWorkSlots();
+            new ViewWorkSlotsPg(ws);
         }
 
         if (e.getSource() == searchWorkSlotsButton) {

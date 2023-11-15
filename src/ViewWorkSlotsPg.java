@@ -107,7 +107,8 @@ public class ViewWorkSlotsPg extends JFrame {
     // Helper method to get the WorkSlot object for the selected row
     private WorkSlot getWorkSlotForRow(int rowIndex) {
         // Fetch all work slots
-        ArrayList<WorkSlot> workSlots = WorkSlot.getAllWorkSlots();
+        WorkSlot w = new WorkSlot();
+        ArrayList<WorkSlot> workSlots = w.getAllWorkSlots();
 
         // Ensure the rowIndex is within bounds
         if (rowIndex >= 0 && rowIndex < workSlots.size()) {

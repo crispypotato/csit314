@@ -70,9 +70,11 @@ public class CreateWorkSlotsPg extends JFrame implements ActionListener {
             String position = positionField.getText();
 
             // Perform validation and create work slot
-            WorkSlot newWorkSlot = new WorkSlot(date, hours, position, null);
+            CafeOwnerCreateWorkSlotController c = new CafeOwnerCreateWorkSlotController();
+            c.createWorkSlot(date, hours, position, hours);
+            //WorkSlot newWorkSlot = new WorkSlot(date, hours, position, null);
 
-            newWorkSlot.createWorkSlot();
+            //newWorkSlot.createWorkSlot();
 
             JOptionPane.showMessageDialog(null, "Work Slot created successfully.", "Success", JOptionPane.PLAIN_MESSAGE);
             frame.dispose();

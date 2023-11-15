@@ -8,6 +8,9 @@ public class WorkSlot {
     private String position;
     private Integer  assignedTo;
 
+    public WorkSlot(){ 
+        
+    }
     public WorkSlot(String date, int hours, String position, Integer assignedTo) {
         this.date = date;
         this.hours = hours;
@@ -133,7 +136,7 @@ public class WorkSlot {
     }
 
 
-    public static ArrayList<WorkSlot> getAllWorkSlots() {
+    public  ArrayList<WorkSlot> getAllWorkSlots() {
         ArrayList<WorkSlot> workSlots = new ArrayList<>();
 
         // Prepare query
