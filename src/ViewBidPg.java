@@ -14,9 +14,9 @@ public class ViewBidPg extends JFrame implements ActionListener {
 
     private ArrayList<Bid> bids;
 
-    public ViewBidPg() {
+    public ViewBidPg(User myUser) {
         // Fetch all bids for the logged-in user (you need to implement this)
-        bids = Bid.getBidsForEmployee(10002); // Assuming a method like this in Bid class
+        bids = Bid.getBidsForEmployee(myUser.getEmpID()); // Assuming a method like this in Bid class
 
         // Setup for UI LAF
         FlatDarkLaf.setup();
@@ -32,7 +32,14 @@ public class ViewBidPg extends JFrame implements ActionListener {
         // Create table components
         initTable(bids);
 
-
+        // check if bids are available
+        for (Bid mybid : bids)
+        {
+            System.out.println("Here2");
+            System.out.println("Bid ID:" + mybid.getBidId());
+            System.out.println("Bid ID:" + mybid.getEmpId());
+            System.out.println("Bid ID:" + mybid.getSlotId());
+        }
 
         // Add components to the panel
         GridBagConstraints c = new GridBagConstraints();
@@ -40,11 +47,11 @@ public class ViewBidPg extends JFrame implements ActionListener {
         c.gridy = 0;
         c.gridwidth = 2;
         c.insets = new Insets(5, 5, 5, 5);
-        panel.add(new JScrollPane(bidTable), c);
-
-
-        // Set dimensions
-        panel.setPreferredSize(new Dimension(1200, 900));
+        JScrollPane scrollPane = new JScrollPane(bidTable);
+        
+        // Set Dimensions
+        scrollPane.setPreferredSize(new Dimension(900, 500));
+        panel.add(scrollPane, c);
 
         // Set location
         frame.add(panel, BorderLayout.CENTER);
@@ -71,7 +78,7 @@ public class ViewBidPg extends JFrame implements ActionListener {
 
         Action cancelAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-                JTable table = (JTable) e.getSource();
+                JTable bidTable = (JTable) e.getSource();
                 int modelRow = Integer.valueOf(e.getActionCommand());
                 handleCancelBidButtonClick(modelRow);
             }
@@ -110,6 +117,8 @@ public class ViewBidPg extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new ViewBidPg();
+        User myUser = new User();
+        myUser.loginUser("staff1", "staff1");
+        new ViewBidPg(myUser);
     }
 }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 class User
 {
     // Declaration of variables in Employee
-    private int empID, roleID;
+    private int empID, roleID, maxSlots;
     private String name, username, password, dateJoined, position;
     private double salary;
 
@@ -25,6 +25,7 @@ class User
         this.position = "Default";
         this.username = "Default";
         this.password = "Default";
+        this.maxSlots = 0;
     }
 
     // Constructor for User Class
@@ -39,6 +40,20 @@ class User
         this.position = position;
         this.username = username;
         this.password = password;
+    }
+
+    public User (int empID, String name, double salary, String dateJoined,
+                 int roleID, String position, String username, String password, int maxSlots)
+    {
+        this.empID = empID;
+        this.name = name;
+        this.salary = salary;
+        this.dateJoined = dateJoined;
+        this.roleID = roleID;
+        this.position = position;
+        this.username = username;
+        this.password = password;
+        this.maxSlots = maxSlots;
     }
 
     /* ================================
@@ -93,6 +108,12 @@ class User
 
     public void getSalary(double salary)
     { this.salary = salary; }
+
+    public int getMaxSlots() 
+    { return this.maxSlots; }
+
+    public void setMaxSlots(int maxSlots) 
+    { this.maxSlots = maxSlots; }
 
     /* ================================
      *  End Get Set Methods
@@ -473,6 +494,43 @@ class User
         return user;
     }
 
+    public boolean updateMaxSlots() {
+        boolean success = false;
+
+        // Prepare query
+        String myQuery = "UPDATE EMPLOYEE SET EMP_MAX_SLOTS = ? WHERE EMP_ID = ?";
+
+        Connection connection = null;
+        try {
+            // below two lines are used for connectivity.
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/cafems",
+                    "root", "Just@GroupProj3ctPW");
+
+            // Prepare statement
+            PreparedStatement myStatement = connection.prepareStatement(myQuery);
+
+            // Set parameters for statement
+            myStatement.setInt(1, this.maxSlots);
+            myStatement.setInt(2, this.empID);
+
+            int i = myStatement.executeUpdate();
+            if (i > 0) {
+                System.out.println("EMPLOYEE MAX SLOTS UPDATED");
+                success = true;
+            } else {
+                System.out.println("EMPLOYEE MAX SLOTS NOT UPDATED");
+            }
+
+            myStatement.close();
+            connection.close();
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        return success;
+    }
 
     public static ArrayList<User> getEmployeesByRoleId(int roleId) {
         ArrayList<User> employees = new ArrayList<>();
