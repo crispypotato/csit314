@@ -20,6 +20,7 @@ public class CafeStaffPg extends JFrame implements ActionListener {
     public CafeStaffPg(int employeeId) {
         // Setup for UI LAF
         FlatDarkLaf.setup();
+
         this.employeeId = employeeId;
         // Create Panel
         JPanel CSPanel = new JPanel(new GridBagLayout());
@@ -93,16 +94,20 @@ public class CafeStaffPg extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "Logging out. You will now be redirected back to the login page.", "Logout success", JOptionPane.PLAIN_MESSAGE);
             frame.dispose();
             new loginPg();
+
         } else if (e.getSource() == browseWorkSlotsButton) {
             // Implement browse work slots functionality
             new BrowserWorkSlotsPg(this.employeeId);
+
         } else if (e.getSource() == viewBidsButton) {
             // Implement view my bids functionality
             new ViewBidPg();
+
         } else if (e.getSource() == viewAllocatedSlotsButton) {
             ArrayList<WorkSlot> allocatedSlots = WorkSlot.getWorkSlotsByAssignedEmployeeId(this.employeeId);
             AllocatedSlots dialog = new AllocatedSlots(frame,allocatedSlots);
             dialog.setVisible(true);
+            
         }
         else if (e.getSource() == viewAccountButton) {
             ViewAccountDialog dialog = new ViewAccountDialog(frame, User.getUserById(this.employeeId));

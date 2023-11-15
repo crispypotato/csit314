@@ -1,4 +1,7 @@
 import javax.swing.*;
+
+import com.formdev.flatlaf.FlatDarkLaf;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +17,9 @@ public class ViewBidPg extends JFrame implements ActionListener {
     public ViewBidPg() {
         // Fetch all bids for the logged-in user (you need to implement this)
         bids = Bid.getBidsForEmployee(10002); // Assuming a method like this in Bid class
+
+        // Setup for UI LAF
+        FlatDarkLaf.setup();
 
         // Setup JFrame
         frame = new JFrame("View Bids");

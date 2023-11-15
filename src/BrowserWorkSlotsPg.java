@@ -1,6 +1,9 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+
+import com.formdev.flatlaf.FlatDarkLaf;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,9 +19,14 @@ public class BrowserWorkSlotsPg extends JFrame implements ActionListener {
     private ArrayList<WorkSlot> workSlots;
 
     public BrowserWorkSlotsPg(int employeeId) {
+
+        // Setup for UI LAF
+        FlatDarkLaf.setup();
+
         // Fetch all work slots without assignedTo
         workSlots = WorkSlot.getUnassignedWorkSlots(employeeId);
         this.employeeId = employeeId;
+
         // Setup JFrame
         frame = new JFrame("Browser Work Slots");
         frame.setLayout(new BorderLayout(5, 5));

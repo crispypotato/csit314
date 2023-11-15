@@ -1,6 +1,9 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+
+import com.formdev.flatlaf.FlatDarkLaf;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +14,8 @@ public class ViewWorkSlotsPg extends JFrame {
     private JFrame frame;
 
     public ViewWorkSlotsPg(ArrayList<WorkSlot> workSlots) {
-
+        // Setup for UI LAF
+        FlatDarkLaf.setup();
 
         // Setup JFrame
         frame = new JFrame("View Work Slots");

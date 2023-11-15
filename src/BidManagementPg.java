@@ -1,6 +1,9 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+
+import com.formdev.flatlaf.FlatDarkLaf;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +18,9 @@ public class BidManagementPg extends JFrame implements ActionListener {
     // Add other necessary components like buttons, labels, etc.
 
     public BidManagementPg(ArrayList<Bid> bids) {
+        // Setup for UI LAF
+        FlatDarkLaf.setup();
+
         // Setup JFrame
         frame = new JFrame("Bid Management");
         frame.setLayout(new BorderLayout(5, 5));

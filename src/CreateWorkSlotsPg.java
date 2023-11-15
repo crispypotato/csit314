@@ -1,4 +1,7 @@
 import javax.swing.*;
+
+import com.formdev.flatlaf.FlatDarkLaf;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +12,9 @@ public class CreateWorkSlotsPg extends JFrame implements ActionListener {
     private JTextField dateField, hoursField, positionField;
 
     public CreateWorkSlotsPg() {
+        // Setup for UI LAF
+        FlatDarkLaf.setup();
+
         // Setup JFrame
         frame = new JFrame("Create Work Slot");
         frame.setLayout(new BorderLayout(5, 5));
@@ -91,6 +97,6 @@ public class CreateWorkSlotsPg extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        CreateWorkSlotsPg createWorkSlotPg = new CreateWorkSlotsPg();
+        new CreateWorkSlotsPg();
     }
 }

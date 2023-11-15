@@ -1,5 +1,8 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import com.formdev.flatlaf.FlatDarkLaf;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -9,6 +12,9 @@ public class AllocatedSlots extends JDialog {
     public AllocatedSlots(Frame owner, ArrayList<WorkSlot> allocatedSlots) {
         super(owner, "Allocated Slots", true);
 
+        // Setup for UI LAF
+        FlatDarkLaf.setup();
+        
         // Initialize the table
         initTable(allocatedSlots);
 

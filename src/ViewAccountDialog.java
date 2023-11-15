@@ -1,4 +1,7 @@
 import javax.swing.*;
+
+import com.formdev.flatlaf.FlatDarkLaf;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -8,6 +11,9 @@ public class ViewAccountDialog extends JDialog {
     public ViewAccountDialog(Frame owner, User user) {
         super(owner, "View Account", true);
         this.currentUser = user;
+
+        // Setup for UI LAF
+        FlatDarkLaf.setup();
 
         // Create a panel to hold user details
         JPanel panel = new JPanel(new GridLayout(6, 2));
@@ -42,7 +48,7 @@ public class ViewAccountDialog extends JDialog {
     // Example usage:
     public static void main(String[] args) {
         // Fetch the current user (replace this with your logic)
-        User currentUser = User.getUserById(123);
+        User currentUser = User.getUserById(10002);
 
         // Create and display the dialog
         ViewAccountDialog dialog = new ViewAccountDialog(null, currentUser);

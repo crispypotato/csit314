@@ -12,7 +12,6 @@ public class ViewCafeStaffPg extends JFrame {
         // Setup for UI LAF
         FlatDarkLaf.setup();
 
-
         // Setup JFrame
         frame = new JFrame("View Cafe Staff");
         frame.setLayout(new BorderLayout(1, 2));
