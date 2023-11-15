@@ -14,14 +14,14 @@ import static org.junit.Assert.assertEquals;
 public class sprintUnitTest {
     private User testSubject, testSubject3, testSubject5;
     private loginController testSubject2;
-    private createAccountController testSubject4;
+    private SysAdminCreateAccountController testSubject4;
 
     @Before
     public void setUp() throws Exception {
         this.testSubject = new User();
         this.testSubject2 = new loginController();
         this.testSubject3 = new User(0, "CafeStaff4", 10000, "12/12/2023", 4, "Cashier", "staff4", "staff4");
-        this.testSubject4 = new createAccountController();
+        this.testSubject4 = new SysAdminCreateAccountController();
         this.testSubject5 = new User(0, "CafeStaff5", 11000, "11/12/2023", 4, "Cashier", "staff5", "staff5");
     }
 

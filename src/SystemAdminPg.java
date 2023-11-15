@@ -135,7 +135,7 @@ public class SystemAdminPg extends JFrame implements ActionListener
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == createAccButton)
         {
-            new createAccountPg();
+            new SysAdminCreateAccountPg();
         }
 
         if(e.getSource() == logoutButton){
@@ -145,15 +145,15 @@ public class SystemAdminPg extends JFrame implements ActionListener
         }
 
         if(e.getSource() == viewAccButton){
-            new viewAccountsPg();
+            new SysAdminViewAccountsPg();
         }
 
         if(e.getSource() == viewProfileButton){
-            new viewProfilesPg();
+            new SysAdminViewProfilesPg();
         }
 
         if(e.getSource() == createProfileButton){
-            new createProfilePg();
+            new SysAdminCreateProfilePg();
         }
 
         if (e.getSource() == searchAccButton){
@@ -161,7 +161,7 @@ public class SystemAdminPg extends JFrame implements ActionListener
             if (InputCheck.isNumeric(userInput))
             {
                 int userID = Integer.parseInt(userInput);
-                new searchResultPg(userID);
+                new SysAdminSearchResultPg(userID);
             }
             else
             {
@@ -173,7 +173,7 @@ public class SystemAdminPg extends JFrame implements ActionListener
 
         if (e.getSource() == searchProfileButton){
             String userInput = searchProfileField.getText();
-            new searchProfilePg(userInput);
+            new SysAdminSearchProfilePg(userInput);
         }
     }
 
