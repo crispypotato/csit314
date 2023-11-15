@@ -1,12 +1,10 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -21,9 +19,6 @@ public class ViewWorkSlotsPg extends JFrame {
         frame = new JFrame("View Work Slots");
         frame.setLayout(new BorderLayout(5, 5));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        // Create Panel
-        JPanel panel = new JPanel(new GridBagLayout());
 
         // Create a table to display work slots
         String[] columnNames = {"Date", "Hours", "Position", "Assigned To", "Edit", "Delete"};
@@ -46,7 +41,6 @@ public class ViewWorkSlotsPg extends JFrame {
         Action editAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
 
-                JTable table = (JTable) e.getSource();
                 int modelRow = Integer.valueOf(e.getActionCommand());
                 handleEditButtonClick(modelRow);
 
@@ -71,10 +65,12 @@ public class ViewWorkSlotsPg extends JFrame {
         buttonColumn2.setMnemonic(KeyEvent.VK_D);
 
         JScrollPane scrollPane = new JScrollPane(table);
+
         JFrame frame = new JFrame("Work slots");
         frame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
-        frame.add( scrollPane );
-        frame.setSize(400, 160);
+        frame.add(scrollPane);
+        frame.setPreferredSize(new Dimension(450, 160));
+        frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
