@@ -32,15 +32,6 @@ public class ViewBidPg extends JFrame implements ActionListener {
         // Create table components
         initTable(bids);
 
-        // check if bids are available
-        for (Bid mybid : bids)
-        {
-            System.out.println("Here2");
-            System.out.println("Bid ID:" + mybid.getBidId());
-            System.out.println("Bid ID:" + mybid.getEmpId());
-            System.out.println("Bid ID:" + mybid.getSlotId());
-        }
-
         // Add components to the panel
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
