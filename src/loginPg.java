@@ -133,7 +133,7 @@ public class loginPg extends JFrame implements ActionListener
                 }
                 else if(currentUser.getRoleID() == 4)
                 {
-                    new CafeManagerPg();
+                    new CafeManagerPg(currentUser);
                 }
                 else if(currentUser.getRoleID() == 5)
                 {
