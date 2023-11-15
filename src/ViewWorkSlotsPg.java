@@ -1,10 +1,12 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -41,6 +43,7 @@ public class ViewWorkSlotsPg extends JFrame {
         Action editAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
 
+                JTable table = (JTable) e.getSource();
                 int modelRow = Integer.valueOf(e.getActionCommand());
                 handleEditButtonClick(modelRow);
 

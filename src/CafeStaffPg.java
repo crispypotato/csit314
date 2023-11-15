@@ -15,13 +15,14 @@ public class CafeStaffPg extends JFrame implements ActionListener {
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
     private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
 
-    public int employeeId;
+    private int employeeId;
+    private User myUser = new User();
 
-    public CafeStaffPg(int employeeId) {
+    public CafeStaffPg(User myUser) {
         // Setup for UI LAF
         FlatDarkLaf.setup();
 
-        this.employeeId = employeeId;
+        this.employeeId = myUser.getEmpID();
         // Create Panel
         JPanel CSPanel = new JPanel(new GridBagLayout());
 
@@ -98,7 +99,7 @@ public class CafeStaffPg extends JFrame implements ActionListener {
 
         } else if (e.getSource() == viewBidsButton) {
             // Implement view my bids functionality
-            new ViewBidPg();
+            new ViewBidPg(myUser);
 
         } else if (e.getSource() == viewAllocatedSlotsButton) {
             ArrayList<WorkSlot> allocatedSlots = WorkSlot.getWorkSlotsByAssignedEmployeeId(this.employeeId);
@@ -109,6 +110,32 @@ public class CafeStaffPg extends JFrame implements ActionListener {
         else if (e.getSource() == viewAccountButton) {
             ViewAccountDialog dialog = new ViewAccountDialog(frame, User.getUserById(this.employeeId));
             dialog.setVisible(true);
+        }
+        else if (e.getSource() == setMaxSlotsButton) {
+            MaxSlotsDialog maxSlotsDialog = new MaxSlotsDialog(frame, null);
+            maxSlotsDialog.setVisible(true);
+
+            if (maxSlotsDialog.isOkPressed()) {
+                int maxSlots = maxSlotsDialog.getMaxSlots();
+                User newUser = User.getUserById(this.employeeId);
+                newUser.setMaxSlots(maxSlots);
+                newUser.updateMaxSlots();
+                // Handle the maxSlots value, e.g., save it to the database
+                JOptionPane.showMessageDialog(frame, "Max Work Slots set to: " + maxSlots);
+            }
+        } else if (e.getSource() == updateMaxSlotsButton) {
+            User currUser = User.getUserById(this.employeeId);
+            MaxSlotsDialog maxSlotsDialog = new MaxSlotsDialog(frame, currUser.getMaxSlots());
+            maxSlotsDialog.setVisible(true);
+
+            if (maxSlotsDialog.isOkPressed()) {
+                int updatedMaxSlots = maxSlotsDialog.getMaxSlots();
+
+                currUser.setMaxSlots(updatedMaxSlots);
+                currUser.updateMaxSlots();
+                // Handle the updatedMaxSlots value, e.g., save it to the database
+                JOptionPane.showMessageDialog(frame, "Max Work Slots updated to: " + updatedMaxSlots);
+            }
         }
         // Add more else-if conditions for other buttons...
     }
@@ -130,6 +157,8 @@ public class CafeStaffPg extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new CafeStaffPg(10002);
+        User myUser = new User();
+        myUser = myUser.loginUser("staff1", "staff1");
+        new CafeStaffPg(myUser);
     }
 }

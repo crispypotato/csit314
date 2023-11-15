@@ -56,6 +56,7 @@ public class ViewCafeStaffPg extends JFrame {
         };
 
         JScrollPane scrollPane = new JScrollPane(staffTable);
+        scrollPane.setPreferredSize(new Dimension(900, 400));
 
         // Add the table to the panel
         GridBagConstraints c = new GridBagConstraints();
@@ -64,7 +65,7 @@ public class ViewCafeStaffPg extends JFrame {
         panel.add(scrollPane, c);
 
         // Set dimensions
-        panel.setPreferredSize(new Dimension(1200, 900));
+        //panel.setPreferredSize(new Dimension(1200, 900));
 
         // Set location
         frame.add(panel, BorderLayout.CENTER);
