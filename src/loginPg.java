@@ -137,7 +137,7 @@ public class loginPg extends JFrame implements ActionListener
                 }
                 else if(currentUser.getRoleID() == 5)
                 {
-                    new CafeStaffPg();
+                    new CafeStaffPg(currentUser.getEmpID());
                 }
             }
         }

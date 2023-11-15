@@ -4,54 +4,107 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class CafeOwnerPg extends JFrame implements ActionListener
 {
     private JFrame frame;
-    private JButton createAccButton, logoutButton;
+    private JButton createWorkSlotButton, viewWorkSlotsButton,
+            searchWorkSlotsButton, logoutButton;
+    private JTextField searchWorkSlotsField;
 
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
     private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
 
     public CafeOwnerPg()
     {
+        GridBagConstraints c;
         // Setup for UI LAF
         FlatDarkLaf.setup();
 
-        // Create Panel
-        JPanel COPanel = new JPanel(new GridBagLayout());
+        // Setup JFrame
+        frame = new JFrame("Cafe Owner Homepage");
+        frame.setLayout(new BorderLayout(5, 5));
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        // Set System Admin Panel
-        COPanel.setBorder(BorderFactory.createCompoundBorder(
+        // Create Panels
+        JPanel InfoPanel = new JPanel(new GridBagLayout());
+        JPanel HomePanel = new JPanel(new GridBagLayout());
+        JPanel ButtonPanel = new JPanel(new GridBagLayout());
+
+        // ================ Set Home Panel ======================
+        HomePanel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createTitledBorder("Cafe Owner | Home"),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        GridBagConstraints c;
-
         // Set title
         JLabel headerLabel = new JLabel("What do you want to do today?");
-        headerLabel.setFont(new Font("Serif", Font.BOLD, 20));
-        c = createGbc(0,0);
+        headerLabel.setFont(new Font("Serif", Font.BOLD, 15));
+        c = createGbc(0, 0);
         c.gridwidth = 2;
-        COPanel.add(headerLabel, c);
+        HomePanel.add(headerLabel, c);
 
-        // Set createAccount
-        createAccButton = new JButton("");
-        createAccButton.addActionListener(this);
-        c = createGbc(0,2);
-        COPanel.add(createAccButton, c);
+        // Set search Work Slots
+        JLabel searchWorkSlotsLabel = new JLabel("Search Work Slots: ");
+        c = createGbc(0, 1);
+        HomePanel.add(searchWorkSlotsLabel, c);
+        searchWorkSlotsField = new JTextField();
+        c = createGbc(1, 1);
+        HomePanel.add(searchWorkSlotsField, c);
+        searchWorkSlotsButton = new JButton("Search");
+        searchWorkSlotsButton.addActionListener(this);
+        c = createGbc(2, 1);
+        HomePanel.add(searchWorkSlotsButton, c);
+
+        // ================ Set Button Panel ======================
+        // Set createWorkSlot
+        createWorkSlotButton = new JButton("Create Work Slot");
+        createWorkSlotButton.addActionListener(this);
+        c = createGbc(0, 0);
+        ButtonPanel.add(createWorkSlotButton, c);
+
+        // Set viewWorkSlots
+        viewWorkSlotsButton = new JButton("View And Update Work Slots");
+        viewWorkSlotsButton.addActionListener(this);
+        c = createGbc(0, 1);
+        ButtonPanel.add(viewWorkSlotsButton, c);
+
 
         // Set logout
         logoutButton = new JButton("Log out");
         logoutButton.addActionListener(this);
-        c = createGbc(5,0);
-        COPanel.add(logoutButton, c);
+        c = createGbc(0, 4);
+        ButtonPanel.add(logoutButton, c);
 
-        frame = new JFrame("Cafe Owner Homepage");
-        frame.setLayout(new GridBagLayout());
+        // ================ Set Info Panel ======================
+        JLabel id = new JLabel("Employee ID: " + String.valueOf(""));
+        JLabel name = new JLabel("Name: " + "");
+        JLabel salary = new JLabel("Salary: " + String.valueOf(""));
+        JLabel dateJoined = new JLabel("Date Joined: " + "");
+        c = createGbc(0, 0);
+        c.insets = new Insets(0, 10, 0, 10);
+        InfoPanel.add(id, c);
+        c = createGbc(1, 0);
+        c.insets = new Insets(0, 10, 0, 10);
+        InfoPanel.add(name, c);
+        c = createGbc(0, 1);
+        c.insets = new Insets(10, 10, 10, 10);
+        InfoPanel.add(salary, c);
+        c = createGbc(1, 1);
+        c.insets = new Insets(0, 10, 0, 10);
+        InfoPanel.add(dateJoined, c);
 
-        frame.add(COPanel, c);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // Set Dimensions
+        InfoPanel.setPreferredSize(new Dimension(500, 50));
+        ButtonPanel.setPreferredSize(new Dimension(150, 250));
+        HomePanel.setPreferredSize(new Dimension(350, 150));
+
+        // Set locations
+        frame.add(InfoPanel, BorderLayout.NORTH);
+        frame.add(HomePanel, BorderLayout.CENTER);
+        frame.add(ButtonPanel, BorderLayout.EAST);
+
+        // Set frame output
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -62,6 +115,26 @@ public class CafeOwnerPg extends JFrame implements ActionListener
             JOptionPane.showMessageDialog(null, "Logging out. You will now be redirected back to the login page.", "Logout success", JOptionPane.PLAIN_MESSAGE);
             frame.dispose();
             new loginPg();
+        }
+        if (e.getSource() == createWorkSlotButton) {
+            // Implement create work slot functionality
+            new CreateWorkSlotsPg();
+        }
+        if (e.getSource() == viewWorkSlotsButton) {
+            // Implement view work slots functionality included edit and delete
+            // Fetch all work slots
+            ArrayList<WorkSlot> workSlots = WorkSlot.getAllWorkSlots();
+            new ViewWorkSlotsPg(workSlots);
+        }
+
+        if (e.getSource() == searchWorkSlotsButton) {
+            // Retrieve user input
+            String userInput = searchWorkSlotsField.getText().trim();
+
+            // Search for work slots based on date or position
+            ArrayList<WorkSlot> searchResults = WorkSlot.searchWorkSlots(userInput);
+
+            new ViewWorkSlotsPg(searchResults);
         }
     }
 

@@ -116,7 +116,7 @@ class User
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "Just@GroupProj3ctPW");
+                "root", "");
  
             // Prepare statement
             PreparedStatement myStatement = connection.prepareStatement(myQuery);
@@ -169,7 +169,7 @@ class User
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "Just@GroupProj3ctPW");
+                "root", "");
  
             // Prepare statement
             PreparedStatement myStatement = connection.prepareStatement(myQuery);
@@ -210,7 +210,7 @@ class User
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/cafems",
-                    "root", "Just@GroupProj3ctPW");
+                    "root", "");
 
             Statement statement;
             statement = connection.createStatement();
@@ -259,7 +259,7 @@ class User
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "Just@GroupProj3ctPW");
+                "root", "");
  
             // Prepare statement
             PreparedStatement myStatement = connection.prepareStatement(myQuery);
@@ -307,7 +307,7 @@ class User
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "Just@GroupProj3ctPW");
+                "root", "");
  
             // Prepare statement
             PreparedStatement myStatement = connection.prepareStatement(myQuery);
@@ -357,7 +357,7 @@ class User
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "Just@GroupProj3ctPW");
+                "root", "");
  
             // Prepare statement
             PreparedStatement myStatement = connection.prepareStatement(myQuery);
@@ -409,7 +409,7 @@ class User
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/cafems",
-                    "root", "Just@GroupProj3ctPW");
+                    "root", "");
 
             // Prepare statement
             PreparedStatement myStatement = connection.prepareStatement(myQuery);
@@ -435,6 +435,81 @@ class User
         return success;
     }
 
+    public static User getUserById(int userId) {
+        User user = null;
+
+        // Your SQL query to fetch the user by ID
+        String query = "SELECT * FROM Employee WHERE EMP_ID = ?";
+
+        try (Connection connection = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/cafems",
+                "root", "")) {
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, userId);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        int employeeId = resultSet.getInt("EMP_ID");
+                        String name = resultSet.getString("EMP_NAME");
+                        int salary = resultSet.getInt("EMP_SALARY");
+                        String dateJoined = resultSet.getString("EMP_DATEJOINED");
+                        int roleId = resultSet.getInt("EMP_ROLEID");
+                        String position = resultSet.getString("EMP_POSITION");
+                        String username = resultSet.getString("EMP_USERNAME");
+                        String password = resultSet.getString("EMP_PASSWORD");
+
+                        // Add other properties as needed
+
+                        user = new User(employeeId, name, salary, dateJoined, roleId, position, username, password);
+                    }
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle the exception according to your application's needs
+        }
+
+        return user;
+    }
+
+
+    public static ArrayList<User> getEmployeesByRoleId(int roleId) {
+        ArrayList<User> employees = new ArrayList<>();
+
+        String query = "SELECT * FROM Employee WHERE EMP_ROLEID = ?";
+
+        try (Connection connection = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/cafems",
+                "root", "")) {
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, roleId);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        int employeeId = resultSet.getInt("EMP_ID");
+                        String name = resultSet.getString("EMP_NAME");
+                        int salary = resultSet.getInt("EMP_SALARY");
+                        String dateJoined = resultSet.getString("EMP_DATEJOINED");
+                        int roleID = resultSet.getInt("EMP_ROLEID");
+                        String position = resultSet.getString("EMP_POSITION");
+                        String password = resultSet.getString("EMP_PASSWORD");
+                        String username = resultSet.getString("EMP_USERNAME");
+                        // Add other properties as needed
+
+                        User employee = new User(employeeId, name, salary, dateJoined, roleID, position, username, password);
+                        employees.add(employee);
+                    }
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle the exception according to your application's needs
+        }
+
+        return employees;
+    }
     // Basic toString method to display unique userID
     @Override
     public String toString()
