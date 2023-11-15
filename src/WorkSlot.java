@@ -75,7 +75,7 @@ public class WorkSlot {
 
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/cafems",
-                    "root", "");
+                    "root", "Just@GroupProj3ctPW");
 
             // Prepare statement
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -107,7 +107,7 @@ public class WorkSlot {
 
         try (Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "")) {
+                "root", "Just@GroupProj3ctPW")) {
             try (PreparedStatement preparedStatement = connection.prepareStatement(selectQuery)) {
                 preparedStatement.setInt(1, slotId);
 
@@ -145,7 +145,7 @@ public class WorkSlot {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/cafems",
-                    "root", "");
+                    "root", "Just@GroupProj3ctPW");
 
             Statement statement;
             statement = connection.createStatement();
@@ -182,7 +182,7 @@ public class WorkSlot {
         try {
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/cafems",
-                    "root", "");
+                    "root", "Just@GroupProj3ctPW");
 
             // Prepare statement
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -219,7 +219,7 @@ public class WorkSlot {
         try {
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/cafems",
-                    "root", "");
+                    "root", "Just@GroupProj3ctPW");
 
             // Prepare statement
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -253,7 +253,7 @@ public class WorkSlot {
 
         try (Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "");
+                "root", "Just@GroupProj3ctPW");
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, "%" + userInput + "%"); // Search for date
@@ -289,7 +289,7 @@ public class WorkSlot {
 
         try (Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "")) {
+                "root", "Just@GroupProj3ctPW")) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, employeeId);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -319,7 +319,7 @@ public class WorkSlot {
 
         try (Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "")) {
+                "root", "Just@GroupProj3ctPW")) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, "%" + userInput + "%");
             preparedStatement.setString(2, "%" + userInput + "%");
@@ -351,7 +351,7 @@ public class WorkSlot {
 
         try (Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "")) {
+                "root", "Just@GroupProj3ctPW")) {
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setInt(1, employeeId);
@@ -382,7 +382,7 @@ public class WorkSlot {
 
         try (Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "")) {
+                "root", "Just@GroupProj3ctPW")) {
             try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
                 preparedStatement.setInt(1, empId);
                 preparedStatement.setInt(2, slotId);

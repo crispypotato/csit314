@@ -52,7 +52,7 @@ public class Bid {
         try {
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/cafems",
-                    "root", "");
+                    "root", "Just@GroupProj3ctPW");
 
             // Prepare statement
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -87,7 +87,7 @@ public class Bid {
         try {
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/cafems",
-                    "root", "");
+                    "root", "Just@GroupProj3ctPW");
 
             // Create statement
             PreparedStatement preparedStatement = connection.prepareStatement(myQuery);
@@ -120,7 +120,7 @@ public class Bid {
         try {
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/cafems",
-                    "root", "");
+                    "root", "Just@GroupProj3ctPW");
 
             // Prepare statement
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -154,7 +154,7 @@ public class Bid {
         try {
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/cafems",
-                    "root", "");
+                    "root", "Just@GroupProj3ctPW");
 
             // Prepare statement
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -184,7 +184,7 @@ public class Bid {
         // Prepare query
         String query = "SELECT * FROM BIDS WHERE EMP_ID = ?";
 
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/cafems", "root", "");
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/cafems", "root", "Just@GroupProj3ctPW");
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             // Set parameter for the employee ID

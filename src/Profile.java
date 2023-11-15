@@ -41,7 +41,7 @@ public class Profile {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/cafems",
-                    "root", "");
+                    "root", "Just@GroupProj3ctPW");
 
             Statement statement;
             statement = connection.createStatement();
@@ -81,7 +81,7 @@ public class Profile {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "");
+                "root", "Just@GroupProj3ctPW");
  
             // Prepare statement
             PreparedStatement myStatement = connection.prepareStatement(myQuery);
@@ -119,7 +119,7 @@ public class Profile {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/cafems",
-                    "root", "");
+                    "root", "Just@GroupProj3ctPW");
 
             Statement statement;
             statement = connection.createStatement();
@@ -160,7 +160,7 @@ public class Profile {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "");
+                "root", "Just@GroupProj3ctPW");
  
             // Prepare statement
             PreparedStatement myStatement = connection.prepareStatement(myQuery);
@@ -202,7 +202,7 @@ public class Profile {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/cafems",
-                    "root", "");
+                    "root", "Just@GroupProj3ctPW");
 
             // Prepare statement
             PreparedStatement myStatement = connection.prepareStatement(myQuery);
@@ -241,7 +241,7 @@ public class Profile {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/cafems",
-                    "root", "");
+                    "root", "Just@GroupProj3ctPW");
 
             // Prepare statement
             PreparedStatement myStatement = connection.prepareStatement(myQuery);

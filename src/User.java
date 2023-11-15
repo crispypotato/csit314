@@ -116,7 +116,7 @@ class User
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "");
+                "root", "Just@GroupProj3ctPW");
  
             // Prepare statement
             PreparedStatement myStatement = connection.prepareStatement(myQuery);
@@ -169,7 +169,7 @@ class User
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "");
+                "root", "Just@GroupProj3ctPW");
  
             // Prepare statement
             PreparedStatement myStatement = connection.prepareStatement(myQuery);
@@ -210,7 +210,7 @@ class User
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/cafems",
-                    "root", "");
+                    "root", "Just@GroupProj3ctPW");
 
             Statement statement;
             statement = connection.createStatement();
@@ -259,7 +259,7 @@ class User
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "");
+                "root", "Just@GroupProj3ctPW");
  
             // Prepare statement
             PreparedStatement myStatement = connection.prepareStatement(myQuery);
@@ -307,7 +307,7 @@ class User
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "");
+                "root", "Just@GroupProj3ctPW");
  
             // Prepare statement
             PreparedStatement myStatement = connection.prepareStatement(myQuery);
@@ -357,7 +357,7 @@ class User
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "");
+                "root", "Just@GroupProj3ctPW");
  
             // Prepare statement
             PreparedStatement myStatement = connection.prepareStatement(myQuery);
@@ -409,7 +409,7 @@ class User
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/cafems",
-                    "root", "");
+                    "root", "Just@GroupProj3ctPW");
 
             // Prepare statement
             PreparedStatement myStatement = connection.prepareStatement(myQuery);
@@ -443,7 +443,7 @@ class User
 
         try (Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "")) {
+                "root", "Just@GroupProj3ctPW")) {
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setInt(1, userId);
@@ -481,7 +481,7 @@ class User
 
         try (Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/cafems",
-                "root", "")) {
+                "root", "Just@GroupProj3ctPW")) {
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setInt(1, roleId);

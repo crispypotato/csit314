@@ -23,16 +23,13 @@ public class CafeManagerPg extends JFrame implements ActionListener {
         frame.setLayout(new BorderLayout(5, 5));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        // Create Panel
-        JPanel CMPanel = new JPanel(new GridBagLayout());
-
         // Create Panels
         JPanel InfoPanel = new JPanel(new GridBagLayout());
         JPanel HomePanel = new JPanel(new GridBagLayout());
         JPanel ButtonPanel = new JPanel(new GridBagLayout());
 
         // Set System Admin Panel
-        CMPanel.setBorder(BorderFactory.createCompoundBorder(
+        HomePanel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createTitledBorder("Cafe Manager | Home"),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
