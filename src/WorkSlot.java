@@ -6,7 +6,7 @@ public class WorkSlot {
     private String date;
     private int hours;
     private String position;
-    private Integer  assignedTo;
+    private Integer assignedTo;
 
     public WorkSlot(){}
 

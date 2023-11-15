@@ -54,8 +54,8 @@ public class ViewBidPg extends JFrame implements ActionListener {
     }
 
     private void initTable(ArrayList<Bid> input) {
-        String[] columnNames = {"Slot ID", "Employee ID", "Bid ID", "Action"};
-        Object[][] data = new Object[input.size()][4];
+        String[] columnNames = {"Slot ID", "Employee ID", "Bid ID", "Cancel", "Update"};
+        Object[][] data = new Object[input.size()][5];
 
         for (int i = 0; i < input.size(); i++) {
             Bid bid = input.get(i);
@@ -63,6 +63,7 @@ public class ViewBidPg extends JFrame implements ActionListener {
             data[i][1] = bid.getEmpId();
             data[i][2] = bid.getBidId();
             data[i][3] = "Cancel"; // Add a placeholder for the cancel button
+            data[i][4] = "Update";
         }
 
         bidTable = new JTable(data, columnNames);
@@ -75,8 +76,19 @@ public class ViewBidPg extends JFrame implements ActionListener {
             }
         };
 
+        Action updateAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                JTable bidTable = (JTable) e.getSource();
+                int modelRow = Integer.valueOf(e.getActionCommand());
+                handleUpdateBidButtonClick(modelRow);
+            }
+        };
+
         ButtonColumn buttonColumn = new ButtonColumn(bidTable, cancelAction, 3);
         buttonColumn.setMnemonic(KeyEvent.VK_D);
+
+        ButtonColumn buttonColumn2 = new ButtonColumn(bidTable, updateAction, 4);
+        buttonColumn2.setMnemonic(KeyEvent.VK_D);
     }
 
     private void handleCancelBidButtonClick(int rowIndex) {
@@ -98,6 +110,30 @@ public class ViewBidPg extends JFrame implements ActionListener {
                     this,
                     "Failed to cancel bid.",
                     "Cancel Bid Failure",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
+    private void handleUpdateBidButtonClick(int rowIndex) {
+        // Get the Bid corresponding to the clicked row
+        Bid bid = bids.get(rowIndex);
+
+        // Implement bid cancellation (you need to implement this)
+        boolean bidUpdated = bid.updateBid(); // Assuming a method like this in Bid class
+
+        if (bidUpdated) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Bid updated successfully!",
+                    "Update Bid Success",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        } else {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Failed to update bid.",
+                    "Update Bid Failure",
                     JOptionPane.ERROR_MESSAGE
             );
         }

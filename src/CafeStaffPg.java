@@ -97,7 +97,7 @@ public class CafeStaffPg extends JFrame implements ActionListener {
 
         } else if (e.getSource() == browseWorkSlotsButton) {
             // Implement browse work slots functionality
-            new BrowserWorkSlotsPg(this.employeeId);
+            new BrowseWorkSlotsPg(this.employeeId);
 
         } else if (e.getSource() == viewBidsButton) {
             // Implement view my bids functionality
