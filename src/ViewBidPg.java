@@ -39,7 +39,7 @@ public class ViewBidPg extends JFrame implements ActionListener {
         c.gridwidth = 2;
         c.insets = new Insets(5, 5, 5, 5);
         JScrollPane scrollPane = new JScrollPane(bidTable);
-        
+
         // Set Dimensions
         scrollPane.setPreferredSize(new Dimension(900, 500));
         panel.add(scrollPane, c);

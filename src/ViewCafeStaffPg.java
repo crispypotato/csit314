@@ -64,9 +64,6 @@ public class ViewCafeStaffPg extends JFrame {
         c.gridy = 0;
         panel.add(scrollPane, c);
 
-        // Set dimensions
-        //panel.setPreferredSize(new Dimension(1200, 900));
-
         // Set location
         frame.add(panel, BorderLayout.CENTER);
 

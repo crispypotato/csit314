@@ -8,9 +8,8 @@ public class WorkSlot {
     private String position;
     private Integer  assignedTo;
 
-    public WorkSlot(){ 
+    public WorkSlot(){}
 
-    }
     public WorkSlot(String date, int hours, String position, Integer assignedTo) {
         this.date = date;
         this.hours = hours;
@@ -136,7 +135,7 @@ public class WorkSlot {
     }
 
 
-    public  ArrayList<WorkSlot> getAllWorkSlots() {
+    public ArrayList<WorkSlot> getAllWorkSlots() {
         ArrayList<WorkSlot> workSlots = new ArrayList<>();
 
         // Prepare query
@@ -246,7 +245,7 @@ public class WorkSlot {
         return success;
     }
 
-    public  ArrayList<WorkSlot> searchWorkSlots(String userInput) {
+    public ArrayList<WorkSlot> searchWorkSlots(String userInput) {
         ArrayList<WorkSlot> searchResults = new ArrayList<>();
 
         // Implement your database query to search for work slots based on date or position

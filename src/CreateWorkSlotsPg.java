@@ -9,7 +9,9 @@ import java.awt.event.ActionListener;
 public class CreateWorkSlotsPg extends JFrame implements ActionListener {
     private JFrame frame;
     private JButton createButton, cancelButton;
-    private JTextField dateField, hoursField, positionField;
+    private JTextField dateField;
+    private JTextField hoursField;
+    private JComboBox<String> positionField;
 
     public CreateWorkSlotsPg() {
         // Setup for UI LAF
@@ -39,7 +41,10 @@ public class CreateWorkSlotsPg extends JFrame implements ActionListener {
         // Set position
         JLabel positionLabel = new JLabel("Position: ");
         inputPanel.add(positionLabel, createGbc(0, 2));
-        positionField = new JTextField(15);
+        String[] positionChoices = {" ", "Cashier","Chef", "Waiter"};
+        positionField = new JComboBox<String>(positionChoices);
+        positionField.setVisible(true);
+        positionField.setSelectedIndex(0);
         inputPanel.add(positionField, createGbc(1, 2));
 
         // Create button
@@ -67,7 +72,7 @@ public class CreateWorkSlotsPg extends JFrame implements ActionListener {
             // Implement create work slot logic
             String date = dateField.getText();
             int hours = Integer.parseInt(hoursField.getText());
-            String position = positionField.getText();
+            String position = positionField.getSelectedItem().toString();
 
             // Perform validation and create work slot
             CafeOwnerCreateWorkSlotController c = new CafeOwnerCreateWorkSlotController();

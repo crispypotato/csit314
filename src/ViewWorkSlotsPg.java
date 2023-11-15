@@ -1,12 +1,10 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -23,7 +21,7 @@ public class ViewWorkSlotsPg extends JFrame {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Create a table to display work slots
-        String[] columnNames = {"Date", "Hours", "Position", "Assigned To", "Edit", "Delete"};
+        String[] columnNames = {"Date", "Hours", "Position", "Assigned To", "", ""};
         Object[][] data = new Object[workSlots.size()][6]; // Added two extra columns for buttons
 
         for (int i = 0; i < workSlots.size(); i++) {
@@ -43,7 +41,6 @@ public class ViewWorkSlotsPg extends JFrame {
         Action editAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
 
-                JTable table = (JTable) e.getSource();
                 int modelRow = Integer.valueOf(e.getActionCommand());
                 handleEditButtonClick(modelRow);
 
@@ -52,12 +49,10 @@ public class ViewWorkSlotsPg extends JFrame {
 
         Action deleteAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-
                 JTable table = (JTable) e.getSource();
                 int modelRow = Integer.valueOf(e.getActionCommand());
                 handleDeleteButtonClick(modelRow);
                 ((DefaultTableModel) table.getModel()).removeRow(modelRow);
-
             }
         };
 
