@@ -9,6 +9,7 @@ public class TestRunner {
         for (Failure failure : result.getFailures()) {
             System.out.println("Failure: " + failure.toString());
         }
-        System.out.println("Successful: " + result.wasSuccessful() + " ran " + result.getRunCount() + " tests");
+        System.out.println("Is Test Successful?: " + result.wasSuccessful() + 
+                        " \nTotal Test Ran: " + result.getRunCount() + " tests");
     }
 }

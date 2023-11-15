@@ -20,9 +20,9 @@ public class sprintUnitTest {
     public void setUp() throws Exception {
         this.testSubject = new User();
         this.testSubject2 = new loginController();
-        this.testSubject3 = new User(0, "CafeStaff4", 10000, "12/12/2023", 4, "Cashier", "staff4", "staff4");
+        this.testSubject3 = new User(0, "CafeStaff4", 10000, "12/12/2023", 5, "Cashier", "staff4", "staff4");
         this.testSubject4 = new SysAdminCreateAccountController();
-        this.testSubject5 = new User(0, "CafeStaff5", 11000, "11/12/2023", 4, "Cashier", "staff5", "staff5");
+        this.testSubject5 = new User(0, "CafeStaff5", 11000, "11/12/2023", 5, "Cashier", "staff5", "staff5");
     }
 
     @After
@@ -38,9 +38,9 @@ public class sprintUnitTest {
     public void testEntityLogin() {
         // Test Login - Expected Success
         testSubject = testSubject.loginUser("sysadmin1", "sysadmin1");
-        assertEquals("Login SA E", 10001, testSubject.getEmpID());
+        assertEquals("Login SA E", 10002, testSubject.getEmpID());
         testSubject = testSubject.loginUser("owner1", "owner1");
-        assertEquals("Login CO E", 10002, testSubject.getEmpID());
+        assertEquals("Login CO E", 10001, testSubject.getEmpID());
         testSubject = testSubject.loginUser("manager1", "manager1");
         assertEquals("Login CM E", 10003, testSubject.getEmpID());
         testSubject = testSubject.loginUser("staff1", "staff1");
@@ -56,9 +56,9 @@ public class sprintUnitTest {
     public void testControllerLogin() {
         // Test Login - Expected Success
         testSubject = testSubject2.loginUser("sysadmin1","sysadmin1");
-        assertEquals("Login SA C", 10001, testSubject.getEmpID());
+        assertEquals("Login SA C", 10002, testSubject.getEmpID());
         testSubject = testSubject.loginUser("owner1", "owner1");
-        assertEquals("Login CO C", 10002, testSubject.getEmpID());
+        assertEquals("Login CO C", 10001, testSubject.getEmpID());
         testSubject = testSubject.loginUser("manager1", "manager1");
         assertEquals("Login CM C", 10003, testSubject.getEmpID());
         testSubject = testSubject2.loginUser("staff1", "staff1");
