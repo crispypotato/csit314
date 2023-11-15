@@ -82,6 +82,7 @@ public class CafeOwnerPg extends JFrame implements ActionListener
         JLabel name = new JLabel("Name: " + myUser.getName());
         JLabel salary = new JLabel("Salary: " + String.valueOf(myUser.getSalary()));
         JLabel dateJoined = new JLabel("Date Joined: " + myUser.getDateJoined());
+        
         c = createGbc(0, 0);
         c.insets = new Insets(0, 10, 0, 10);
         InfoPanel.add(id, c);

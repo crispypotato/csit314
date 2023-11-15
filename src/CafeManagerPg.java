@@ -14,7 +14,7 @@ public class CafeManagerPg extends JFrame implements ActionListener {
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
     private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
 
-    public CafeManagerPg() {
+    public CafeManagerPg(User myUser) {
         // Setup for UI LAF
         FlatDarkLaf.setup();
 
@@ -87,10 +87,11 @@ public class CafeManagerPg extends JFrame implements ActionListener {
 
         // ================ Set Info Panel ======================
         // Placeholder labels for employee information
-        JLabel id = new JLabel("Employee ID: " + String.valueOf(""));
-        JLabel name = new JLabel("Name: " + "");
-        JLabel salary = new JLabel("Salary: " + String.valueOf(""));
-        JLabel dateJoined = new JLabel("Date Joined: " + "");
+        JLabel id = new JLabel("Employee ID: " + String.valueOf(myUser.getEmpID()));
+        JLabel name = new JLabel("Name: " + myUser.getName());
+        JLabel salary = new JLabel("Salary: " + String.valueOf(myUser.getSalary()));
+        JLabel dateJoined = new JLabel("Date Joined: " + myUser.getDateJoined());
+
         c = createGbc(0, 0);
         c.insets = new Insets(0, 10, 0, 10);
         InfoPanel.add(id, c);
@@ -177,6 +178,8 @@ public class CafeManagerPg extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new CafeManagerPg();
+        User myUser = new User();
+        myUser = myUser.loginUser("manager1", "manager1");
+        new CafeManagerPg(myUser);
     }
 }
