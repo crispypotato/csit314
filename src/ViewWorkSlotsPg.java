@@ -72,7 +72,7 @@ public class ViewWorkSlotsPg extends JFrame {
 
         JScrollPane scrollPane = new JScrollPane(table);
         JFrame frame = new JFrame("Work slots");
-        frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        frame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
         frame.add( scrollPane );
         frame.setSize(400, 160);
         frame.setLocationRelativeTo(null);

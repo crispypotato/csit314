@@ -51,9 +51,6 @@ public class CafeStaffPg extends JFrame implements ActionListener {
         c = createGbc(1, 2);
         CSPanel.add(viewBidsButton, c);
 
-
-
-
         viewAllocatedSlotsButton = new JButton("View Allocated Slots");
         viewAllocatedSlotsButton.addActionListener(this);
         c = createGbc(0, 3);
@@ -83,7 +80,7 @@ public class CafeStaffPg extends JFrame implements ActionListener {
         frame.setLayout(new GridBagLayout());
 
         frame.add(CSPanel, c);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -107,7 +104,7 @@ public class CafeStaffPg extends JFrame implements ActionListener {
             ArrayList<WorkSlot> allocatedSlots = WorkSlot.getWorkSlotsByAssignedEmployeeId(this.employeeId);
             AllocatedSlots dialog = new AllocatedSlots(frame,allocatedSlots);
             dialog.setVisible(true);
-            
+
         }
         else if (e.getSource() == viewAccountButton) {
             ViewAccountDialog dialog = new ViewAccountDialog(frame, User.getUserById(this.employeeId));
