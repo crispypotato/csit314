@@ -6,6 +6,14 @@ public class Bid {
     private int slotId;
     private int empId;
 
+    // default constructor
+    public Bid()
+    {
+        this.bidId = 0;
+        this.slotId = 0;
+        this.empId = 0;
+    }
+    
     public Bid(int slotId, int empId) {
         this.slotId = slotId;
         this.empId = empId;
@@ -178,7 +186,7 @@ public class Bid {
         return success;
     }
 
-    public static ArrayList<Bid> getBidsForEmployee(int employeeId) {
+    public ArrayList<Bid> getBidsForEmployee(int employeeId) {
         ArrayList<Bid> bids = new ArrayList<>();
 
         // Prepare query
@@ -210,7 +218,6 @@ public class Bid {
 
     public boolean approveBid() {
         // Assuming you have the necessary information in the Bid class
-        int bidId = getBidId();
         int empId = getEmpId();
         int slotId = getSlotId();
 

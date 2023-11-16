@@ -100,7 +100,7 @@ public class CafeStaffPg extends JFrame implements ActionListener {
 
         } else if (e.getSource() == viewBidsButton) {
             // Implement view my bids functionality
-            new ViewBidPg(myUser);
+            new CafeStaffViewBidPg(myUser);
 
         } else if (e.getSource() == viewAllocatedSlotsButton) {
             ArrayList<WorkSlot> allocatedSlots = WorkSlot.getWorkSlotsByAssignedEmployeeId(this.employeeId);
