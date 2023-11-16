@@ -119,7 +119,7 @@ public class Bid {
         return bids;
     }
 
-    public boolean updateBid() {
+    public boolean updateBid(Bid aBid) {
         boolean success = false;
 
         // Prepare query
@@ -134,9 +134,9 @@ public class Bid {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             // Set parameters for statement
-            preparedStatement.setInt(1, this.slotId);
-            preparedStatement.setInt(2, this.empId);
-            preparedStatement.setInt(3, this.bidId);
+            preparedStatement.setInt(1, aBid.slotId);
+            preparedStatement.setInt(2, aBid.empId);
+            preparedStatement.setInt(3, aBid.bidId);
 
             // Execute the query
             int rowsAffected = preparedStatement.executeUpdate();
@@ -153,7 +153,7 @@ public class Bid {
         return success;
     }
 
-    public boolean deleteBid() {
+    public boolean deleteBid(Bid aBid) {
         boolean success = false;
 
         // Prepare query
@@ -168,7 +168,7 @@ public class Bid {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             // Set parameters for statement
-            preparedStatement.setInt(1, this.bidId);
+            preparedStatement.setInt(1, aBid.bidId);
 
             // Execute the query
             int rowsAffected = preparedStatement.executeUpdate();

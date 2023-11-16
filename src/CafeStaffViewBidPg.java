@@ -96,8 +96,9 @@ public class CafeStaffViewBidPg extends JFrame implements ActionListener {
         // Get the Bid corresponding to the clicked row
         Bid bid = bids.get(rowIndex);
 
-        // Implement bid cancellation (you need to implement this)
-        boolean bidCancelled = bid.deleteBid(); // Assuming a method like this in Bid class
+        // Implement bid cancellation
+        CafeStaffCancelBidController cbc = new CafeStaffCancelBidController();
+        boolean bidCancelled = cbc.deleteBid(bid);
 
         if (bidCancelled) {
             JOptionPane.showMessageDialog(
@@ -120,8 +121,9 @@ public class CafeStaffViewBidPg extends JFrame implements ActionListener {
         // Get the Bid corresponding to the clicked row
         Bid bid = bids.get(rowIndex);
 
-        // Implement bid cancellation (you need to implement this)
-        boolean bidUpdated = bid.updateBid(); // Assuming a method like this in Bid class
+        // Implement bid update
+        CafeStaffUpdateBidController ubc = new CafeStaffUpdateBidController();
+        boolean bidUpdated = ubc.updateBid(bid); 
 
         if (bidUpdated) {
             JOptionPane.showMessageDialog(
