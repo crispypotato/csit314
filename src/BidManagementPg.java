@@ -54,7 +54,8 @@ public class BidManagementPg extends JFrame implements ActionListener {
 
         for (int i = 0; i < bids.size(); i++) {
             Bid bid = bids.get(i);
-            User employee = User.getUserById(bid.getEmpId());
+            User employee = new User();
+            employee = employee.getUserById(bid.getEmpId());
             WorkSlot slot = WorkSlot.getWorkSlotById(bid.getSlotId());
             data[i][0] = bid.getBidId();
             data[i][1] = employee.getName();

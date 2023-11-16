@@ -48,7 +48,8 @@ public class ViewAccountDialog extends JDialog {
     // Example usage:
     public static void main(String[] args) {
         // Fetch the current user (replace this with your logic)
-        User currentUser = User.getUserById(10002);
+        User currentUser = new User();
+        currentUser = currentUser.getUserById(10002);
 
         // Create and display the dialog
         ViewAccountDialog dialog = new ViewAccountDialog(null, currentUser);
