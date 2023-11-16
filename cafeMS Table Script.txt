@@ -62,3 +62,5 @@ insert into profile (profile_name) values("System Admin");
 insert into profile (profile_name) values("Cafe Owner");
 insert into profile (profile_name) values("Cafe Manager");
 insert into profile (profile_name) values("Cafe Staff");
+
+ALTER TABLE EMPLOYEE ADD COLUMN EMP_MAX_SLOTS INT;

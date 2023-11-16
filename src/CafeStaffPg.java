@@ -110,7 +110,8 @@ public class CafeStaffPg extends JFrame implements ActionListener {
 
         }
         else if (e.getSource() == viewAccountButton) {
-            ViewAccountDialog dialog = new ViewAccountDialog(frame, User.getUserById(this.employeeId));
+            User currUser = new User();
+            ViewAccountDialog dialog = new ViewAccountDialog(frame, currUser.getUserById(this.employeeId));
             dialog.setVisible(true);
         }
         else if (e.getSource() == setMaxSlotsButton) {
@@ -119,22 +120,21 @@ public class CafeStaffPg extends JFrame implements ActionListener {
 
             if (maxSlotsDialog.isOkPressed()) {
                 int maxSlots = maxSlotsDialog.getMaxSlots();
-                User newUser = User.getUserById(this.employeeId);
-                newUser.setMaxSlots(maxSlots);
-                newUser.updateMaxSlots();
+                User newUser = new User();
+                newUser = newUser.getUserById(this.employeeId);
+                newUser.updateMaxSlots(maxSlots);
                 // Handle the maxSlots value, e.g., save it to the database
                 JOptionPane.showMessageDialog(frame, "Max Work Slots set to: " + maxSlots);
             }
         } else if (e.getSource() == updateMaxSlotsButton) {
-            User currUser = User.getUserById(this.employeeId);
+            User currUser = new User();
+            currUser = currUser.getUserById(this.employeeId);
             MaxSlotsDialog maxSlotsDialog = new MaxSlotsDialog(frame, currUser.getMaxSlots());
             maxSlotsDialog.setVisible(true);
 
             if (maxSlotsDialog.isOkPressed()) {
                 int updatedMaxSlots = maxSlotsDialog.getMaxSlots();
-
-                currUser.setMaxSlots(updatedMaxSlots);
-                currUser.updateMaxSlots();
+                currUser.updateMaxSlots(updatedMaxSlots);
                 // Handle the updatedMaxSlots value, e.g., save it to the database
                 JOptionPane.showMessageDialog(frame, "Max Work Slots updated to: " + updatedMaxSlots);
             }
