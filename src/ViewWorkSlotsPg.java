@@ -13,6 +13,71 @@ import java.util.ArrayList;
 public class ViewWorkSlotsPg extends JFrame {
     private JFrame frame;
 
+    public ViewWorkSlotsPg() {
+        // Fetch all work slots
+        CafeManagerViewWorkSlotsController vwsc = new CafeManagerViewWorkSlotsController();
+        ArrayList<WorkSlot> workSlots = vwsc.getAllWorkSlots();
+        
+        // Setup for UI LAF
+        FlatDarkLaf.setup();
+
+        // Setup JFrame
+        frame = new JFrame("View Work Slots");
+        frame.setLayout(new BorderLayout(5, 5));
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Create a table to display work slots
+        String[] columnNames = {"Date", "Hours", "Position", "Assigned To", "", ""};
+        Object[][] data = new Object[workSlots.size()][6]; // Added two extra columns for buttons
+
+        for (int i = 0; i < workSlots.size(); i++) {
+            WorkSlot workSlot = workSlots.get(i);
+            data[i][0] = workSlot.getDate();
+            data[i][1] = workSlot.getHours();
+            data[i][2] = workSlot.getPosition();
+            data[i][3] = workSlot.getAssignedTo();
+            data[i][4] = "Edit";
+            data[i][5] = "Delete";
+        }
+
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+
+        JTable table = new JTable(model);
+
+        Action editAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                JTable table = (JTable) e.getSource();
+                int modelRow = Integer.valueOf(e.getActionCommand());
+                handleEditButtonClick(modelRow);
+            }
+        };
+
+        Action deleteAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                JTable table = (JTable) e.getSource();
+                int modelRow = Integer.valueOf(e.getActionCommand());
+                handleDeleteButtonClick(modelRow);
+                ((DefaultTableModel) table.getModel()).removeRow(modelRow);
+            }
+        };
+
+        ButtonColumn buttonColumn = new ButtonColumn(table, deleteAction, 5);
+        buttonColumn.setMnemonic(KeyEvent.VK_D);
+
+        ButtonColumn buttonColumn2 = new ButtonColumn(table, editAction, 4);
+        buttonColumn2.setMnemonic(KeyEvent.VK_D);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+
+        JFrame frame = new JFrame("Work slots");
+        frame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+        frame.add(scrollPane);
+        frame.setPreferredSize(new Dimension(450, 160));
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
     public ViewWorkSlotsPg(ArrayList<WorkSlot> workSlots) {
         // Setup for UI LAF
         FlatDarkLaf.setup();
