@@ -157,7 +157,7 @@ public class CafeManagerPg extends JFrame implements ActionListener {
 
             // Search for work slots based on date or position
             CafeManagerSearchWorkSlotController c = new CafeManagerSearchWorkSlotController();
-            ArrayList <WorkSlot> results = c.searchWorkSlot(userInput);
+            ArrayList <WorkSlot> results = c.searchWorkSlots(userInput);
             //ArrayList<WorkSlot> searchResults = WorkSlot.searchWorkSlots(userInput);
 
             new ViewWorkSlotsPg(results);

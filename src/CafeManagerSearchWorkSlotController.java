@@ -6,7 +6,7 @@ public class CafeManagerSearchWorkSlotController {
         
     }
 
-    public ArrayList <WorkSlot> searchWorkSlot(String userinput){
+    public ArrayList <WorkSlot> searchWorkSlots(String userinput){
         WorkSlot ws = new WorkSlot();
         return ws.searchWorkSlots(userinput);
     }
