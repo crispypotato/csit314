@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class CafeManagerPg extends JFrame implements ActionListener {
     private JFrame frame;
-    private JButton createWorkSlotButton, viewWorkSlotsButton, viewCafeStaffButton, viewBidsButton,
+    private JButton viewWorkSlotsButton, viewCafeStaffButton, viewBidsButton,
             searchWorkSlotsButton, logoutButton;
     private JTextField searchWorkSlotsField;
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
@@ -55,12 +55,6 @@ public class CafeManagerPg extends JFrame implements ActionListener {
         HomePanel.add(searchWorkSlotsButton, c);
 
         // ================ Set Button Panel ======================
-        // Set createWorkSlot
-        createWorkSlotButton = new JButton("Create Work Slot");
-        createWorkSlotButton.addActionListener(this);
-        c = createGbc(0, 0);
-        ButtonPanel.add(createWorkSlotButton, c);
-
         // Set viewWorkSlots
         viewWorkSlotsButton = new JButton("View Work Slots");
         viewWorkSlotsButton.addActionListener(this);
@@ -126,10 +120,6 @@ public class CafeManagerPg extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "Logging out. You will now be redirected back to the login page.", "Logout success", JOptionPane.PLAIN_MESSAGE);
             frame.dispose();
             new loginPg();
-        }
-        if (e.getSource() == createWorkSlotButton) {
-            // Implement create work slot functionality
-            new CreateWorkSlotsPg();
         }
         if (e.getSource() == viewWorkSlotsButton) {
             // Implement view work slots functionality included edit and delete
