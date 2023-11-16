@@ -456,8 +456,8 @@ class User
         return success;
     }
 
-    public static User getUserById(int userId) {
-        User user = null;
+    public User getUserById(int userId) {
+        User user = new User();
 
         // Your SQL query to fetch the user by ID
         String query = "SELECT * FROM Employee WHERE EMP_ID = ?";
@@ -471,18 +471,14 @@ class User
 
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
-                        int employeeId = resultSet.getInt("EMP_ID");
-                        String name = resultSet.getString("EMP_NAME");
-                        int salary = resultSet.getInt("EMP_SALARY");
-                        String dateJoined = resultSet.getString("EMP_DATEJOINED");
-                        int roleId = resultSet.getInt("EMP_ROLEID");
-                        String position = resultSet.getString("EMP_POSITION");
-                        String username = resultSet.getString("EMP_USERNAME");
-                        String password = resultSet.getString("EMP_PASSWORD");
-
-                        // Add other properties as needed
-
-                        user = new User(employeeId, name, salary, dateJoined, roleId, position, username, password);
+                        user.empID = resultSet.getInt("EMP_ID");
+                        user.name = resultSet.getString("EMP_NAME");
+                        user.salary = resultSet.getInt("EMP_SALARY");
+                        user.dateJoined = resultSet.getString("EMP_DATEJOINED");
+                        user.roleID = resultSet.getInt("EMP_ROLEID");
+                        user.position = resultSet.getString("EMP_POSITION");
+                        user.username = resultSet.getString("EMP_USERNAME");
+                        user.password = resultSet.getString("EMP_PASSWORD");
                     }
                 }
             }
@@ -494,8 +490,9 @@ class User
         return user;
     }
 
-    public boolean updateMaxSlots() {
+    public boolean updateMaxSlots(int max_slots) {
         boolean success = false;
+        this.maxSlots = max_slots;
 
         // Prepare query
         String myQuery = "UPDATE EMPLOYEE SET EMP_MAX_SLOTS = ? WHERE EMP_ID = ?";
@@ -512,7 +509,7 @@ class User
             PreparedStatement myStatement = connection.prepareStatement(myQuery);
 
             // Set parameters for statement
-            myStatement.setInt(1, this.maxSlots);
+            myStatement.setInt(1, max_slots);
             myStatement.setInt(2, this.empID);
 
             int i = myStatement.executeUpdate();

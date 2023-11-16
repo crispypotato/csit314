@@ -105,8 +105,8 @@ public class CafeStaffPg extends JFrame implements ActionListener {
 
         } else if (e.getSource() == viewAllocatedSlotsButton) {
             ArrayList<WorkSlot> allocatedSlots = WorkSlot.getWorkSlotsByAssignedEmployeeId(this.employeeId);
-            AllocatedSlots dialog = new AllocatedSlots(frame,allocatedSlots);
-            dialog.setVisible(true);
+            AllocatedSlots displayAllocatedSlots = new AllocatedSlots(frame,allocatedSlots);
+            displayAllocatedSlots.setVisible(true);
 
         }
         else if (e.getSource() == viewAccountButton) {
