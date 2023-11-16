@@ -119,9 +119,12 @@ public class CafeStaffPg extends JFrame implements ActionListener {
 
             if (maxSlotsDialog.isOkPressed()) {
                 int maxSlots = maxSlotsDialog.getMaxSlots();
-                myUser.updateMaxSlots(maxSlots);
+                boolean maxSlotSet = myUser.updateMaxSlots(maxSlots);
                 // Handle the maxSlots value, e.g., save it to the database
-                JOptionPane.showMessageDialog(frame, "Max Work Slots set to: " + maxSlots);
+                if (maxSlotSet)
+                {
+                    JOptionPane.showMessageDialog(frame, "Max Work Slots set to: " + maxSlots);
+                }
             }
         } else if (e.getSource() == updateMaxSlotsButton) {
             MaxSlotsDialog maxSlotsDialog = new MaxSlotsDialog(frame, myUser.getMaxSlots());
@@ -129,9 +132,12 @@ public class CafeStaffPg extends JFrame implements ActionListener {
 
             if (maxSlotsDialog.isOkPressed()) {
                 int updatedMaxSlots = maxSlotsDialog.getMaxSlots();
-                myUser.updateMaxSlots(updatedMaxSlots);
+                boolean maxSlotUpdate = myUser.updateMaxSlots(updatedMaxSlots);
                 // Handle the updatedMaxSlots value, e.g., save it to the database
-                JOptionPane.showMessageDialog(frame, "Max Work Slots updated to: " + updatedMaxSlots);
+                if (maxSlotUpdate)
+                {
+                    JOptionPane.showMessageDialog(frame, "Max Work Slots updated to: " + updatedMaxSlots);
+                }
             }
         }
         // Add more else-if conditions for other buttons...
