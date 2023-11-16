@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-public class BrowseWorkSlotsPg extends JFrame implements ActionListener {
+public class CafeStaffBrowseWorkSlotsPg extends JFrame implements ActionListener {
     private JFrame frame;
     private JTextField searchField;
     private JButton searchButton;
@@ -18,13 +18,14 @@ public class BrowseWorkSlotsPg extends JFrame implements ActionListener {
     public int employeeId;
     private ArrayList<WorkSlot> workSlots;
 
-    public BrowseWorkSlotsPg(int employeeId) {
+    public CafeStaffBrowseWorkSlotsPg(int employeeId) {
 
         // Setup for UI LAF
         FlatDarkLaf.setup();
 
         // Fetch all work slots without assignedTo
-        workSlots = WorkSlot.getUnassignedWorkSlots(employeeId);
+        CafeStaffBrowseWorkSlotsController bsc = new CafeStaffBrowseWorkSlotsController();
+        workSlots = bsc.getUnassignedWorkSlots(employeeId);
         this.employeeId = employeeId;
 
         // Setup JFrame
@@ -161,6 +162,6 @@ public class BrowseWorkSlotsPg extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new BrowseWorkSlotsPg(10002);
+        new CafeStaffBrowseWorkSlotsPg(10002);
     }
 }

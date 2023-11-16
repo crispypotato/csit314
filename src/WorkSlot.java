@@ -282,7 +282,7 @@ public class WorkSlot {
         return searchResults;
     }
 
-    public static ArrayList<WorkSlot> getUnassignedWorkSlots(int employeeId) {
+    public ArrayList<WorkSlot> getUnassignedWorkSlots(int employeeId) {
         ArrayList<WorkSlot> unassignedWorkSlots = new ArrayList<>();
 
         // Your SQL query to fetch unassigned work slots

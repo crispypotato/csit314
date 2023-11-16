@@ -8,9 +8,8 @@ import java.util.ArrayList;
 
 public class CafeStaffPg extends JFrame implements ActionListener {
     private JFrame frame;
-    private JButton browseWorkSlotsButton,  viewBidsButton, updateBidsButton,
-            cancelBidsButton, searchBidsButton, viewAllocatedSlotsButton, setMaxSlotsButton,
-            updateMaxSlotsButton, viewAccountButton, logoutButton;
+    private JButton browseWorkSlotsButton,  viewBidsButton, viewAllocatedSlotsButton, 
+                    setMaxSlotsButton, updateMaxSlotsButton, viewAccountButton, logoutButton;
 
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
     private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
@@ -97,7 +96,7 @@ public class CafeStaffPg extends JFrame implements ActionListener {
 
         } else if (e.getSource() == browseWorkSlotsButton) {
             // Implement browse work slots functionality
-            new BrowseWorkSlotsPg(this.employeeId);
+            new CafeStaffBrowseWorkSlotsPg(this.employeeId);
 
         } else if (e.getSource() == viewBidsButton) {
             // Implement view my bids functionality
