@@ -128,7 +128,7 @@ public class BidManagementPg extends JFrame implements ActionListener {
     private void handleRejectClick(int rowIndex) {
         Bid bid = bids.get(rowIndex);
         // Reject the bid and delete it from the database
-        boolean bidRejected = bid.deleteBid();
+        boolean bidRejected = bid.deleteBid(bid);
 
         if (bidRejected) {
             JOptionPane.showMessageDialog(
