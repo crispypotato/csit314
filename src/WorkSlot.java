@@ -346,7 +346,7 @@ public class WorkSlot {
         return searchResults;
     }
 
-    public static ArrayList<WorkSlot> getWorkSlotsByAssignedEmployeeId(int employeeId) {
+    public ArrayList<WorkSlot> getWorkSlotsByAssignedEmployeeId(int employeeId) {
         ArrayList<WorkSlot> assignedWorkSlots = new ArrayList<>();
 
         String query = "SELECT * FROM WORKSLOTS WHERE SLOT_ASSIGNEDTO = ?";

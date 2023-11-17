@@ -103,7 +103,8 @@ public class CafeStaffPg extends JFrame implements ActionListener {
             new CafeStaffViewBidPg(myUser);
 
         } else if (e.getSource() == viewAllocatedSlotsButton) {
-            ArrayList<WorkSlot> allocatedSlots = WorkSlot.getWorkSlotsByAssignedEmployeeId(this.employeeId);
+            CafeStaffViewAllocWSController vawc = new CafeStaffViewAllocWSController();
+            ArrayList<WorkSlot> allocatedSlots = vawc.getWorkSlotsByAssignedEmployeeId(this.employeeId);
             AllocatedSlots displayAllocatedSlots = new AllocatedSlots(frame,allocatedSlots);
             displayAllocatedSlots.setVisible(true);
 
