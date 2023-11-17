@@ -135,7 +135,8 @@ public class CafeManagerPg extends JFrame implements ActionListener {
 
         if (e.getSource() == viewBidsButton) {
             // Implement view bids functionality
-            ArrayList<Bid> allBids = Bid.getAllBids();
+            CafeManagerViewBidsController vbc = new CafeManagerViewBidsController();
+            ArrayList<Bid> allBids = vbc.getAllBids();
             new BidManagementPg(allBids);
         }
 

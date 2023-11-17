@@ -56,7 +56,7 @@ public class BidManagementPg extends JFrame implements ActionListener {
             Bid bid = bids.get(i);
             User employee = new User();
             employee = employee.getUserById(bid.getEmpId());
-            CafeManagerViewBidsController vbc = new CafeManagerViewBidsController();
+            CafeManagerGetWSController vbc = new CafeManagerGetWSController();
             WorkSlot slot = vbc.getWorkSlotById(bid.getSlotId());
             data[i][0] = bid.getBidId();
             data[i][1] = employee.getName();
@@ -154,7 +154,8 @@ public class BidManagementPg extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         // Example usage:
-        ArrayList<Bid> bids = Bid.getAllBids(); // Fetch all bids
+        CafeManagerViewBidsController vbc = new CafeManagerViewBidsController();
+        ArrayList<Bid> bids = vbc.getAllBids(); // Fetch all bids
         new BidManagementPg(bids);
     }
 }

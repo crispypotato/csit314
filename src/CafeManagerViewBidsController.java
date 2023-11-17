@@ -1,11 +1,14 @@
+import java.util.ArrayList;
+
 public class CafeManagerViewBidsController {
     public CafeManagerViewBidsController() {}
 
-    public WorkSlot getWorkSlotById(int slotID)
+    public ArrayList<Bid> getAllBids()
     {
-        WorkSlot ws = new WorkSlot();
-        ws = ws.getWorkSlotById(slotID);
+        Bid aBid = new Bid();
+        ArrayList<Bid> bids = new ArrayList<Bid>();
 
-        return ws;
+        bids = aBid.getAllBids();
+        return bids;
     }
 }

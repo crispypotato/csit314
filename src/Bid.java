@@ -85,7 +85,7 @@ public class Bid {
         return success;
     }
 
-    public static ArrayList<Bid> getAllBids() {
+    public ArrayList<Bid> getAllBids() {
         ArrayList<Bid> bids = new ArrayList<>();
 
         // Prepare query
