@@ -108,7 +108,8 @@ public class BidManagementPg extends JFrame implements ActionListener {
 
     private void handleApproveClick(int rowIndex) {
         Bid bid = bids.get(rowIndex);
-        boolean bidApproved = bid.approveBid();
+        CafeManagerApproveBidController apc = new CafeManagerApproveBidController();
+        boolean bidApproved = apc.approveBid(bid);
 
         if (bidApproved) {
             JOptionPane.showMessageDialog(
@@ -129,7 +130,8 @@ public class BidManagementPg extends JFrame implements ActionListener {
     private void handleRejectClick(int rowIndex) {
         Bid bid = bids.get(rowIndex);
         // Reject the bid and delete it from the database
-        boolean bidRejected = bid.deleteBid(bid);
+        CafeManagerDeleteBidController dbc = new CafeManagerDeleteBidController();
+        boolean bidRejected = dbc.deleteBid(bid);
 
         if (bidRejected) {
             JOptionPane.showMessageDialog(

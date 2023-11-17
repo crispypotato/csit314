@@ -168,7 +168,7 @@ public class Bid {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             // Set parameters for statement
-            preparedStatement.setInt(1, aBid.bidId);
+            preparedStatement.setInt(1, aBid.getBidId());
 
             // Execute the query
             int rowsAffected = preparedStatement.executeUpdate();
@@ -216,10 +216,10 @@ public class Bid {
         return bids;
     }
 
-    public boolean approveBid() {
+    public boolean approveBid(Bid myBid) {
         // Assuming you have the necessary information in the Bid class
-        int empId = getEmpId();
-        int slotId = getSlotId();
+        int empId = myBid.getEmpId();
+        int slotId = myBid.getSlotId();
 
         // Update the WorkSlot's assigned employee ID
         WorkSlot ws = new WorkSlot();
