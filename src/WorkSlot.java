@@ -104,7 +104,7 @@ public class WorkSlot {
         return success;
     }
 
-    public static WorkSlot getWorkSlotById(int slotId) {
+    public WorkSlot getWorkSlotById(int slotId) {
         String selectQuery = "SELECT * FROM WORKSLOTS WHERE SLOT_ID = ?";
 
         try (Connection connection = DriverManager.getConnection(
