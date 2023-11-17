@@ -221,9 +221,9 @@ public class Bid {
         int empId = getEmpId();
         int slotId = getSlotId();
 
-
         // Update the WorkSlot's assigned employee ID
-        boolean workSlotAssigned = WorkSlot.assignWorkSlot(slotId, empId);
+        WorkSlot ws = new WorkSlot();
+        boolean workSlotAssigned = ws.assignWorkSlot(slotId, empId);
 
         return workSlotAssigned;
     }

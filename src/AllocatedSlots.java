@@ -61,7 +61,8 @@ public class AllocatedSlots extends JDialog {
     // Example usage:
     public static void main(String[] args) {
         // Fetch allocated slots (replace this with your logic)
-        ArrayList<WorkSlot> allocatedSlots = WorkSlot.getWorkSlotsByAssignedEmployeeId(10002);
+        CafeStaffViewAllocWSController vawc = new CafeStaffViewAllocWSController();
+        ArrayList<WorkSlot> allocatedSlots = vawc.getWorkSlotsByAssignedEmployeeId(10002);
 
         // Create and display the dialog
         AllocatedSlots dialog = new AllocatedSlots(null, allocatedSlots);

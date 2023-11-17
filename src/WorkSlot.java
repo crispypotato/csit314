@@ -379,7 +379,7 @@ public class WorkSlot {
         return assignedWorkSlots;
     }
 
-    public static boolean assignWorkSlot(int slotId, int empId) {
+    public boolean assignWorkSlot(int slotId, int empId) {
         String updateQuery = "UPDATE WORKSLOTS SET SLOT_ASSIGNEDTO = ? WHERE SLOT_ID = ?";
 
         try (Connection connection = DriverManager.getConnection(
