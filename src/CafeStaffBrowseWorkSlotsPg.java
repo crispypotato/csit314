@@ -149,7 +149,8 @@ public class CafeStaffBrowseWorkSlotsPg extends JFrame implements ActionListener
         if (e.getSource() == searchButton) {
             // Implement search functionality
             String userInput = searchField.getText();
-            ArrayList<WorkSlot> searchResults = WorkSlot.searchUnassignedWorkSlots(userInput);
+            CafeStaffSearchWorkSlotController swsc = new CafeStaffSearchWorkSlotController();
+            ArrayList<WorkSlot> searchResults = swsc.searchUnassignedWorkSlots(userInput);
 
             // Update the table with search results
             DefaultTableModel model = (DefaultTableModel) workSlotTable.getModel();

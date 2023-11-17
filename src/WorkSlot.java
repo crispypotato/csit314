@@ -313,7 +313,7 @@ public class WorkSlot {
         return unassignedWorkSlots;
     }
 
-    public static ArrayList<WorkSlot> searchUnassignedWorkSlots(String userInput) {
+    public ArrayList<WorkSlot> searchUnassignedWorkSlots(String userInput) {
         ArrayList<WorkSlot> searchResults = new ArrayList<>();
 
         // Your SQL query to search for unassigned work slots based on userInput
