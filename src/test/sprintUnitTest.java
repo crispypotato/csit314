@@ -113,9 +113,5 @@ public class sprintUnitTest {
         // Test Create Profile - Expected Success
         boolean outcome1 = testSubject8.createProfileRecord("newProfile2");
         assertEquals("Create Profile C",true, outcome1);
-        // fail test does not work as there are no checks on profile - do we still need to include?
-        // Test Create Profile - Expected Fail - no Profile name
-        /*boolean outcome2 = testSubject8.createProfileRecord("");
-        assertEquals("Create Profile C",false, outcome2);*/
     }
 }
