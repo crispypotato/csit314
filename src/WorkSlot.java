@@ -175,7 +175,7 @@ public class WorkSlot {
         return workSlots;
     }
 
-    public boolean editWorkSlot() {
+    public boolean editWorkSlot(WorkSlot ws) {
         boolean success = false;
 
         // Prepare query
@@ -190,11 +190,10 @@ public class WorkSlot {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             // Set parameters for statement
-            preparedStatement.setString(1, this.date);
-            preparedStatement.setInt(2, this.hours);
-            preparedStatement.setString(3, this.position);
-
-            preparedStatement.setInt(4, this.slotId);
+            preparedStatement.setString(1, ws.getDate());
+            preparedStatement.setInt(2, ws.getHours());
+            preparedStatement.setString(3, ws.getPosition());
+            preparedStatement.setInt(4, ws.slotId);
 
             // Execute the query
             int rowsAffected = preparedStatement.executeUpdate();

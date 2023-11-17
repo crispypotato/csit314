@@ -211,7 +211,15 @@ public class ViewWorkSlotsPg extends JFrame {
             workSlot.setPosition(positionField.getText());
             workSlot.setAssignedTo(Integer.parseInt(assignedToField.getText()));
 
-            workSlot.editWorkSlot();
+            UpdateWorkSlotController uwsc = new UpdateWorkSlotController();
+            boolean updatedWS = uwsc.editWorkSlot(workSlot);
+            if (updatedWS)
+            {
+                JOptionPane.showMessageDialog(null, 
+                            "Work Slot updated successfully!", 
+                            "Update Status", 
+                            JOptionPane.PLAIN_MESSAGE);
+            }
             // Close the dialog
             editDialog.dispose();
             // Implement any additional logic to save the changes to the database if needed
