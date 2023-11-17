@@ -129,7 +129,8 @@ public class CafeManagerPg extends JFrame implements ActionListener {
         if (e.getSource() == viewCafeStaffButton) {
             // Implement view cafe staff functionality
             // Fetch all cafe staff
-            ArrayList<User> cafeStaffList = User.getEmployeesByRoleId(5);
+            CafeManagerViewCSController vcsc = new CafeManagerViewCSController();
+            ArrayList<User> cafeStaffList = vcsc.getEmployeesByRoleId(5);
             new ViewCafeStaffPg(cafeStaffList);
         }
 

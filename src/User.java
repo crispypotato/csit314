@@ -529,7 +529,7 @@ class User
         return success;
     }
 
-    public static ArrayList<User> getEmployeesByRoleId(int roleId) {
+    public ArrayList<User> getEmployeesByRoleId(int roleId) {
         ArrayList<User> employees = new ArrayList<>();
 
         String query = "SELECT * FROM Employee WHERE EMP_ROLEID = ?";
