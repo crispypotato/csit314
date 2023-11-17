@@ -37,7 +37,8 @@ public class ViewCafeStaffPg extends JFrame {
             // Add other properties as needed
 
             // Fetch work slots assigned to the current cafe staff member
-            ArrayList<WorkSlot> assignedWorkSlots = WorkSlot.getWorkSlotsByAssignedEmployeeId(employee.getEmpID());
+            CafeStaffViewAllocWSController vawc = new CafeStaffViewAllocWSController ();
+            ArrayList<WorkSlot> assignedWorkSlots = vawc.getWorkSlotsByAssignedEmployeeId(employee.getEmpID());
             StringBuilder assignedWorkSlotsText = new StringBuilder();
 
             for (WorkSlot workSlot : assignedWorkSlots) {
