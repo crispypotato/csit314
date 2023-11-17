@@ -67,7 +67,7 @@ public class WorkSlot {
         this.assignedTo = assignedTo;
     }
 
-    public boolean createWorkSlot() {
+    public boolean createWorkSlot(String date,int hours,String position, int assignedTo) {
         boolean success = false;
 
         // Prepare query
@@ -83,9 +83,9 @@ public class WorkSlot {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             // Set parameters for statement
-            preparedStatement.setString(1, this.date);
-            preparedStatement.setInt(2, this.hours);
-            preparedStatement.setString(3, this.position);
+            preparedStatement.setString(1, date);
+            preparedStatement.setInt(2, hours);
+            preparedStatement.setString(3, position);
 
 
             // Execute the query
